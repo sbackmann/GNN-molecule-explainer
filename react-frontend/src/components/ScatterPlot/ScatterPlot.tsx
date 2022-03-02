@@ -31,7 +31,7 @@ const ScatterPlot = (props: ScatterPlotProps) => {
             .attr('transform', `translate(${props.left},${props.top})`)
 
         console.log('Hi, all good');
-        const data = await getData(`example-data`);
+        const data = await getData(`upload-data`);
         console.log(data);
         const maxPrice = Math.max(...data.map((dt) => (dt as unknown as Types.Data).X1), 0);
         const maxCarat = Math.max(...data.map((dt) => (dt as unknown as Types.Data).X2), 0);
@@ -53,7 +53,8 @@ const ScatterPlot = (props: ScatterPlotProps) => {
                 return y(((d as unknown) as Types.Data).X2)
             })
             .attr('r', 0.8)
-            .style('fill', function (d) { return colors[d.cluster]; })
+            //.style('fill', function (d) { return colors[d.cluster]; })
+            .style('fill', 'grey')
 
 
     }

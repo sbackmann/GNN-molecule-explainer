@@ -17,6 +17,9 @@ app = FastAPI(
 
 @app.post("/upload-data")
 def upload_data(file: UploadFile = File(...)):
+    ##data = pd.read_csv(file.file)
+    ##if cluster_algo
+
     return pd.read_csv(file.file).to_dict()
 
 

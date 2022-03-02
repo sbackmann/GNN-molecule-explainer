@@ -80,20 +80,20 @@ const queryBackend = async (route: string): Promise<unknown> => {
 }
 
 export const getData = async (route: string): Promise<DataArray> => {
-    //const jsonResponse = await queryBackend(route);
+    const jsonResponse = await queryBackend(route);
     console.log('hi');
-    const jsonResponse = {
-        "X1": {
-            "0": 3,
-            "1": 2,
-            "2": 1
-        },
-        "X2": {
-            "0": -0.7985781715081679,
-            "1": 0.9344454645471068,
-            "2": 0.397302084259078
-        }
-    }
+    // const jsonResponse = {
+    //     "X1": {
+    //         "0": 3,
+    //         "1": 2,
+    //         "2": 1
+    //     },
+    //     "X2": {
+    //         "0": -0.7985781715081679,
+    //         "1": 0.9344454645471068,
+    //         "2": 0.397302084259078
+    //     }
+    // }
 
     return dataArrayDecoder.decodeToPromise(jsonResponse);
 }

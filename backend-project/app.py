@@ -19,8 +19,10 @@ app = FastAPI(
 def upload_data(file: UploadFile = File(...)):
     ##data = pd.read_csv(file.file)
     ##if cluster_algo
-
-    return pd.read_csv(file.file).to_dict()
+    print(file)
+    data = pd.read_csv(file.file).to_dict()
+    print(data)
+    return data
 
 
 @app.get("/", response_class=HTMLResponse)

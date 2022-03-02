@@ -8,7 +8,7 @@ const dataPointDecoder = JsonDecoder.object<DataPoint>(
     {
         x1: JsonDecoder.number,
         x2: JsonDecoder.number,
-        cluster: JsonDecoder.number,
+        //cluster: JsonDecoder.number,
     },
     'DataPoint'
 );

@@ -80,7 +80,9 @@ const queryBackend = async (route: string): Promise<unknown> => {
 }
 
 export const getData = async (route: string): Promise<DataArray> => {
+    console.log('hi there');
     const jsonResponse = await queryBackend(route);
+    console.log(jsonResponse);
     console.log('hi');
     // const jsonResponse = {
     //     "X1": {

@@ -8,7 +8,7 @@ function App() {
   const [exampleData, setExampleData] = useState<DataArray>();
 
   useEffect(() => {
-    queryBackend(`upload-data?name=moons`).then((exampleData) => {
+    queryBackend(`upload-data?name=blobs`).then((exampleData) => {
       setExampleData(exampleData);
     });
   }, []);
@@ -17,8 +17,8 @@ function App() {
   return (
     <div className="App">
       <header className="App-header"> K-Means clustering
-        {exampleData && <Visualization width={1100} height={550} data={exampleData} />}
       </header>
+      <div>{exampleData && <Visualization width={1100} height={550} data={exampleData} />}</div>
     </div>
   )
 }

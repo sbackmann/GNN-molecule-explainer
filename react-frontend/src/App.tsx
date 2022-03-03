@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import ScatterPlot from './components/ScatterPlot/ScatterPlot';
 import { DataArray } from './types/DataArray';
 import queryBackend from './backend/BackendQueryEngine';
 import Visualization from './Visualization';
@@ -10,14 +8,16 @@ function App() {
   const [exampleData, setExampleData] = useState<DataArray>();
 
   useEffect(() => {
-    queryBackend(`upload-data?name=moons`, `moons`).then((exampleData) => {
+    queryBackend(`upload-data?name=moons`).then((exampleData) => {
       setExampleData(exampleData);
     });
   }, []);
+  console.log('we are in the app script')
+  console.log(exampleData);
   return (
     <div className="App">
-      <header className="App-header"> Clustering
-        {exampleData && <Visualization width={1000} height={500} data={exampleData} />}
+      <header className="App-header"> K-Means clustering
+        {exampleData && <Visualization width={1100} height={550} data={exampleData} />}
       </header>
     </div>
   )

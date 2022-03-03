@@ -8,8 +8,8 @@ import { AxisBottom, AxisLeft } from '@visx/axis';
 import DataPointComponent from './components/DataPointComponent';
 
 const DEFAULT_MARGINS: Margins = {
-    left: 10,
-    top: 10,
+    left: 100,
+    top: 50,
     bottom: 100,
     right: 20,
 };
@@ -25,14 +25,18 @@ const Visualization: React.FunctionComponent<Props> = ({ data, width, height, ma
     // figure bounds
     const xMax = width - margins.left - margins.right;
     const yMax = height - margins.top - margins.bottom;
-    const colors = ['blue', 'white'];
+    const colors = ['blue', 'pink'];
     // scales
-    const xValues = data.map((d) => d.x1);
+    const xValues = data.map((d) => d.X1);
+    console.log(xValues);
     const xScale = scaleLinear<number>()
         .domain([Math.min(...xValues), Math.max(...xValues)])
         .range([0, xMax]);
-
-    const yValues = data.map((d) => d.x2);
+    console.log(yMax);
+    console.log('this data')
+    console.log(data)
+    const yValues = data.map((d) => d.X2);
+    console.log(yValues)
     const yScale = scaleLinear<number>()
         .domain([Math.min(...yValues), Math.max(...yValues)])
         .range([0, yMax]);
@@ -45,19 +49,19 @@ const Visualization: React.FunctionComponent<Props> = ({ data, width, height, ma
     return (
         <svg width={width} height={height}>
             <Group left={margins.left} top={margins.top}>
-                <GridRows scale={yScale} width={xMax} height={yMax} stroke="#e0e0e0" />
-                <GridColumns scale={xScale} width={xMax} height={yMax} stroke="#e0e0e0" />
-                <line x1={xMax} x2={xMax} y1={0} y2={yMax} stroke="#e0e0e0" />
-                <AxisBottom top={yMax} scale={xScale} />
-                <AxisLeft scale={yScale} />
-                <text x="-140" y="-30" transform="rotate(-90)" fontSize={10}>
-                    yAxis
+                {/* <GridRows scale={yScale} width={xMax} height={yMax} stroke="#eaf0f6" /> */}
+                {/* <GridColumns scale={xScale} width={xMax} height={yMax} stroke="#eaf0f6" /> */}
+                {/* <line x1={xMax} x2={xMax} y1={0} y2={yMax} stroke="white" /> */}
+                <AxisBottom top={yMax} scale={xScale} stroke='white' />
+                <AxisLeft scale={yScale} stroke='white' />
+                <text x="-200" y="-70" transform="rotate(-90)" fontSize={30} fill='white'>
+                    x2
                 </text>
-                <text x="200" y="350" transform="rotate(0)" fontSize={10}>
-                    xAxis
+                <text x="500" y="500" transform="rotate(0)" fontSize={30} fill='white'>
+                    x1
                 </text>
                 {data.map((d, idx) => (
-                    <DataPointComponent key={idx} x={xScale(d.x1)} y={yScale(d.x2)} color={colors[d.cluster]} />
+                    <DataPointComponent key={idx} x={xScale(d.X1)} y={yScale(d.X2)} color={colors[d.cluster]} />
                 ))}
             </Group>
         </svg>

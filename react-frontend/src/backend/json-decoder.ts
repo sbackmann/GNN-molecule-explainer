@@ -6,8 +6,8 @@ import { DataPoint } from '../types/DataPoint';
  ********** */
 const dataPointDecoder = JsonDecoder.object<DataPoint>(
     {
-        x1: JsonDecoder.number,
-        x2: JsonDecoder.number,
+        X1: JsonDecoder.number,
+        X2: JsonDecoder.number,
         cluster: JsonDecoder.number
     },
     'DataPoint'

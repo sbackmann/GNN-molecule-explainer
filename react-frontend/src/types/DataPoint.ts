@@ -1,5 +1,5 @@
 export interface DataPoint {
-    x1: number;
-    x2: number;
+    X1: number;
+    X2: number;
     cluster: number
 }

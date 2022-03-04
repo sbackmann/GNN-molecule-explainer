@@ -28,30 +28,7 @@ app.add_middleware(
 )
 
 
-# @app.post("/upload-data")
-# def upload_data(file: UploadFile = File(...)):
-#     ##data = pd.read_csv(file.file)
-#     ##if cluster_algo
-#     print(file)
-#     data = pd.read_csv(file.file).to_dict()
-#     print(data)
-#     return data
-
-
-# @app.post("/upload-data", response_model=ExampleDataResponse)
-# def upload_data(file: UploadFile = File(...)):
-#     print(file.filename)
-#     data = pd.read_csv(file.file)
-#     kmeans = KMeans(n_clusters=2, random_state=0).fit(data)
-#     labels = kmeans.labels_
-#     data["cluster"] = labels.tolist()
-#     print(data.head())
-#     print(data.to_dict(orient="records"))
-#     return data.to_dict(orient="records")
-# return pd.read_csv(file.file).to_dict()
-
-
-@app.post("/upload-data", response_model=ExampleDataResponse)
+@app.post("/get-data", response_model=ExampleDataResponse)
 def upload_data(name: str):
     data = pd.read_csv(f"data/dataset_{name}.csv")
     kmeans = KMeans(n_clusters=2, random_state=0).fit(data)

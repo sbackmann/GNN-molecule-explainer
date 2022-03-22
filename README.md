@@ -20,7 +20,7 @@ Define the tasks
 ### Pitch
 <!-- blank line -->
 <figure class="video_container">
-  <iframe src="https://drive.google.com/file/d/1-9NsBDNVXA0AMyCBLQjfsVCTwI4obZ1v/view?usp=sharing" frameborder="0" allowfullscreen="false"> </iframe>
+  <iframe src="https://drive.google.com/file/d/1-9NsBDNVXA0AMyCBLQjfsVCTwI4obZ1v/preview" frameborder="0" allowfullscreen="false"> </iframe>
 </figure>
 <!-- blank line -->
 

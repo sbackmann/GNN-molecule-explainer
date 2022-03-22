@@ -1,5 +1,4 @@
 # Project Title
-----
 Team Members:
 1. Team member 1
 2. Team member 2
@@ -7,7 +6,6 @@ Team Members:
 4. ...
 
 ## Project Description 
-----
 Describe here the project and your goal.
 
 ### Users
@@ -22,9 +20,7 @@ Define the tasks
 ### Pitch
 <!-- blank line -->
 <figure class="video_container">
-  <video controls="true" allowfullscreen="true" poster="visuals/snap.png">
-    <source src="visuals/Short_video.mp4" type="video/mp4">
-  </video>
+  <iframe src="https://drive.google.com/file/d/1-9NsBDNVXA0AMyCBLQjfsVCTwI4obZ1v/view?usp=sharing" frameborder="0" allowfullscreen="false"> </iframe>
 </figure>
 <!-- blank line -->
 

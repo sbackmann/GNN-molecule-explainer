@@ -1,11 +1,15 @@
 # Project Title
-Team Members:
+
+# Repo Index
+
+[[_TOC_]]
+
+## Team Members
+
 1. Team member 1
 2. Team member 2
 3. Team member 3
 4. ...
-
-[[_TOC_]]
 
 ## Project Description 
 Describe here the project and your goal.
@@ -32,9 +36,10 @@ Document here the major milestones of your code and future planned steps
 
 
 ## Versioning
-<Please take a look at Git Best Practices here: https://www.youtube.com/watch?v=DSuSBuVYpys>
+Please take a look at Git Best Practices here: https://www.youtube.com/watch?v=DSuSBuVYpys
 
 Tags:
+
 - Week 1: #1+
 - Week 2: #1+
 - Week 3: #1+

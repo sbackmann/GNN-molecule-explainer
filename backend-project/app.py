@@ -7,7 +7,7 @@ import os
 import csv
 import codecs
 from io import StringIO
-from pydantic_models.example_data_points import ExampleDataResponse
+# from pydantic_models.example_data_points import ExampleDataResponse
 from typing import Callable
 from sklearn.cluster import KMeans
 
@@ -28,14 +28,14 @@ app.add_middleware(
 )
 
 
-@app.post("/get-data", response_model=ExampleDataResponse)
+@app.post("/get-data")
 def upload_data(name: str):
     data = pd.read_csv(f"data/dataset_{name}.csv")
     kmeans = KMeans(n_clusters=2, random_state=0).fit(data)
     labels = kmeans.labels_
     data["cluster"] = labels.tolist()
     print(data.head())
-    print(data.to_dict(orient="records"))
+    # print(data.to_dict(orient="records"))
     return data.to_dict(orient="records")
 
 

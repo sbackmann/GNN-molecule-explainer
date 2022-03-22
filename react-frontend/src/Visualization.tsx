@@ -2,15 +2,15 @@ import React from 'react';
 import { DataArray } from './types/DataArray';
 import { Margins } from './types/Margins';
 import { Group } from '@visx/group';
-import { GridColumns, GridRows } from '@visx/grid';
 import { scaleLinear } from '@visx/scale';
 import { AxisBottom, AxisLeft } from '@visx/axis';
 import DataPointComponent from './components/DataPointComponent';
 
+
 const DEFAULT_MARGINS: Margins = {
     left: 100,
     top: 50,
-    bottom: 100,
+    bottom: 70,
     right: 20,
 };
 
@@ -25,18 +25,14 @@ const Visualization: React.FunctionComponent<Props> = ({ data, width, height, ma
     // figure bounds
     const xMax = width - margins.left - margins.right;
     const yMax = height - margins.top - margins.bottom;
-    const colors = ['blue', 'pink'];
+    const colors = ['yellow', '#FF0000']; //or 'red' 
     // scales
     const xValues = data.map((d) => d.X1);
-    console.log(xValues);
     const xScale = scaleLinear<number>()
         .domain([Math.min(...xValues), Math.max(...xValues)])
         .range([0, xMax]);
-    console.log(yMax);
-    console.log('this data')
-    console.log(data)
+    
     const yValues = data.map((d) => d.X2);
-    console.log(yValues)
     const yScale = scaleLinear<number>()
         .domain([Math.min(...yValues), Math.max(...yValues)])
         .range([0, yMax]);
@@ -49,6 +45,7 @@ const Visualization: React.FunctionComponent<Props> = ({ data, width, height, ma
     return (
         <svg width={width} height={height}>
             <Group left={margins.left} top={margins.top}>
+
                 {/* <GridRows scale={yScale} width={xMax} height={yMax} stroke="#eaf0f6" /> */}
                 {/* <GridColumns scale={xScale} width={xMax} height={yMax} stroke="#eaf0f6" /> */}
                 {/* <line x1={xMax} x2={xMax} y1={0} y2={yMax} stroke="white" /> */}

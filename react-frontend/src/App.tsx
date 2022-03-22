@@ -3,23 +3,34 @@ import './App.css';
 import { DataArray } from './types/DataArray';
 import queryBackend from './backend/BackendQueryEngine';
 import Visualization from './Visualization';
-import ScatterPlot from "./components/ScatterPlot/ScatterPlot";
+import DataChoiceComponent from './components/DataChoiceComponent';
 
 function App() {
-  const [exampleData, setExampleData] = useState<DataArray>();
 
+  const [exampleData, setExampleData] = useState<DataArray>();
+  const [dataChoice, setDataChoice] = useState<string>();
+  
   useEffect(() => {
-    queryBackend(`upload-data?name=circles`).then((exampleData) => {
+    queryBackend(`get-data?name=` + dataChoice).then((exampleData) => {
       setExampleData(exampleData);
     });
-  }, []);
-  console.log('we are in the app script')
-  console.log(exampleData);
+  }, [dataChoice]);
+
+  function choiceMade(choice: string){
+    setDataChoice(choice);
+  }
+  
+  console.log(exampleData) 
+  console.log(dataChoice)
+
   return (
     <div className="App">
       <header className="App-header"> K-Means clustering
       </header>
-      <div>{exampleData && <Visualization width={1100} height={550} data={exampleData} />}</div>
+      <div>
+      <DataChoiceComponent onChoiceMade={choiceMade}/>
+      </div>
+      <div>{exampleData && dataChoice && <Visualization width={1100} height={550} data={exampleData} />}</div>
     </div>
   )
 }

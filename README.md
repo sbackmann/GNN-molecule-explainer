@@ -1,2 +1,2 @@
-# Dummy Fullstack
+# Project Title
 

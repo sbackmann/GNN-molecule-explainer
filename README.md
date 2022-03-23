@@ -28,7 +28,7 @@ Write here all intructions to build the environment and run your code.\
 **NOTE:** If we cannot run your code following these requirements we will not be able to evaluate it.
 
 ## Milestones
-Document here the major milestones of your code and future planned steps\
+Document here the major milestones of your code and future planned steps.\
 - [x] Week 1
   - [x] Completed Sub-task: [#20984ec2](https://gitlab.ethz.ch/iml-course/scaffolding-templates/dummy-fullstack/dummy-fullstack2/-/commit/20984ec2197fa8dcdc50f19723e5aa234b9588a3)
   - [x] Completed Sub-task: [#20984ec2](https://gitlab.ethz.ch/iml-course/scaffolding-templates/dummy-fullstack/dummy-fullstack2/-/commit/20984ec2197fa8dcdc50f19723e5aa234b9588a3)
@@ -37,7 +37,8 @@ Document here the major milestones of your code and future planned steps\
   - [ ] Sub-task 
   - [ ] Sub-task 
 
-Open an issue for each subtask.\ 
+
+Open an issue for each subtask.\
 Create a merge request (with corresponding branch) from each issue.\
 Finally accept the merge request once issue is resolved.\
 Once you complete a task, link the corresponding commit.\
@@ -47,7 +48,7 @@ This will help you have a clearer overview of what you are currently doing, trac
 
 ## Versioning
 Create stable versions of your code each week by using gitlab tags.\
-Take a look at [Gitlab Tags](https://docs.gitlab.com/ee/topics/git/tags.html).
+Take a look at [Gitlab Tags](https://docs.gitlab.com/ee/topics/git/tags.html) for more details. 
 
 Then list here the weekly tags. \
 We will evaluate your code every week, based on the corresponding version.

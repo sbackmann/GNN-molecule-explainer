@@ -9,16 +9,19 @@
 4. ...
 
 ## Project Description 
-Describe here the project and your goal.
+Describe here your project in detail and define your goals.
 
 ### Users
-List Users
+List your projects target Users.
 
 ### Dataset
-Add here all used datasets + where and how to download them 
+Add here all used datasets.\
+Document here where to find the data and how to download it. 
 
 ### Tasks
-Define the tasks
+Define all the tasks you want your dashboard solve.
+
+====
 
 ## Requirements
 Write here all intructions to build the environment and run your code.\
@@ -26,17 +29,20 @@ Write here all intructions to build the environment and run your code.\
 
 ## Active TODO 
 Document here the major milestones of your code and future planned steps\
+[base]:(https://gitlab.ethz.ch/iml-course/scaffolding-templates/dummy-fullstack/dummy-fullstack2/-/commit/)
+
 - [ ] Week 1
-  - [x] Completed Sub-task 
-  - [x] Completed Sub-task 
+  - [x] Completed Sub-task: [commit link]([base]20984ec2197fa8dcdc50f19723e5aa234b9588a3)
+  - [x] Completed Sub-task: 
 
 - [ ] Week 2
   - [ ] Sub-task 
   - [ ] Sub-task 
 
-** Open an issue for each subtask.\ 
-Create a merge request (with corresponding branch) from each issue.\
-Finally accept the merge request once issue is resolved. ** \
+**Open an issue for each subtask**.\ 
+**Create a merge request (with corresponding branch) from each issue.**\
+**Finally accept the merge request once issue is resolved.** \
+**Once you complete a task, link the corresponding commit.** \
 Take a look at [Issues and Branches](https://www.youtube.com/watch?v=DSuSBuVYpys) for more details. \
 This will help you have a clearer overview of what you are currently doing, track your progress and organise your work among yourselves. Moreover it gives us more insights on your progress.  
 

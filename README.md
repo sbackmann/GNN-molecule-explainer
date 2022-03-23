@@ -1,6 +1,6 @@
 # Project Title
 
-# Repo Index
+## Repo Index
 
 [[_TOC_]]
 
@@ -41,12 +41,12 @@ Document here the major milestones of your code and future planned steps
 Open issues on your code and create branches from them. 
 Merge the branch once the issue is resolved.
 You should create an issue per task and milestones defined in (#active-todo).
-Take a look at [link](https://www.youtube.com/watch?v=DSuSBuVYpys)
+Take a look at [Issues and Branches](https://www.youtube.com/watch?v=DSuSBuVYpys)
 
 
 ## Versioning
 Create stable versions of your code each week by using gitlab tags.
-Take a look at [link](https://docs.gitlab.com/ee/topics/git/tags.html)
+Take a look at [Gitlab Tags](https://docs.gitlab.com/ee/topics/git/tags.html)
 
 Then document here the weekly tags. 
 We will evaluate your code weekly based on this versions.

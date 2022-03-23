@@ -24,7 +24,8 @@ Define all the tasks you want your dashboard solve.
 - - -
 ## Folder Structure
 Specify here the structure of you code and comment what the most important files contain
-'''
+
+``` bash
 ├── README.md  
 ├── backend-project
 │   ├── app.py   # main app
@@ -70,7 +71,7 @@ Specify here the structure of you code and comment what the most important files
 │   │       └── Margins.ts
 │   └── tsconfig.json
 └── requirements.txt
-'''
+```
 
 ## Requirements
 Write here all intructions to build the environment and run your code.\
@@ -91,11 +92,9 @@ Document here the major milestones of your code and future planned steps.\
   - [ ] Sub-task: ...
 
 Create a list subtask.\
-Open an issue for each subtask.\
-Once you create a subtask, link the corresponding issue.\
+Open an issue for each subtask. Once you create a subtask, link the corresponding issue.\
 Create a merge request (with corresponding branch) from each issue.\
-Finally accept the merge request once issue is resolved.\
-Once you complete a task, link the corresponding merge commit.\
+Finally accept the merge request once issue is resolved. Once you complete a task, link the corresponding merge commit.\
 Take a look at [Issues and Branches](https://www.youtube.com/watch?v=DSuSBuVYpys) for more details. 
 
 This will help you have a clearer overview of what you are currently doing, track your progress and organise your work among yourselves. Moreover it gives us more insights on your progress.  

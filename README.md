@@ -29,7 +29,7 @@ Write here all intructions to build the environment and run your code.\
 
 ## Active TODO 
 Document here the major milestones of your code and future planned steps\
-[base]:(https://gitlab.ethz.ch/iml-course/scaffolding-templates/dummy-fullstack/dummy-fullstack2/-/commit/)
+[base]: https://gitlab.ethz.ch/iml-course/scaffolding-templates/dummy-fullstack/dummy-fullstack2/-/commit/
 
 - [ ] Week 1
   - [x] Completed Sub-task: [commit link]([base]20984ec2197fa8dcdc50f19723e5aa234b9588a3)

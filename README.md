@@ -21,14 +21,14 @@ Add here all used datasets + where and how to download them
 Define the tasks
 
 ## Requirements
-Write here all intructions to build the environment and run your code.
+Write here all intructions to build the environment and run your code.\
 **NOTE:** If we cannot run your code following these requirements we will not be able to evaluate it.
 
 ## Active TODO 
 Document here the major milestones of your code and future planned steps\
 - [ ] Week 1
-  - [ ] Sub-task 
-  - [x] Completed 
+  - [x] Completed Sub-task 
+  - [x] Completed Sub-task 
 
 - [ ] Week 2
   - [ ] Sub-task 

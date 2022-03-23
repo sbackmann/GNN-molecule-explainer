@@ -34,23 +34,23 @@ Document here the major milestones of your code and future planned steps\
   - [ ] Sub-task 
   - [ ] Sub-task 
 
-Open issues on your code and create branches from them. \
-Merge the branch once the issue is resolved.\
-You should create an issue per task and milestones defined in (#active-todo).\
-Take a look at [Issues and Branches](https://www.youtube.com/watch?v=DSuSBuVYpys).
-
+** Open an issue for each subtask.\ 
+Create a merge request (with corresponding branch) from each issue.\
+Finally accept the merge request once issue is resolved. ** \
+Take a look at [Issues and Branches](https://www.youtube.com/watch?v=DSuSBuVYpys) for more details. \
+This will help you have a clearer overview of what you are currently doing, track your progress and organise your work among yourselves. Moreover it gives us more insights on your progress.  
 
 ## Versioning
 Create stable versions of your code each week by using gitlab tags.\
 Take a look at [Gitlab Tags](https://docs.gitlab.com/ee/topics/git/tags.html).
 
-Then document here the weekly tags. \
-We will evaluate your code weekly based on this versions.
+Then list here the weekly tags. \
+We will evaluate your code every week, based on the corresponding version.
 
 Tags:
-- Week 1: #1+
-- Week 2: #1+
-- Week 3: #1+
+- Week 1: [Week 1 Tag](https://gitlab.ethz.ch/iml-course/scaffolding-templates/dummy-fullstack/dummy-fullstack2/-/tags/stable-readme)
+- Week 2: [Week 2 Tag](https://gitlab.ethz.ch/iml-course/scaffolding-templates/dummy-fullstack/dummy-fullstack2/-/tags/stable-readme)
+- Week 3: ..
 - ...
 
 

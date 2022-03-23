@@ -37,11 +37,13 @@ Document here the major milestones of your code and future planned steps\
   - [ ] Sub-task 
   - [ ] Sub-task 
 
-**Open an issue for each subtask**.\ 
-**Create a merge request (with corresponding branch) from each issue.**\
-**Finally accept the merge request once issue is resolved.** \
-**Once you complete a task, link the corresponding commit.** \
-Take a look at [Issues and Branches](https://www.youtube.com/watch?v=DSuSBuVYpys) for more details. \
+
+Open an issue for each subtask. \ 
+Create a merge request (with corresponding branch) from each issue. \
+Finally accept the merge request once issue is resolved. \
+Once you complete a task, link the corresponding commit. \
+Take a look at [Issues and Branches](https://www.youtube.com/watch?v=DSuSBuVYpys) for more details. 
+
 This will help you have a clearer overview of what you are currently doing, track your progress and organise your work among yourselves. Moreover it gives us more insights on your progress.  
 
 ## Versioning

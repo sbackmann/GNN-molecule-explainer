@@ -84,11 +84,11 @@ Write here **DETAILED** intructions on how to run your code.\
 ## Milestones
 Document here the major milestones of your code and future planned steps.\
 - [x] Week 1
-  - [x] Completed Sub-task: [#20984ec2](https://gitlab.ethz.ch/iml-course/scaffolding-templates/dummy-fullstack/dummy-fullstack2/-/commit/20984ec2197fa8dcdc50f19723e5aa234b9588a3)
+  - [x] Completed Sub-task: [#20984ec2](https://gitlab.inf.ethz.ch/COURSE-XAI-IML22/dummy-fullstack/-/commit/20984ec2197fa8dcdc50f19723e5aa234b9588a3)
   - [x] Completed Sub-task: ...
 
 - [ ] Week 2
-  - [ ] Sub-task: [#2](https://gitlab.ethz.ch/iml-course/scaffolding-templates/dummy-fullstack/dummy-fullstack2/-/issues/2)
+  - [ ] Sub-task: [#2](https://gitlab.inf.ethz.ch/COURSE-XAI-IML22/dummy-fullstack/-/issues/2)
   - [ ] Sub-task: ...
 
 Create a list subtask.\
@@ -107,7 +107,7 @@ Then list here the weekly tags. \
 We will evaluate your code every week, based on the corresponding version.
 
 Tags:
-- Week 1: [Week 1 Tag](https://gitlab.ethz.ch/iml-course/scaffolding-templates/dummy-fullstack/dummy-fullstack2/-/tags/stable-readme)
+- Week 1: [Week 1 Tag](https://gitlab.inf.ethz.ch/COURSE-XAI-IML22/dummy-fullstack/-/tags/stable-readme)
 - Week 2: ..
 - Week 3: ..
 - ...

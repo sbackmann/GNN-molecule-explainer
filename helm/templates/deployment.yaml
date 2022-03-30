@@ -49,3 +49,7 @@ spec:
         env:
         - name: CONTEXT_PATH
           value: "{{ .Release.Name }}-frontend"
+        - name: BACKEND_SERVICE_NAME
+          value: "{{ .Release.Name }}-backend"
+        - name: BACKEND_SERVICE_PORT
+          value: 8000

@@ -52,4 +52,4 @@ spec:
         - name: BACKEND_SERVICE_NAME
           value: "{{ .Release.Name }}-backend"
         - name: BACKEND_SERVICE_PORT
-          value: 8000
+          value: "8000"

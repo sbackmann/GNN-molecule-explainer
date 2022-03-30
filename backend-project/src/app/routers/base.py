@@ -53,5 +53,5 @@ async def version() -> dict:
   return {
     "commit": os.environ['COMMIT_ID'],
     "job": os.environ['JOB_ID'],
-    "date": datetime.datetime.now().strftime("%d.%m.%Y %H:%M:%S")
+    "current_date": datetime.datetime.now().strftime("%d.%m.%Y %H:%M:%S")
   }

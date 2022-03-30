@@ -3,6 +3,7 @@ from fastapi.responses import HTMLResponse
 from fastapi.middleware.cors import CORSMiddleware
 import pandas as pd
 import os
+from pathlib import PurePath
 from io import StringIO
 # from pydantic_models.example_data_points import ExampleDataResponse
 from typing import Callable
@@ -25,7 +26,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(base.router, prefix=os.environ["CONTEXT_PATH"])
+context_path = PurePath('/', os.environ["CONTEXT_PATH"]).as_posix()
+app.include_router(base.router, prefix=context_path)
 
 def update_schema_name(app: FastAPI, function: Callable, name: str) -> None:
     """

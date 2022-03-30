@@ -4,6 +4,7 @@ from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.responses import HTMLResponse
 import pandas as pd
 import os
+import datetime
 from io import StringIO
 from typing import Callable
 from sklearn.cluster import KMeans
@@ -46,3 +47,11 @@ async def root():
         </html>
         """
     return HTMLResponse(content=html_content, status_code=200)
+
+@router.get("/version")
+async def version() -> dict:
+  return {
+    "commit": os.environ['COMMIT_ID'],
+    "job": os.environ['JOB_ID'],
+    "date": datetime.datetime.now().strftime("%d.%m.%Y %H:%M:%S")
+  }

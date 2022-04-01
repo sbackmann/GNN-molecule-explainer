@@ -7,7 +7,7 @@ lint_helm:
   stage: lint
   image: matthiasgabathuler/my-runner:ubuntu-20.04
   tags:
-    - dockerhub
+    - isg-test
   script:
     - IMAGE_NAME=$(echo $IMAGE_NAME | tr '[:upper:]' '[:lower:]')
     - >-
@@ -23,7 +23,7 @@ build_backend:
     name: gcr.io/kaniko-project/executor:debug
     entrypoint: [""]
   tags:
-    - dockerhub
+    - isg-test
   variables:
     IMAGE_NAME: $ci_registry/$CI_PROJECT_PATH-backend
   script:
@@ -42,7 +42,7 @@ build_frontend:
     name: gcr.io/kaniko-project/executor:debug
     entrypoint: [""]
   tags:
-    - dockerhub
+    - isg-test
   variables:
     IMAGE_NAME: $ci_registry/$CI_PROJECT_PATH-frontend
   script:
@@ -59,7 +59,7 @@ deploy_app:
   stage: deploy
   image: matthiasgabathuler/my-runner:ubuntu-20.04
   tags:
-  - dockerhub
+  - isg-test
   variables:
     IMAGE_NAME: $CI_PROJECT_PATH
   script:

@@ -28,6 +28,12 @@ build_backend:
     IMAGE_NAME: $ci_registry/$CI_PROJECT_PATH-backend
   script:
     - IMAGE_NAME=$(echo $IMAGE_NAME | tr '[:upper:]' '[:lower:]')
+    - mkdir -p /kaniko/.docker
+    - |-
+       KANIKOPROXYBUILDARGS=""
+       KANIKOCFG="\"auths\":{\"${ci_registry}\":{\"auth\":\"$(printf "%s:%s" "${ci_registry_user}" "${ci_registry_password}" | base64 | tr -d '\n')\"}}"
+       KANIKOCFG="{ ${KANIKOCFG} }"
+       echo "${KANIKOCFG}" > /kaniko/.docker/config.json
     - >-
       /kaniko/executor
       --context "${CI_PROJECT_DIR}/backend-project"
@@ -47,6 +53,11 @@ build_frontend:
     IMAGE_NAME: $ci_registry/$CI_PROJECT_PATH-frontend
   script:
     - IMAGE_NAME=$(echo $IMAGE_NAME | tr '[:upper:]' '[:lower:]')
+    - |-
+       KANIKOPROXYBUILDARGS=""
+       KANIKOCFG="\"auths\":{\"${ci_registry}\":{\"auth\":\"$(printf "%s:%s" "${ci_registry_user}" "${ci_registry_password}" | base64 | tr -d '\n')\"}}"
+       KANIKOCFG="{ ${KANIKOCFG} }"
+       echo "${KANIKOCFG}" > /kaniko/.docker/config.json
     - >-
       /kaniko/executor
       --context "${CI_PROJECT_DIR}/react-frontend"

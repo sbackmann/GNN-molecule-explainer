@@ -25,6 +25,8 @@ spec:
           value: {{ .Values.build.commit | quote }}
         - name: JOB_ID
           value: {{ .Values.build.job_id | quote }}
+      imagePullSecrets:
+      - name: isg-registry
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -53,3 +55,5 @@ spec:
           value: "{{ .Release.Name }}-backend"
         - name: BACKEND_SERVICE_PORT
           value: "8000"
+      imagePullSecrets:
+      - name: isg-registry

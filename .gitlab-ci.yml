@@ -6,8 +6,6 @@ stages:
 lint_helm:
   stage: lint
   image: matthiasgabathuler/my-runner:ubuntu-20.04
-  tags:
-    - isg-test
   script:
     - IMAGE_NAME=$(echo $IMAGE_NAME | tr '[:upper:]' '[:lower:]')
     - >-
@@ -22,8 +20,6 @@ build_backend:
   image:
     name: gcr.io/kaniko-project/executor:debug
     entrypoint: [""]
-  tags:
-    - isg-test
   variables:
     IMAGE_NAME: $ci_registry/$CI_PROJECT_PATH-backend
   script:
@@ -41,8 +37,6 @@ build_frontend:
   image:
     name: gcr.io/kaniko-project/executor:debug
     entrypoint: [""]
-  tags:
-    - isg-test
   variables:
     IMAGE_NAME: $ci_registry/$CI_PROJECT_PATH-frontend
   script:
@@ -58,8 +52,6 @@ build_frontend:
 deploy_app:
   stage: deploy
   image: matthiasgabathuler/my-runner:ubuntu-20.04
-  tags:
-  - isg-test
   variables:
     IMAGE_NAME: $CI_PROJECT_PATH
   script:

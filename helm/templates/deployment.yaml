@@ -11,6 +11,8 @@ spec:
     metadata:
       labels:
         app: {{ .Release.Name }}-backend
+      annotations:
+        rollme: {{ randAlphaNum 5 | quote }}
     spec:
       containers:
       - name: {{ .Release.Name }}-backend
@@ -41,6 +43,8 @@ spec:
     metadata:
       labels:
         app: {{ .Release.Name }}-frontend
+      annotations:
+        rollme: {{ randAlphaNum 5 | quote }}
     spec:
       containers:
       - name: {{ .Release.Name }}-frontend

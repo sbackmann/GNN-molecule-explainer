@@ -5,3 +5,5 @@ image:
 build:
   job_id: ""
   commit: ""
+url:
+  host_name: "www.course-xai-iml22.isginf.ch"

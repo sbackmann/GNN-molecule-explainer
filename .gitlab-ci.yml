@@ -41,6 +41,9 @@ build_backend:
       --destination "${IMAGE_NAME}:${CI_COMMIT_REF_NAME}"
       --destination "${IMAGE_NAME}:${CI_COMMIT_SHORT_SHA}"
       --destination "${IMAGE_NAME}:latest"
+  only:
+    changes:
+      - backend-project/**/*
 
 build_frontend:
   stage: build
@@ -65,6 +68,9 @@ build_frontend:
       --destination "${IMAGE_NAME}:${CI_COMMIT_REF_NAME}"
       --destination "${IMAGE_NAME}:${CI_COMMIT_SHORT_SHA}"
       --destination "${IMAGE_NAME}:latest"
+  only:
+  changes:
+    - react-frontend/**/*
 
 deploy_app:
   stage: deploy
@@ -83,10 +89,9 @@ deploy_app:
     --history-max 10
     --set image.host=${ci_registry}
     --set image.name=${IMAGE_NAME}
-    --set image.tag=${CI_COMMIT_SHORT_SHA}
+    --set image.tag=${CI_COMMIT_REF_NAME}
     --set build.job_id=${CI_JOB_ID}
     --set build.commit=${CI_COMMIT_SHA}
-
   only:
     - ci-cd-pipeline
     - /^release.*$/

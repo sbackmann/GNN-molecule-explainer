@@ -81,6 +81,7 @@ deploy_app:
     upgrade ${CI_PROJECT_NAME} ${CI_PROJECT_DIR}/helm
     --install
     --history-max 10
+    --set image.host=${ci_registry}
     --set image.name=${IMAGE_NAME}
     --set image.tag=${CI_COMMIT_SHORT_SHA}
     --set build.job_id=${CI_JOB_ID}

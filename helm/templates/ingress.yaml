@@ -7,7 +7,7 @@ metadata:
 spec:
   ingressClassName: ingress-nginx
   rules:
-  - host: {{ .Values.url_hostname }}
+  - host: {{ .Values.url.hostname }}
     http:
       paths:
       - path: /{{ .Release.Name }}

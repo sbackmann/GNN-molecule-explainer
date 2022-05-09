@@ -69,8 +69,8 @@ build_frontend:
       --destination "${IMAGE_NAME}:${CI_COMMIT_SHORT_SHA}"
       --destination "${IMAGE_NAME}:latest"
   only:
-  changes:
-    - react-frontend/**/*
+    changes:
+      - react-frontend/**/*
 
 deploy_app:
   stage: deploy

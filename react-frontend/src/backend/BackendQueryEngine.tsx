@@ -5,9 +5,8 @@ export interface queryBackendProps {
 }
 
 const { BACKEND_SERVICE_NAME } = process.env;
-const { BACKEND_SERVICE_PORT } = process.env;
 
-export const BASE_URL = BACKEND_SERVICE_NAME
+export const BASE_URL = BACKEND_SERVICE_NAME;
 
 export const queryBackend = async (route: string): Promise<DataArray> => {
     const requestURL = `${BASE_URL}/${route}`;

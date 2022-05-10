@@ -54,6 +54,6 @@ spec:
         - name: CONTEXT_PATH
           value: "{{ .Release.Name }}"
         - name: BACKEND_SERVICE_NAME
-          value: "{{ .Release.Name }}-backend"
+          value: "http://{{ .Release.Name }}.course-xai-iml22.svc:80/{{ .Release.Name }}-backend"
         - name: BACKEND_SERVICE_PORT
           value: "80"

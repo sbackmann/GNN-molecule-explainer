@@ -4,7 +4,10 @@ export interface queryBackendProps {
     route: string;
 }
 
-export const BASE_URL = 'http://127.0.0.1:8000';
+const { BACKEND_SERVICE_NAME } = process.env;
+const { BACKEND_SERVICE_PORT } = process.env;
+
+export const BASE_URL = 'http://'+BACKEND_SERVICE_NAME+'.course-xai-iml22.svc:'+BACKEND_SERVICE_PORT;
 
 export const queryBackend = async (route: string): Promise<DataArray> => {
     const requestURL = `${BASE_URL}/${route}`;

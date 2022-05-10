@@ -52,7 +52,7 @@ spec:
         - containerPort: 3000
         env:
         - name: CONTEXT_PATH
-          value: "{{ .Release.Name }}-frontend"
+          value: "{{ .Release.Name }}"
         - name: BACKEND_SERVICE_NAME
           value: "{{ .Release.Name }}-backend"
         - name: BACKEND_SERVICE_PORT

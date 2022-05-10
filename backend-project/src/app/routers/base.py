@@ -38,7 +38,7 @@ async def root():
     html_content = """
         <html>
             <head>
-                <title>Week 2</title>
+                <title>CI/CD Test</title>
             </head>
             <body>
                 <h1>Test Python Backend</h1>

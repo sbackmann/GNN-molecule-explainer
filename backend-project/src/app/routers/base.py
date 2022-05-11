@@ -41,7 +41,7 @@ async def root():
                 <title>CI/CD Test</title>
             </head>
             <body>
-                <h1>Test Python Backend</h1>
+                <h1>Test CI/CD</h1>
                 Visit the <a href="/docs">API doc</a> (<a href="/redoc">alternative</a>) for usage information.
             </body>
         </html>

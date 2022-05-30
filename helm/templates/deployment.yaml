@@ -22,7 +22,7 @@ spec:
         - containerPort: 8000
         env:
         - name: CONTEXT_PATH
-          value: "{{ .Release.Name }}-backend"
+          value: "backend"
         - name: COMMIT_ID
           value: {{ .Values.build.commit | quote }}
         - name: JOB_ID

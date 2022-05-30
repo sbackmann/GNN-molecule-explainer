@@ -6,6 +6,7 @@ export interface queryBackendProps {
 
 export const BASE_URL = "##BACKEND_URI##";
 
+
 export const queryBackend = async (route: string): Promise<DataArray> => {
     const requestURL = `${BASE_URL}/${route}`;
     // const formData = new FormData();

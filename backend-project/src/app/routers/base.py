@@ -14,7 +14,7 @@ router = APIRouter()
 
 @router.post("/get-data")
 def upload_data(name: str):
-    data = pd.read_csv(f"data/dataset_{name}.csv")
+    data = pd.read_csv(f"../data/dataset_{name}.csv")
     kmeans = KMeans(n_clusters=2, random_state=0).fit(data)
     labels = kmeans.labels_
     data["cluster"] = labels.tolist()

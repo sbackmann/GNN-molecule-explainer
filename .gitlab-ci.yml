@@ -61,7 +61,7 @@ build_frontend:
     #    KANIKOCFG="\"auths\":{\"${ci_registry}\":{\"auth\":\"$(printf "%s:%s" "${ci_registry_user}" "${ci_registry_password}" | base64 | tr -d '\n')\"}}"
     #    KANIKOCFG="{ ${KANIKOCFG} }"
     #    echo "${KANIKOCFG}" > /kaniko/.docker/config.json
-    - sed -i "s/##BACKEND_URI##/https:\/\/www.course-xai-iml22.isginf.ch\/$(echo $CI_PROJECT_NAME | tr '[:upper:]' '[:lower:]')-backend/g" react-frontend/src/backend/BackendQueryEngine.tsx
+    - sed -i "s/##BACKEND_URI##/http:\/\/www.course-xai-iml22.isginf.ch\/$(echo $CI_PROJECT_NAME | tr '[:upper:]' '[:lower:]')-backend/g" react-frontend/src/backend/BackendQueryEngine.tsx
     - >-
       /kaniko/executor
       --context "${CI_PROJECT_DIR}/react-frontend"

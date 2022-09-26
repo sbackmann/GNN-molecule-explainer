@@ -1,4 +1,3 @@
-
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.responses import HTMLResponse
 import pandas as pd
@@ -37,7 +36,7 @@ color = ["3A3276", "5B5393", "847EB1"]
 
 @router.get("/", response_class=HTMLResponse)
 async def root():
-    html_content = """
+    html_content = '''
         <html>
             <head>
                 <title>CI/CD Test</title>
@@ -47,7 +46,7 @@ async def root():
                 <p style="background-color: #%s; padding: 3px; width: 100%;" >This is the backend for the "Dummy Fullstack" app.</p>
             </body>
         </html>
-        """ % (color[0],color[1],color[2])
+        ''' % (color[0],color[1],color[2])
     return HTMLResponse(content=html_content, status_code=200)
 
 @router.get("/version")

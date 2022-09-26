@@ -31,8 +31,8 @@ async def create_file(file: bytes = File(...)):
 async def create_upload_file(file: UploadFile):
     return {"filename": file.filename}
 
-# color = ["AAA239", "D4CD6A", "FFF9AA"]
-color = ["3A3276", "5B5393", "847EB1"]
+color = ["AAA239", "D4CD6A", "FFF9AA"]
+#color = ["3A3276", "5B5393", "847EB1"]
 
 @router.get("/", response_class=HTMLResponse)
 async def root():

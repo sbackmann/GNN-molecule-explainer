@@ -36,17 +36,17 @@ color = ["3A3276", "5B5393", "847EB1"]
 
 @router.get("/", response_class=HTMLResponse)
 async def root():
-    html_content = '''
+    html_content = """
         <html>
             <head>
                 <title>CI/CD Test</title>
             </head>
-            <body style="background-color: #%s; padding: 20px;">
-                <h1 style="background-color: #%s; padding: 3px; width: 100%;" >Test CI/CD</h1>
-                <p style="background-color: #%s; padding: 3px; width: 100%;" >This is the backend for the "Dummy Fullstack" app.</p>
+            <body style=\"background-color: #%s; padding: 20px;\">
+                <h1 style=\"background-color: #%s; padding: 3px; width: 100%%;\" >Test CI/CD</h1>
+                <p style=\"background-color: #%s; padding: 3px; width: 100%%;\" >This is the backend for the "Dummy Fullstack" app.</p>
             </body>
         </html>
-        ''' % (color[0],color[1],color[2])
+        """ % (color[0],color[1],color[2])
     return HTMLResponse(content=html_content, status_code=200)
 
 @router.get("/version")

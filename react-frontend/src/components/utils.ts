@@ -1,4 +1,4 @@
-import { Margins } from "../types/margins";
+import { Margin } from "../types/margin";
 
 export function getChildOrAppend<
     GElement extends d3.BaseType,
@@ -15,20 +15,20 @@ export function getChildOrAppend<
     return root.select<GElement>(`${tag}.${className}`);
 }
 
-export const DEFAULT_MARGINS = {
+export const DEFAULT_MARGIN = {
   top: 20,
   left: 40,
   bottom: 20,
   right: 20
 }
 
-export const getMargin = (margin?: Margins) => {
-  if (!margin) return DEFAULT_MARGINS
-  else return {...DEFAULT_MARGINS, ...margin}
+export const getMargin = (margin?: Margin) => {
+  if (!margin) return DEFAULT_MARGIN
+  else return {...DEFAULT_MARGIN, ...margin}
 }
 
 export interface ChartStyle {
   width: number
   height: number
-  margin?: Margins
+  margin?: Margin
 }

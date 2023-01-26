@@ -4,6 +4,7 @@ import { DataArray } from './types/dataArray';
 import queryBackend from './router/BackendQueryEngine';
 import Visualization from './components/Visualization';
 import DataChoiceComponent from './components/DataChoiceComponent';
+import ScatterPlot from './components/ScatterPlot/ScatterPlot';
 
 function App() {
 
@@ -27,10 +28,8 @@ function App() {
     <div className="App">
       <header className="App-header"> K-Means clustering
       </header>
-      <div>
-        <DataChoiceComponent onChoiceMade={choiceMade} />
-      </div>
-      <div>{exampleData && dataChoice && <Visualization width={1100} height={550} data={exampleData} />}</div>
+      <DataChoiceComponent onChoiceMade={choiceMade} />
+      <ScatterPlot width={1100} height={550} data={exampleData} />
     </div>
   )
 }

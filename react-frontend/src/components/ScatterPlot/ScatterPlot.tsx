@@ -1,85 +1,73 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState, createRef } from 'react'
 import './ScatterPlot.scss'
 import * as d3 from 'd3'
-import { Types } from './types'
-import queryBackend from '../../router/BackendQueryEngine'
 import { DataArray } from "../../types/dataArray";
+import { ChartStyle, getChildOrAppend, getMargin } from '../utils';
 
-export interface ScatterPlotProps {
-    width: number
-    height: number
-    top?: number
-    right?: number
-    bottom?: number
-    left?: number
-    fill?: string
+
+interface ScatterPlotProp extends ChartStyle {
+    data?: DataArray
 }
 
-const ScatterPlot = (props: ScatterPlotProps) => {
-    const [data, setData] = useState<DataArray>();
-
+const ScatterPlot = (props: ScatterPlotProp) => {
+    const ref = createRef<SVGSVGElement>()
+    const { data, ...style} = props
     useEffect(() => {
-        const asyncGetData = async () => {
-            const data = await queryBackend(`upload-data?name=moons`)
-            setData(data);
+        const root = ref.current;
+        if (data && root) {
+            renderScatterPlot(root, data, style)
         }
+    }, [props])
 
-        asyncGetData();
-    }, []);
-
-    return <>{data && <InnerScatterPlot data={data} {...props} />}</>;
+    return <div className="scatterPlot">
+        <svg width={props.width} height={props.height} ref={ref} />
+    </div>
 }
 
-const InnerScatterPlot = (props: ScatterPlotProps & { data: DataArray }) => {
-    // const width = props.width - props.left - props.right;
-    // const height = props.height - props.top - props.bottom;
-    //
-    // const svg = d3
-    //     .select('.basicScatterChart')
-    //     .append('svg')
-    //     .attr('width', width + props.left + props.right)
-    //     .attr('height', height + props.top + props.bottom)
-    //     .append('g')
-    //     .attr('transform', `translate(${props.left},${props.top})`)
-    //
-    // console.log('Hi, all good');
-    //
-    const x = d3.scaleLinear().domain([0, 1]).range([0, props.width]);
-    // console.log('print x');
-    // console.log(x);
-    // svg.append('g').attr('transform', `translate(0,${height})`).call(d3.axisBottom(x));
-    //
+/** 
+ * Render the scatterplot
+ * @param root the root SVG element
+ * @param data the data for visualization
+ * @param props the parameters of the scatterplot
+*/
+function renderScatterPlot(
+    root: SVGElement | SVGGElement,
+    data: DataArray,
+    props: ChartStyle
+) {
+    const margin = getMargin(props.margin)
+    const height = props.height - margin.top - margin.bottom
+    const width = props.width - margin.left - margin.right
 
-    const colors = ["blue", "red"];
-    const y = d3.scaleLinear().domain([0, 4.5]).range([props.height, 0])
-    // svg.append('g').call(d3.axisLeft(y))
-    // svg
-    //     .append('g')
-    //     .selectAll('dot')
-    //     .data(props.data)
-    //     .enter()
-    //     .append('circle')
-    //     .attr('cx', (d) => {
-    //         return x(((d as unknown) as Types.Data).X1)
-    //     })
-    //     .attr('cy', (d) => {
-    //         return y(((d as unknown) as Types.Data).X2)
-    //     })
-    //     .attr('r', 0.8)
-    //     //.style('fill', function (d) { return colors[d.cluster]; })
-    //     .style('fill', 'grey')
+    const visRoot = d3.select(root)
+    const base = getChildOrAppend<SVGGElement, SVGElement>(visRoot, "g", "base")
+        .attr("transform", `translate(${margin.left}, ${margin.top})`)
 
-    const circleElements = props.data.map((row, idx) => {
-        return <circle key={idx} cx={x(row.X1)} cy={y(row.X2)} r={5} fill={colors[row.cluster]}></circle>;
-    })
+    const xValues = data.map(d => d.X1)
+    const x = d3.scaleLinear().domain([d3.min(xValues) || 0, d3.max(xValues) || 1]).range([0, width])
+    const yValues = data.map(d => d.X2)
+    const y = d3.scaleLinear().domain([d3.min(yValues) || 0, d3.max(yValues) || 1]).range([height, 0])
+    const colors = d3.scaleOrdinal(["1", "2"], ["blue", "red"])
 
-    return <div className=".basicScatterChart">
-        <svg width={props.width} height={props.height}>
-            <g>
-                {circleElements}
-            </g>
-        </svg>
-    </div>
+    base.selectAll("circle.dot")
+        .data(data)
+        .join<SVGCircleElement>(
+            enter => enter.append("circle")
+                .attr("class", "dot"),
+            update => update,
+            exit => exit.remove()
+        )
+        .attr("cx", d => x(d.X1))
+        .attr("cy", d => y(d.X2))
+        .attr("r", 5)
+        .style("fill", d => colors(d.cluster) || "#fff")
+
+    getChildOrAppend<SVGGElement, SVGGElement>(base, "g", "y-axis-base")
+        .call(d3.axisLeft(y).ticks(4));
+
+    getChildOrAppend<SVGGElement, SVGGElement>(base, "g", "x-axis-base")
+        .attr("transform", `translate(0, ${height})`)
+        .call(d3.axisBottom(x).ticks(5));
 }
 
 

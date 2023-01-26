@@ -1,4 +1,4 @@
-import { DataArray } from "../types/DataArray";
+import { DataArray } from "../types/dataArray";
 
 export interface queryBackendProps {
     route: string;

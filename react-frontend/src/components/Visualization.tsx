@@ -1,10 +1,10 @@
 import React from 'react';
-import { DataArray } from './types/DataArray';
-import { Margins } from './types/Margins';
+import { DataArray } from '../types/dataArray';
+import { Margins } from '../types/margins';
 import { Group } from '@visx/group';
 import { scaleLinear } from '@visx/scale';
 import { AxisBottom, AxisLeft } from '@visx/axis';
-import DataPointComponent from './components/DataPointComponent';
+import DataPointComponent from './DataPointComponent';
 
 
 const DEFAULT_MARGINS: Margins = {

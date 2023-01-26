@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import { DataArray } from './types/DataArray';
-import queryBackend from './backend/BackendQueryEngine';
-import Visualization from './Visualization';
+import { DataArray } from './types/dataArray';
+import queryBackend from './router/BackendQueryEngine';
+import Visualization from './components/Visualization';
 import DataChoiceComponent from './components/DataChoiceComponent';
 
 function App() {

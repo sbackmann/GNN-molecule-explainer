@@ -2,8 +2,8 @@ import React, {useEffect, useState} from 'react'
 import './ScatterPlot.scss'
 import * as d3 from 'd3'
 import {Types} from './types'
-import queryBackend from '../../backend/BackendQueryEngine'
-import {DataArray} from "../../types/DataArray";
+import queryBackend from '../../router/BackendQueryEngine'
+import {DataArray} from "../../types/dataArray";
 
 export interface ScatterPlotProps {
     width: number

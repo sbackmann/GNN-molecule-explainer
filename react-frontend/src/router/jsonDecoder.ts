@@ -1,5 +1,5 @@
 import { JsonDecoder } from 'ts.data.json';
-import { DataPoint } from '../types/DataPoint';
+import { DataPoint } from '../types/dataPoint';
 
 /* **********
  * number[] *

@@ -31,7 +31,7 @@ const Visualization: React.FunctionComponent<Props> = ({ data, width, height, ma
     const xScale = scaleLinear<number>()
         .domain([Math.min(...xValues), Math.max(...xValues)])
         .range([0, xMax]);
-    
+
     const yValues = data.map((d) => d.X2);
     const yScale = scaleLinear<number>()
         .domain([Math.min(...yValues), Math.max(...yValues)])

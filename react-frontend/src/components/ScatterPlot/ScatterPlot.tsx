@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import './ScatterPlot.scss'
 import * as d3 from 'd3'
-import {Types} from './types'
+import { Types } from './types'
 import queryBackend from '../../router/BackendQueryEngine'
-import {DataArray} from "../../types/dataArray";
+import { DataArray } from "../../types/dataArray";
 
 export interface ScatterPlotProps {
     width: number
@@ -27,7 +27,7 @@ const ScatterPlot = (props: ScatterPlotProps) => {
         asyncGetData();
     }, []);
 
-    return <>{data && <InnerScatterPlot data={data} {...props}/>}</>;
+    return <>{data && <InnerScatterPlot data={data} {...props} />}</>;
 }
 
 const InnerScatterPlot = (props: ScatterPlotProps & { data: DataArray }) => {

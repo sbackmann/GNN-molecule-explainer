@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import { DataArray } from './types/dataArray';
+import { DataArray } from './types/data';
 import queryBackend from './router/BackendQueryEngine';
-import Visualization from './components/Visualization';
-import DataChoiceComponent from './components/DataChoiceComponent';
-import ScatterPlot from './components/ScatterPlot/ScatterPlot';
+import DataChoiceComponent from './components/DataChoice';
+import ScatterPlot from './components/ScatterPlot';
 
 function App() {
 
@@ -20,9 +19,6 @@ function App() {
   function choiceMade(choice: string) {
     setDataChoice(choice);
   }
-
-  console.log(exampleData)
-  console.log(dataChoice)
 
   return (
     <div className="App">

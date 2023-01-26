@@ -1,8 +1,8 @@
-import { useEffect, useState, createRef } from 'react'
-import './ScatterPlot.scss'
+import { useEffect, createRef } from 'react'
 import * as d3 from 'd3'
-import { DataArray } from "../../types/dataArray";
-import { ChartStyle, getChildOrAppend, getMargin } from '../utils';
+import { DataArray } from "../types/data";
+import { ChartStyle, getChildOrAppend, getMargin } from './utils';
+import './ScatterPlot.scss'
 
 
 interface ScatterPlotProp extends ChartStyle {

@@ -3,3 +3,5 @@ export interface DataPoint {
     X2: number;
     cluster: string
 }
+
+export type DataArray = DataPoint[];

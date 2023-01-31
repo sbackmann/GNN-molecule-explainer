@@ -11,7 +11,7 @@ DATA_FILES = {'instance-data': 'gam-instance-data',
             'features': 'features'}
 DATA_URL = "https://msrgamut.microsoft.com/data/ames-housing-"
 
-class HelloWorld(Resource):
+class AmesData(Resource):
     def get(self, source):
         '''
         r = requests.get(f'{DATA_URL}{DATA_FILES[source]}.json', verify=False)
@@ -23,7 +23,7 @@ class HelloWorld(Resource):
 
         return data_json
 
-api.add_resource(HelloWorld, '/<string:source>')
+api.add_resource(AmesData, '/<string:source>')
 
 if __name__ == '__main__':
     app.run(debug=True)

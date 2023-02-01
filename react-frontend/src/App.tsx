@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import { DataArray } from './types/data';
-import queryBackend from './router/BackendQueryEngine';
 import DataChoiceComponent from './components/DataChoice';
 import ScatterPlot from './components/ScatterPlot';
+import { postPoints } from './router/resources/data';
 
 function App() {
 
@@ -11,7 +11,7 @@ function App() {
   const [dataChoice, setDataChoice] = useState<string>();
 
   useEffect(() => {
-    queryBackend(`get-data?name=` + dataChoice).then((exampleData) => {
+    dataChoice && postPoints(dataChoice).then(exampleData => {
       setExampleData(exampleData);
     });
   }, [dataChoice]);

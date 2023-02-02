@@ -1,3 +1,3 @@
-from . import ames
+from . import local, remote
 
-__all__ = ["ames"]
+__all__ = ["local", "remote"]

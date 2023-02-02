@@ -1,10 +1,6 @@
+from flask_restful import Resource
 import json
 
-from flask import Flask
-from flask_restful import Resource, Api
-
-app = Flask(__name__)
-api = Api(app)
 
 DATA_FILES = {
     "instance-data": "gam-instance-data",
@@ -25,9 +21,3 @@ class AmesData(Resource):
             data_json = json.load(f)
 
         return data_json
-
-
-api.add_resource(AmesData, "/<string:source>")
-
-if __name__ == "__main__":
-    app.run(debug=True)

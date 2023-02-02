@@ -17,7 +17,7 @@ class AmesData(Resource):
         data_json = r.json()
         """
 
-        with open(f"../../data/ames-housing-{DATA_FILES[source]}.json") as f:
+        with open(f"../data/ames-housing-{DATA_FILES[source]}.json") as f:
             data_json = json.load(f)
 
         return data_json

@@ -2,7 +2,7 @@ import argparse
 
 from flask import Flask
 
-from src.routes import add_routes
+from src.router.routes import add_routes
 
 
 def create_app():

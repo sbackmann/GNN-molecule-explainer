@@ -7,6 +7,6 @@ API = "/api/"
 def add_routes(app):
     api = Api(app)
 
-    api.add_resource(res.AmesData, API + "/<string:source>")
+    api.add_resource(res.ames.AmesData, API + "/<string:source>")
 
     return api

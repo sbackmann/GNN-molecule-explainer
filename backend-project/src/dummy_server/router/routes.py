@@ -1,5 +1,5 @@
 from flask_restful import Api
-import src.resources as res
+import dummy_server.resources as res
 
 API = "/api/"  # optional string
 
@@ -7,6 +7,6 @@ API = "/api/"  # optional string
 def add_routes(app):
     api = Api(app)
 
-    api.add_resource(res.ames.local, API + "<access point url>")
+    api.add_resource(res.local.LocalResource, API + "<access point url>")
 
     return api

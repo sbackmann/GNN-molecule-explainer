@@ -7,18 +7,31 @@ def read(fname):
 
 
 setup(
-    name="backend-project",
-    version="0.1.0",
-    description="backend for the dummy project of the XAI-IML 2023 course.",
-    long_description=read("../README.md"),
+    name="dummy_server",
+    version="0.0.1",
+    description="Backend for the dummy project of the XAI-IML 2023 course.",
+    long_description=read("README.md"),
     classifiers=[
-        "Programming Language :: Python :: 3.10",
+        "Programming Languag'Development Status :: 2 - Pre-Alpha",
+        "Intended Audience :: Developers",
+        "Natural Language :: English",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.9",
         "Development Status :: 4 - Beta",
     ],
     keywords=[],
     url="",
     author="",
     author_email="",
-    packages=find_packages(include=["src"]),
-    package_dir={"src": "src"},
+    entry_point={
+        "console_scripts": [
+            "start-server = src.dummy_server.router.app:start_server",
+        ]
+    },
+    install_requires=[
+        "Flask",
+        "flask-restful",
+    ],
+    packages=find_packages(where="src", include=["dummy_server*"]),
+    package_dir={"": "src"},
 )

@@ -2,7 +2,7 @@ import argparse
 
 from flask import Flask
 
-from src.router.routes import add_routes
+from dummy_server.router.routes import add_routes
 
 
 def create_app():
@@ -36,7 +36,3 @@ def start_server():
     server_app = create_app()
 
     server_app.run(debug=args.debug, host=args.host, port=args.port)
-
-
-if __name__ == "__main__":
-    start_server()

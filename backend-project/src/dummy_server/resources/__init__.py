@@ -1,3 +1,3 @@
-from . import local, remote
+from . import scatter_data
 
-__all__ = ["local", "remote"]
+__all__ = ["scatter_data"]

@@ -7,6 +7,8 @@ API = "/api/"  # optional string
 def add_routes(app):
     api = Api(app)
 
-    api.add_resource(res.local.LocalResource, API + "<access point url>")
+    api.add_resource(res.scatter_data.BlobsResource, API + "blobs")
+    api.add_resource(res.scatter_data.CirclesResource, API + "circles")
+    api.add_resource(res.scatter_data.MoonsResource, API + "moons")
 
     return api

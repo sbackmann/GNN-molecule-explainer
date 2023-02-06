@@ -31,6 +31,8 @@ setup(
     install_requires=[
         "Flask",
         "flask-restful",
+        "pandas",
+        "scikit-learn",
     ],
     packages=find_packages(where="src", include=["dummy_server*"]),
     package_dir={"": "src"},

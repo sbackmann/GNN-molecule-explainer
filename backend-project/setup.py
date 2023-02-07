@@ -19,10 +19,6 @@ setup(
         "Programming Language :: Python :: 3.9",
         "Development Status :: 4 - Beta",
     ],
-    keywords=[],
-    url="",
-    author="",
-    author_email="",
     entry_points={
         "console_scripts": [
             "start-server = dummy_server.router.app:start_server",

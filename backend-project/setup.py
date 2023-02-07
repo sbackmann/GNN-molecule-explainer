@@ -23,9 +23,9 @@ setup(
     url="",
     author="",
     author_email="",
-    entry_point={
+    entry_points={
         "console_scripts": [
-            "start-server = src.dummy_server.router.app:start_server",
+            "start-server = dummy_server.router.app:start_server",
         ]
     },
     install_requires=[

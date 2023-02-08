@@ -12,7 +12,6 @@ setup(
     description="Backend for the dummy project of the XAI-IML 2023 course.",
     long_description=read("README.md"),
     classifiers=[
-        "Programming Languag'Development Status :: 2 - Pre-Alpha",
         "Intended Audience :: Developers",
         "Natural Language :: English",
         "Programming Language :: Python :: 3",

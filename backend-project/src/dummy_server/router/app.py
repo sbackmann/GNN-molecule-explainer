@@ -1,12 +1,14 @@
 import argparse
 
 from flask import Flask
+from flask_cors import CORS
 
 from dummy_server.router.routes import add_routes
 
 
 def create_app():
     app = Flask(__name__)  # static_url_path, static_folder, template_folder...
+    CORS(app, resources={r"/*": {"origins": "*"}})
     add_routes(app)
     return app
 
@@ -22,7 +24,7 @@ def start_server():
     )
     parser.add_argument(
         "--port",
-        default=7777,
+        default=8000,
         help="The port to run the server",
     )
     parser.add_argument(

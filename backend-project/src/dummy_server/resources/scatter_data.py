@@ -7,7 +7,7 @@ from sklearn.cluster import KMeans
 class DatasetResource(Resource):
     """Abstract template for a dataset resource."""
     name: str  # abstract attribute
-    data_root = os.path.join("..", "data")
+    data_root = os.path.join(".", "data")
 
     def get(self):
         path_name = os.path.join(self.data_root, f"dataset_{self.name}.csv")

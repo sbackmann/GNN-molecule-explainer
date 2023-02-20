@@ -1,6 +1,6 @@
 stages:
   - lint
-  # - build
+  - build
   - deploy
 
 variables:
@@ -21,33 +21,33 @@ lint_helm:
       --set build.job_id=${CI_JOB_ID}
       --set build.commit=${CI_COMMIT_SHA}
 
-# build_backend:
-#   stage: build
-#   image:
-#     name: gcr.io/kaniko-project/executor:debug
-#     entrypoint: [""]
-#   script:
-#     - >-
-#       /kaniko/executor
-#       --context "${CI_PROJECT_DIR}/backend-project"
-#       --dockerfile "${CI_PROJECT_DIR}/backend-project/Dockerfile"
-#       --destination "${IMAGE_NAME}-backend:${CI_COMMIT_REF_NAME}"
-#       --destination "${IMAGE_NAME}-backend:${CI_COMMIT_SHORT_SHA}"
-#       --destination "${IMAGE_NAME}-backend:latest"
+build_backend:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  script:
+    - >-
+      /kaniko/executor
+      --context "${CI_PROJECT_DIR}/backend-project"
+      --dockerfile "${CI_PROJECT_DIR}/backend-project/Dockerfile"
+      --destination "${IMAGE_NAME}-backend:${CI_COMMIT_REF_NAME}"
+      --destination "${IMAGE_NAME}-backend:${CI_COMMIT_SHORT_SHA}"
+      --destination "${IMAGE_NAME}-backend:latest"
 
-# build_frontend:
-#   stage: build
-#   image:
-#     name: gcr.io/kaniko-project/executor:debug
-#     entrypoint: [""]
-#   script:
-#     - >-
-#       /kaniko/executor
-#       --context "${CI_PROJECT_DIR}/react-frontend"
-#       --dockerfile "${CI_PROJECT_DIR}/react-frontend/Dockerfile"
-#       --destination "${IMAGE_NAME}-frontend:${CI_COMMIT_REF_NAME}"
-#       --destination "${IMAGE_NAME}-frontend:${CI_COMMIT_SHORT_SHA}"
-#       --destination "${IMAGE_NAME}-frontend:latest"
+build_frontend:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  script:
+    - >-
+      /kaniko/executor
+      --context "${CI_PROJECT_DIR}/react-frontend"
+      --dockerfile "${CI_PROJECT_DIR}/react-frontend/Dockerfile"
+      --destination "${IMAGE_NAME}-frontend:${CI_COMMIT_REF_NAME}"
+      --destination "${IMAGE_NAME}-frontend:${CI_COMMIT_SHORT_SHA}"
+      --destination "${IMAGE_NAME}-frontend:latest"
 
 deploy_app:
   stage: deploy
@@ -56,16 +56,16 @@ deploy_app:
     entrypoint: [""]
   script:
   - >-
-    echo "helm --namespace $k8s_namespace
+    helm --namespace $k8s_namespace
     --kube-context $k8s_context
     upgrade ${CI_PROJECT_NAME} ${CI_PROJECT_DIR}/helm
     --install
     --history-max 5
     --set image.host=${ci_registry}
     --set image.name=${IMAGE_NAME}
-    --set image.tag=a84154d6
+    --set image.tag=${CI_COMMIT_REF_NAME}
     --set build.job_id=${CI_JOB_ID}
-    --set build.commit=${CI_COMMIT_SHA}"
+    --set build.commit=${CI_COMMIT_SHA}
   only:
     - ci-cd-pipeline
     - /^release.*$/

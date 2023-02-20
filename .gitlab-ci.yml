@@ -51,7 +51,9 @@ build_frontend:
 
 deploy_app:
   stage: deploy
-  image: matthiasgabathuler/my-runner:ubuntu-20.04
+  image:
+    name: alpine/helm:3.11.1
+    entrypoint: [""]
   script:
   - >-
     helm --namespace $k8s_namespace

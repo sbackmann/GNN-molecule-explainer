@@ -3,8 +3,9 @@ stages:
   - build
   - deploy
 
-variables:
-  - IMAGE_NAME=$(echo $IMAGE_NAME | tr '[:upper:]' '[:lower:]')
+default:
+  before_script:
+    - IMAGE_NAME=$(echo $IMAGE_NAME | tr '[:upper:]' '[:lower:]')
 
 lint_helm:
   stage: lint

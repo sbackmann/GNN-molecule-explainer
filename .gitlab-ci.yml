@@ -44,6 +44,7 @@ build_frontend:
     IMAGE_NAME: $ci_registry/$CI_PROJECT_PATH-frontend
   script:
     - IMAGE_NAME=$(echo $IMAGE_NAME | tr '[:upper:]' '[:lower:]')
+    - sed -i "s/##BACKEND_URI##/http:\/\/$(echo $CI_PROJECT_NAME | tr '[:upper:]' '[:lower:]').course-xai-iml22.isginf.ch\/backend/g" react-frontend/src/backend/BackendQueryEngine.tsx
     - >-
       /kaniko/executor
       --context "${CI_PROJECT_DIR}/react-frontend"

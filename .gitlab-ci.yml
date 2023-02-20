@@ -55,6 +55,16 @@ build_frontend:
       --dockerfile "${CI_PROJECT_DIR}/react-frontend/Dockerfile"
       --destination "${IMAGE_NAME}-frontend:${CI_COMMIT_REF_NAME}"
 
+deploy:
+  stage: deploy
+  image:
+    name: bitnami/kubectl:latest
+    entrypoint: ['']
+  script:
+    - kubectl config get-contexts
+    - kubectl config use-context path/to/agent/repository:agent-name
+    - kubectl get pods
+
 deploy_app:
   stage: deploy
   image:

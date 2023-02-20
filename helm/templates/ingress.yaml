@@ -7,7 +7,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: {{ .Release.Name }}.course-xai-iml22.isginf.ch #{{ .Values.url.hostname }}
+  - host: {{ .Release.Name }}.course-xai-iml23.isginf.ch #{{ .Values.url.hostname }}
     http:
       paths:
       - path: /

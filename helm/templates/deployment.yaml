@@ -27,6 +27,13 @@ spec:
           value: {{ .Values.build.commit | quote }}
         - name: JOB_ID
           value: {{ .Values.build.job_id | quote }}
+        resources:
+          limits:
+            cpu: "1"
+            memory: "2G"
+          requests:
+            cpu: "0.5"
+            memory: "500M"
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -50,3 +57,10 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: 3000
+        resources:
+          limits:
+            cpu: "1"
+            memory: "1G"
+          requests:
+            cpu: "0.5"
+            memory: "500M"

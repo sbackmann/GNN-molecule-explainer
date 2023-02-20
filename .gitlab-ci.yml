@@ -3,6 +3,9 @@ stages:
   - build
   - deploy
 
+variables:
+  IMAGE_NAME: $ci_registry/$CI_PROJECT_PATH
+
 default:
   before_script:
     - IMAGE_NAME=$(echo $IMAGE_NAME | tr '[:upper:]' '[:lower:]')
@@ -23,38 +26,32 @@ build_backend:
   image:
     name: gcr.io/kaniko-project/executor:debug
     entrypoint: [""]
-  variables:
-    IMAGE_NAME: $ci_registry/$CI_PROJECT_PATH-backend
   script:
     - >-
       /kaniko/executor
       --context "${CI_PROJECT_DIR}/backend-project"
       --dockerfile "${CI_PROJECT_DIR}/backend-project/Dockerfile"
-      --destination "${IMAGE_NAME}:${CI_COMMIT_REF_NAME}"
-      --destination "${IMAGE_NAME}:${CI_COMMIT_SHORT_SHA}"
-      --destination "${IMAGE_NAME}:latest"
+      --destination "${IMAGE_NAME}-backend:${CI_COMMIT_REF_NAME}"
+      --destination "${IMAGE_NAME}-backend:${CI_COMMIT_SHORT_SHA}"
+      --destination "${IMAGE_NAME}-backend:latest"
 
 build_frontend:
   stage: build
   image:
     name: gcr.io/kaniko-project/executor:debug
     entrypoint: [""]
-  variables:
-    IMAGE_NAME: $ci_registry/$CI_PROJECT_PATH-frontend
   script:
     - >-
       /kaniko/executor
       --context "${CI_PROJECT_DIR}/react-frontend"
       --dockerfile "${CI_PROJECT_DIR}/react-frontend/Dockerfile"
-      --destination "${IMAGE_NAME}:${CI_COMMIT_REF_NAME}"
-      --destination "${IMAGE_NAME}:${CI_COMMIT_SHORT_SHA}"
-      --destination "${IMAGE_NAME}:latest"
+      --destination "${IMAGE_NAME}-frontend:${CI_COMMIT_REF_NAME}"
+      --destination "${IMAGE_NAME}-frontend:${CI_COMMIT_SHORT_SHA}"
+      --destination "${IMAGE_NAME}-frontend:latest"
 
 deploy_app:
   stage: deploy
   image: matthiasgabathuler/my-runner:ubuntu-20.04
-  variables:
-    IMAGE_NAME: $CI_PROJECT_PATH
   script:
   - >-
     helm --namespace $k8s_namespace

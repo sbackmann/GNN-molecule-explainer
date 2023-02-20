@@ -1,8 +1,8 @@
 FROM python:3.9-slim
 
-COPY ./src /srv/backend-app
+COPY ./ /srv/backend-app
 
 WORKDIR /srv/backend-app
-RUN pip3 install -r requirements.txt
+RUN pip3 install --no-cache-dir .
 
-CMD [ "python", "main.py" ]
+CMD [ "start-server" ]

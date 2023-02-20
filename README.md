@@ -99,6 +99,10 @@ Take a look at [Issues and Branches](https://www.youtube.com/watch?v=DSuSBuVYpys
 
 This will help you have a clearer overview of what you are currently doing, track your progress and organise your work among yourselves. Moreover it gives us more insights on your progress.  
 
+## Weekly Summary 
+Write here a short summary with weekly progress, including challanges and open questions.\
+We will use this to understand what your struggles and where did the weekly effort go to.
+
 ## Versioning
 Create stable versions of your code each week by using gitlab tags.\
 Take a look at [Gitlab Tags](https://docs.gitlab.com/ee/topics/git/tags.html) for more details. 

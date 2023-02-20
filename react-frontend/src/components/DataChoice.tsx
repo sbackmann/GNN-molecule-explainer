@@ -1,11 +1,11 @@
 import React from 'react';
 
 
-class DataChoiceComponent extends React.Component<{onChoiceMade: any}, {text: string}>{
+class DataChoiceComponent extends React.Component<{ onChoiceMade: any }, { text: string }>{
 
   constructor(props: any) {
     super(props);
-    this.state = {text: ''};
+    this.state = { text: '' };
     this.handleChange = this.handleChange.bind(this);
     this.handleChoice = this.handleChoice.bind(this);
   }
@@ -22,22 +22,22 @@ class DataChoiceComponent extends React.Component<{onChoiceMade: any}, {text: st
           value={this.state.text}
         />
         <button onClick={this.handleChoice}>
-          Confirm 
+          Confirm
         </button>
       </div>
     );
   }
 
-  handleChange(e : any) {
-    this.setState({ text: e.target.value});
+  handleChange(e: any) {
+    this.setState({ text: e.target.value });
   }
 
-  handleChoice(e : any){
+  handleChoice(e: any) {
     console.log('Previous state: ', this.state)
     this.props.onChoiceMade(this.state.text);
     this.setState({
       text: '',
-    });            
+    });
   }
 }
 export default DataChoiceComponent;

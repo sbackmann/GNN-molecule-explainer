@@ -14,9 +14,11 @@ spec:
       annotations:
         rollme: {{ randAlphaNum 5 | quote }}
     spec:
+      nodeSelector:
+        course-apps: deployment
       containers:
       - name: {{ .Release.Name }}-backend
-        image: {{ .Values.image.host }}/{{ .Values.image.name }}-backend:{{ .Values.image.tag }}
+        image: {{ .Values.image.name }}-backend:{{ .Values.image.tag }}
         imagePullPolicy: Always
         ports:
         - containerPort: 8000
@@ -27,6 +29,13 @@ spec:
           value: {{ .Values.build.commit | quote }}
         - name: JOB_ID
           value: {{ .Values.build.job_id | quote }}
+        resources:
+          limits:
+            cpu: "1"
+            memory: "2G"
+          requests:
+            cpu: "0.5"
+            memory: "500M"
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -44,9 +53,18 @@ spec:
       annotations:
         rollme: {{ randAlphaNum 5 | quote }}
     spec:
+      nodeSelector:
+        course-apps: deployment
       containers:
       - name: {{ .Release.Name }}-frontend
-        image: {{ .Values.image.host }}/{{ .Values.image.name }}-frontend:{{ .Values.image.tag }}
+        image: {{ .Values.image.name }}-frontend:{{ .Values.image.tag }}
         imagePullPolicy: Always
         ports:
         - containerPort: 3000
+        resources:
+          limits:
+            cpu: "1"
+            memory: "1G"
+          requests:
+            cpu: "0.5"
+            memory: "500M"

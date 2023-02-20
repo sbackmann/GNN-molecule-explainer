@@ -3,13 +3,17 @@ stages:
   - build
   - deploy
 
+variables:
+  IMAGE_NAME: $ci_registry/$CI_PROJECT_PATH
+
+default:
+  before_script:
+    - IMAGE_NAME=$(echo $IMAGE_NAME | tr '[:upper:]' '[:lower:]')
+
 lint_helm:
   stage: lint
   image: matthiasgabathuler/my-runner:ubuntu-20.04
-  tags:
-    - isg-test
   script:
-    - IMAGE_NAME=$(echo $IMAGE_NAME | tr '[:upper:]' '[:lower:]')
     - >-
       helm lint ${CI_PROJECT_DIR}/helm
       --set image.name=${IMAGE_NAME}
@@ -19,75 +23,50 @@ lint_helm:
 
 build_backend:
   stage: build
+  rules:
+    - if:
+      changes:
+        paths:
+          - backend-project/**/*
   image:
     name: gcr.io/kaniko-project/executor:debug
     entrypoint: [""]
-  tags:
-    - isg-test
-  variables:
-    IMAGE_NAME: $ci_registry/$CI_PROJECT_PATH-backend
   script:
-    - IMAGE_NAME=$(echo $IMAGE_NAME | tr '[:upper:]' '[:lower:]')
-    - mkdir -p /kaniko/.docker
-    # - |-
-    #    KANIKOPROXYBUILDARGS=""
-    #    KANIKOCFG="\"auths\":{\"${ci_registry}\":{\"auth\":\"$(printf "%s:%s" "${ci_registry_user}" "${ci_registry_password}" | base64 | tr -d '\n')\"}}"
-    #    KANIKOCFG="{ ${KANIKOCFG} }"
-    #    echo "${KANIKOCFG}" > /kaniko/.docker/config.json
     - >-
       /kaniko/executor
       --context "${CI_PROJECT_DIR}/backend-project"
       --dockerfile "${CI_PROJECT_DIR}/backend-project/Dockerfile"
-      --destination "${IMAGE_NAME}:${CI_COMMIT_REF_NAME}"
-      --destination "${IMAGE_NAME}:${CI_COMMIT_SHORT_SHA}"
-      --destination "${IMAGE_NAME}:latest"
-  only:
-    changes:
-      - backend-project/**/*
+      --destination "${IMAGE_NAME}-backend:${CI_COMMIT_REF_NAME}"
 
 build_frontend:
   stage: build
+  rules:
+    - if:
+      changes:
+        paths:
+          - react-frontend/**/*
   image:
     name: gcr.io/kaniko-project/executor:debug
     entrypoint: [""]
-  tags:
-    - isg-test
-  variables:
-    IMAGE_NAME: $ci_registry/$CI_PROJECT_PATH-frontend
   script:
-    - IMAGE_NAME=$(echo $IMAGE_NAME | tr '[:upper:]' '[:lower:]')
-    # - |-
-    #    KANIKOPROXYBUILDARGS=""
-    #    KANIKOCFG="\"auths\":{\"${ci_registry}\":{\"auth\":\"$(printf "%s:%s" "${ci_registry_user}" "${ci_registry_password}" | base64 | tr -d '\n')\"}}"
-    #    KANIKOCFG="{ ${KANIKOCFG} }"
-    #    echo "${KANIKOCFG}" > /kaniko/.docker/config.json
-    - sed -i "s/##BACKEND_URI##/http:\/\/$(echo $CI_PROJECT_NAME | tr '[:upper:]' '[:lower:]').course-xai-iml22.isginf.ch\/backend/g" react-frontend/src/backend/BackendQueryEngine.tsx
     - >-
       /kaniko/executor
       --context "${CI_PROJECT_DIR}/react-frontend"
       --dockerfile "${CI_PROJECT_DIR}/react-frontend/Dockerfile"
-      --destination "${IMAGE_NAME}:${CI_COMMIT_REF_NAME}"
-      --destination "${IMAGE_NAME}:${CI_COMMIT_SHORT_SHA}"
-      --destination "${IMAGE_NAME}:latest"
-  only:
-    changes:
-      - react-frontend/**/*
+      --destination "${IMAGE_NAME}-frontend:${CI_COMMIT_REF_NAME}"
 
 deploy_app:
   stage: deploy
-  image: matthiasgabathuler/my-runner:ubuntu-20.04
-  tags:
-  - isg-test
-  variables:
-    IMAGE_NAME: $CI_PROJECT_PATH
+  image:
+    name: alpine/helm:3.11.1
+    entrypoint: [""]
   script:
-  - IMAGE_NAME=$(echo $IMAGE_NAME | tr '[:upper:]' '[:lower:]')
   - >-
     helm --namespace $k8s_namespace
     --kube-context $k8s_context
     upgrade ${CI_PROJECT_NAME} ${CI_PROJECT_DIR}/helm
     --install
-    --history-max 10
+    --history-max 5
     --set image.host=${ci_registry}
     --set image.name=${IMAGE_NAME}
     --set image.tag=${CI_COMMIT_REF_NAME}
@@ -96,5 +75,4 @@ deploy_app:
   only:
     - ci-cd-pipeline
     - /^release.*$/
-    - master
     - main

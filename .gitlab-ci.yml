@@ -3,11 +3,13 @@ stages:
   - build
   - deploy
 
+variables:
+  - IMAGE_NAME=$(echo $IMAGE_NAME | tr '[:upper:]' '[:lower:]')
+
 lint_helm:
   stage: lint
   image: matthiasgabathuler/my-runner:ubuntu-20.04
   script:
-    - IMAGE_NAME=$(echo $IMAGE_NAME | tr '[:upper:]' '[:lower:]')
     - >-
       helm lint ${CI_PROJECT_DIR}/helm
       --set image.name=${IMAGE_NAME}
@@ -23,7 +25,6 @@ build_backend:
   variables:
     IMAGE_NAME: $ci_registry/$CI_PROJECT_PATH-backend
   script:
-    - IMAGE_NAME=$(echo $IMAGE_NAME | tr '[:upper:]' '[:lower:]')
     - >-
       /kaniko/executor
       --context "${CI_PROJECT_DIR}/backend-project"
@@ -31,9 +32,6 @@ build_backend:
       --destination "${IMAGE_NAME}:${CI_COMMIT_REF_NAME}"
       --destination "${IMAGE_NAME}:${CI_COMMIT_SHORT_SHA}"
       --destination "${IMAGE_NAME}:latest"
-  only:
-    changes:
-      - backend-project/**/*
 
 build_frontend:
   stage: build
@@ -43,7 +41,6 @@ build_frontend:
   variables:
     IMAGE_NAME: $ci_registry/$CI_PROJECT_PATH-frontend
   script:
-    - IMAGE_NAME=$(echo $IMAGE_NAME | tr '[:upper:]' '[:lower:]')
     - sed -i "s/##BACKEND_URI##/http:\/\/$(echo $CI_PROJECT_NAME | tr '[:upper:]' '[:lower:]').course-xai-iml22.isginf.ch\/backend/g" react-frontend/src/backend/BackendQueryEngine.tsx
     - >-
       /kaniko/executor
@@ -52,9 +49,6 @@ build_frontend:
       --destination "${IMAGE_NAME}:${CI_COMMIT_REF_NAME}"
       --destination "${IMAGE_NAME}:${CI_COMMIT_SHORT_SHA}"
       --destination "${IMAGE_NAME}:latest"
-  only:
-    changes:
-      - react-frontend/**/*
 
 deploy_app:
   stage: deploy
@@ -62,7 +56,6 @@ deploy_app:
   variables:
     IMAGE_NAME: $CI_PROJECT_PATH
   script:
-  - IMAGE_NAME=$(echo $IMAGE_NAME | tr '[:upper:]' '[:lower:]')
   - >-
     helm --namespace $k8s_namespace
     --kube-context $k8s_context

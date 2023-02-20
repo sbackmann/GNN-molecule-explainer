@@ -14,6 +14,8 @@ spec:
       annotations:
         rollme: {{ randAlphaNum 5 | quote }}
     spec:
+      nodeSelector:
+        course-apps: deployment
       containers:
       - name: {{ .Release.Name }}-backend
         image: {{ .Values.image.host }}/{{ .Values.image.name }}-backend:{{ .Values.image.tag }}
@@ -51,6 +53,8 @@ spec:
       annotations:
         rollme: {{ randAlphaNum 5 | quote }}
     spec:
+      nodeSelector:
+        course-apps: deployment
       containers:
       - name: {{ .Release.Name }}-frontend
         image: {{ .Values.image.host }}/{{ .Values.image.name }}-frontend:{{ .Values.image.tag }}

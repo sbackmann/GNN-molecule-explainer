@@ -27,7 +27,7 @@ build_backend:
     - if:
       changes:
         paths:
-          - backend-project/*
+          - backend-project/**/*
   image:
     name: gcr.io/kaniko-project/executor:debug
     entrypoint: [""]
@@ -44,7 +44,7 @@ build_frontend:
     - if:
       changes:
         paths:
-          - react-frontend/*
+          - react-frontend/**/*
   image:
     name: gcr.io/kaniko-project/executor:debug
     entrypoint: [""]

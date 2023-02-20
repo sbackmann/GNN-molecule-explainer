@@ -1,5 +1,4 @@
 image:
-  host: "imlshared.azurecr.io"
   name: ""
   tag: ""
 build:

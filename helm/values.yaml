@@ -1,9 +1,9 @@
 image:
-  host: "registry.inf.ethz.ch"
+  host: "imlshared.azurecr.io"
   name: ""
   tag: ""
 build:
   job_id: ""
   commit: ""
 url:
-  hostname: "www.course-xai-iml22.isginf.ch"
+  hostname: "www.course-xai-iml23.isginf.ch"

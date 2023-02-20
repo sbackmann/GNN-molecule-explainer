@@ -23,6 +23,11 @@ lint_helm:
 
 build_backend:
   stage: build
+  rules:
+    - if:
+      changes:
+        paths:
+          - backend-project/*
   image:
     name: gcr.io/kaniko-project/executor:debug
     entrypoint: [""]
@@ -32,11 +37,14 @@ build_backend:
       --context "${CI_PROJECT_DIR}/backend-project"
       --dockerfile "${CI_PROJECT_DIR}/backend-project/Dockerfile"
       --destination "${IMAGE_NAME}-backend:${CI_COMMIT_REF_NAME}"
-      --destination "${IMAGE_NAME}-backend:${CI_COMMIT_SHORT_SHA}"
-      --destination "${IMAGE_NAME}-backend:latest"
 
 build_frontend:
   stage: build
+  rules:
+    - if:
+      changes:
+        paths:
+          - react-frontend/*
   image:
     name: gcr.io/kaniko-project/executor:debug
     entrypoint: [""]
@@ -46,8 +54,6 @@ build_frontend:
       --context "${CI_PROJECT_DIR}/react-frontend"
       --dockerfile "${CI_PROJECT_DIR}/react-frontend/Dockerfile"
       --destination "${IMAGE_NAME}-frontend:${CI_COMMIT_REF_NAME}"
-      --destination "${IMAGE_NAME}-frontend:${CI_COMMIT_SHORT_SHA}"
-      --destination "${IMAGE_NAME}-frontend:latest"
 
 deploy_app:
   stage: deploy
@@ -69,5 +75,4 @@ deploy_app:
   only:
     - ci-cd-pipeline
     - /^release.*$/
-    - master
     - main

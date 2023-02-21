@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const BASE_URL = "http://be.dummy-fullstack.course-xai-iml23.isginf.ch/api/v1"
+export const BASE_URL = "http://localhost:8000/api/v1"
 
 const axiosClient = axios.create({
   baseURL: BASE_URL,

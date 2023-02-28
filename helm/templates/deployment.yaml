@@ -61,9 +61,6 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: 3000
-        env:
-          - name: NODE_ENV
-            value: {{.Values.stage | quote}}
         resources:
           limits:
             cpu: "1"

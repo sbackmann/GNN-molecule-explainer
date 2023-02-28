@@ -72,7 +72,6 @@ deploy_app:
     --set image.tag=${CI_COMMIT_REF_NAME}
     --set build.job_id=${CI_JOB_ID}
     --set build.commit=${CI_COMMIT_SHA}
-    --set stage=${stage}
   only:
     - ci-cd-pipeline
     - /^release.*$/

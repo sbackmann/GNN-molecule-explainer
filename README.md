@@ -81,6 +81,24 @@ Write here all intructions to build the environment and run your code.\
 Write here **DETAILED** intructions on how to run your code.\
 **NOTE:** If we cannot run your code following these instructions we will not be able to evaluate it.
 
+As an example here are the instructions to run the Dummy Project:
+To run the dummy project you have to:
+- clone the repository;
+- open a new terminal instance;
+- move to the folder where the project has been downloaded using the command ```cd```;
+- open the folder called "Dummy-fullstack";
+To run the backend
+- open the backend folder called "backend-project";
+- create a virtual environment using the command ```conda create -n nameOfTheEnvironment```;
+- activate the virtual environment run the command ```conda activate nameOfTheEnvironment```;
+- install the requirements from the txt file using the command ```pip3 install -r requirements.txt```;
+- start the backend with the command ```python3 main.py run```;
+To run the frontend
+- open a new terminal instance and once again go to the folder called "Dummy-fullstack"
+- open the frontend folder called "react-frontend";
+- start the front end by using the following two commands ```npm install```, ```npm start```;
+If all the steps have been successfully executed a new browser window will open automatically.
+
 ## Milestones
 Document here the major milestones of your code and future planned steps.\
 - [x] Week 1

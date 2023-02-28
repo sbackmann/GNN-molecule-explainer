@@ -2,7 +2,7 @@ import { useEffect, createRef } from 'react'
 import * as d3 from 'd3'
 import { DataArray } from "../types/data";
 import { ChartStyle, getChildOrAppend, getMargin } from './utils';
-import './ScatterPlot.scss'
+import './ScatterPlot.css'
 
 
 interface ScatterPlotProp extends ChartStyle {

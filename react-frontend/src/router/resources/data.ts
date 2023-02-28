@@ -3,7 +3,6 @@ import axiosClient from '../apiClient'
 
 /**
  * get the data points through a post request
- * TODO: change it to a get request
  * @param id the identifier of the point array
 */
 export function postPoints(id: string): Promise<DataArray | undefined> {

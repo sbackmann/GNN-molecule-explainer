@@ -28,14 +28,25 @@ Specify here the structure of you code and comment what the most important files
 ``` bash
 ├── README.md  
 ├── backend-project
-│   ├── app.py   # main app
+│   ├── README.md
+│   ├── setup.py   # main app
+│   ├── pyproject.toml
+│   ├── src
+│   │   ├── dummy_server
+│   │   │     ├── router
+│   │   │     │    ├── routes.py
+│   │   │     │    ├── app.py
+│   │   │     │    └── __init__.py
+│   │   │     └── resources
+│   │   │         ├── scatter_data.py
+│   │   │         └── __init__.py
+│   │   └── __init__.py 
 │   ├── data
 │   │   ├── dataset_blobs.csv
 │   │   ├── dataset_circles.csv
 │   │   ├── dataset_moons.csv
 │   │   └── generate_data.py    # script to create data
-│   └── pydantic_models
-│       └── example_data_points.py
+│   └── MANIFEST.in
 ├── react-frontend
 │   ├── README.md
 │   ├── package-lock.json
@@ -45,20 +56,15 @@ Specify here the structure of you code and comment what the most important files
 │   │   ├── App.test.tsx
 │   │   ├── App.tsx
 │   │   ├── Visualization.tsx
-│   │   ├── backend
-│   │   │   ├── BackendQueryEngine.tsx
-│   │   │   └── json-decoder.ts
+│   │   ├── router
+│   │   │   ├── resources
+│   │   │   │   └── data.ts
+│   │   │   └── apiClient.ts
 │   │   ├── components
-│   │   │   ├── BasicLineChart
-│   │   │   │   ├── BasicLineChart.scss
-│   │   │   │   ├── BasicLineChart.tsx
-│   │   │   │   └── types.ts
-│   │   │   ├── DataChoiceComponent.tsx
-│   │   │   ├── DataPointComponent.tsx
-│   │   │   └── ScatterPlot
-│   │   │       ├── ScatterPlot.scss
-│   │   │       ├── ScatterPlot.tsx
-│   │   │       └── types.ts
+│   │   │   ├── utils.ts
+│   │   │   ├── ScatterPlot.tsx
+│   │   │   ├── DataChoice.tsx
+│   │   │   └── ScatterPlot.css
 │   │   ├── index.css
 │   │   ├── index.tsx
 │   │   ├── logo.svg
@@ -66,11 +72,17 @@ Specify here the structure of you code and comment what the most important files
 │   │   ├── reportWebVitals.ts
 │   │   ├── setupTests.ts
 │   │   └── types
-│   │       ├── DataArray.ts
-│   │       ├── DataPoint.ts
-│   │       └── Margins.ts
-│   └── tsconfig.json
-└── requirements.txt
+│   │       ├── margin.ts
+│   │       └── data.ts
+│   ├── tsconfig.json
+│   └── public
+│        ├── robot.txt
+│        ├── manifest.json
+│        ├── logo512.png
+│        ├── logo192.png
+│        ├── index.html
+│        └── favicon.ico
+└── Dockerfile
 ```
 
 ## Requirements
@@ -86,15 +98,15 @@ To run the dummy project you have to:
 - clone the repository;
 - open a new terminal instance;
 - move to the folder where the project has been downloaded using the command ```cd```;
-- open the folder called "Dummy-fullstack";
+- open the folder called "dummy-fullstack-main";
 To run the backend
 - open the backend folder called "backend-project";
 - create a virtual environment using the command ```conda create -n nameOfTheEnvironment```;
 - activate the virtual environment run the command ```conda activate nameOfTheEnvironment```;
 - install the requirements from the txt file using the command ```pip3 install -r requirements.txt```;
-- start the backend with the command ```python3 main.py run```;
+- start the backend with the command ```python3 setup.py run```;
 To run the frontend
-- open a new terminal instance and once again go to the folder called "Dummy-fullstack"
+- open a new terminal instance and once again go to the folder called "dummy-fullstack-main"
 - open the frontend folder called "react-frontend";
 - start the front end by using the following two commands ```npm install```, ```npm start```;
 If all the steps have been successfully executed a new browser window will open automatically.

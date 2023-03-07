@@ -75,4 +75,3 @@ deploy_app:
   only:
     - ci-cd-pipeline
     - /^release.*$/
-    - main

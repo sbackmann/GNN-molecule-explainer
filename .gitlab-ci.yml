@@ -58,14 +58,12 @@ build_frontend:
 deploy_app:
   stage: deploy
   rules:
-    - if:
-      changes:
-        - ci-cd-pipeline
-        - /^release.*$/
-      when: always
     - if: $FORCE_DEPLOY
       when: always
     - when: never
+  only:
+    - ci-cd-pipeline
+    - /^release.*$/
   image:
     name: alpine/helm:3.11.1
     entrypoint: [""]

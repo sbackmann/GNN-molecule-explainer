@@ -57,6 +57,15 @@ build_frontend:
 
 deploy_app:
   stage: deploy
+  rules:
+    - if:
+      changes:
+        - ci-cd-pipeline
+        - /^release.*$/
+      when: always
+    - if: FORCE_DEPLOY
+      when: always
+    - when: never
   image:
     name: alpine/helm:3.11.1
     entrypoint: [""]
@@ -72,6 +81,3 @@ deploy_app:
     --set image.tag=${CI_COMMIT_REF_NAME}
     --set build.job_id=${CI_JOB_ID}
     --set build.commit=${CI_COMMIT_SHA}
-  only:
-    - ci-cd-pipeline
-    - /^release.*$/

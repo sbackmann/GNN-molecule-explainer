@@ -58,11 +58,8 @@ build_frontend:
 deploy_app:
   stage: deploy
   rules:
-    - if:
-      changes:
-        - ci-cd-pipeline
-        - /^release.*$/
-      when: always
+    - if: $CI_COMMIT_BRANCH == "ci-cd-pipeline"
+    - if: $CI_COMMIT_BRANCH =~ /^release.*$/
     - if: $FORCE_DEPLOY
       when: always
     - when: never

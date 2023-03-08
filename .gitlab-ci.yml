@@ -63,7 +63,7 @@ deploy_app:
         - ci-cd-pipeline
         - /^release.*$/
       when: always
-    - if: FORCE_DEPLOY
+    - if: $FORCE_DEPLOY
       when: always
     - when: never
   image:

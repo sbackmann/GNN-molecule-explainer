@@ -14,7 +14,7 @@ def create_app():
 
     @app.route('/version')
     def version():
-        return f"Job ID: {os.environ('JOB_ID')}\nCommit ID: {os.environ('COMMIT_ID')}"
+        return f"Job ID: {os.enviro['JOB_ID']}\nCommit ID: {os.environ['COMMIT_ID']}"
 
     return app
 

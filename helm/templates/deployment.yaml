@@ -31,11 +31,11 @@ spec:
           value: {{ .Values.build.job_id | quote }}
         resources:
           limits:
-            cpu: "1"
-            memory: "2G"
-          requests:
             cpu: "0.5"
-            memory: "500M"
+            memory: "1G"
+          requests:
+            cpu: "0.1"
+            memory: "100M"
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -63,8 +63,8 @@ spec:
         - containerPort: 3000
         resources:
           limits:
-            cpu: "1"
-            memory: "1G"
-          requests:
             cpu: "0.5"
-            memory: "500M"
+            memory: "200M"
+          requests:
+            cpu: "0.1"
+            memory: "50M"

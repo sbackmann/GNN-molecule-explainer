@@ -6,8 +6,10 @@ metadata:
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
     nginx.ingress.kubernetes.io/enable-cors: "true"
     nginx.ingress.kubernetes.io/configuration-snippet: |
-      more_set_headers "Content-Security-Policy-Report-Only: Content-Security-Policy: script-src 'none' ;";
-      more_set_headers "Content-Security-Policy: default-src 'none'" ;
+      more_set_headers "Content-Security-Policy-Report-Only: Content-Security-Policy: script-src 'self' 'none' ;";
+      more_set_headers "Content-Security-Policy: default-src 'self' 'none'" ;
+      more_set_headers "x-content-type-options:	nosniff"
+
 spec:
   ingressClassName: nginx
   rules:

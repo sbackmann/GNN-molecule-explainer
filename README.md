@@ -1,25 +1,33 @@
-# Project Title
+# Explain GNN Prediction on Molecular Data
 
 [[_TOC_]]
 
 ## Team Members
-1. Team member 1
-2. Team member 2
-3. Team member 3
-4. ...
+1. Kenza Amara
+2. Steffen Backmann
+3. Petros Polydorou
+4. Rushan Wang
 
 ## Project Description 
-Describe here your project in detail and define your goals.
+Construct an interactive tool where users can get familiar and play with explainabilitymethods on GNN model for graph or node classification. Moreover, multiple explanations could be provide for a single instance and observe how the scores vary. 
 
 ### Users
-List your projects target Users.
+1. Domain experts in Medicine\Biology
+2. Decision makers
+3. ML developers and ML experts
+
 
 ### Datasets
-Add here all used datasets.\
-Document here where to find the data and how to download it. 
+MUTAG (https://nrvis.com/download/data/labeled/Mutag.zip)
 
 ### Tasks
-Define all the tasks you want your dashboard solve.
+1. Users can specify their need for the explanations.
+2. Users can select the molecular they want to explain.
+3. Display the loss accuracy, balance accuracy, and F1 score for the GNNs method.
+4. Users can choose the explainability method based on the score ranking of all the methods.
+5. Display the Fidelity+ score and Fidelity- score of the explainability method (summary score and input score).
+6. Users can interact with the explanation, eg. add and remove edge.
+
 
 - - -
 ## Folder Structure

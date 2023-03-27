@@ -1,25 +1,33 @@
-# Project Title
+# Explain GNN Prediction on Molecular Data
 
 [[_TOC_]]
 
 ## Team Members
-1. Team member 1
-2. Team member 2
-3. Team member 3
-4. ...
+1. Kenza Amara
+2. Steffen Backmann
+3. Petros Polydorou
+4. Rushan Wang
 
 ## Project Description 
-Describe here your project in detail and define your goals.
+Construct an interactive tool where users can get familiar and play with explainability methods on GNN models for graph or node classification. Moreover, multiple explanations could be provided for a single instance to observe how the scores vary. 
 
 ### Users
-List your projects target Users.
+1. Domain experts in Medicine\Biology
+2. Decision makers
+3. ML developers and ML experts
+
 
 ### Datasets
-Add here all used datasets.\
-Document here where to find the data and how to download it. 
+MUTAG (https://nrvis.com/download/data/labeled/Mutag.zip)
 
 ### Tasks
-Define all the tasks you want your dashboard solve.
+1. Users can specify their need for the explanations.
+2. Users can select the molecule they want to explain.
+3. Display the loss accuracy, balance accuracy, and F1 score for the GNN model.
+4. Users can choose the explainability method based on the score ranking of all the methods.
+5. Display the Fidelity+ score and Fidelity- score of the explainability method (summary score and input score).
+6. Users can interact with the explanation, e.g., add and remove edges.
+
 
 - - -
 ## Folder Structure
@@ -86,7 +94,7 @@ Specify here the structure of you code and comment what the most important files
 ```
 
 ## Requirements
-Write here all intructions to build the environment and run your code.\
+Write here all instructions to build the environment and run your code.\
 **NOTE:** If we cannot run your code following these requirements we will not be able to evaluate it.
 
 ## How to Run
@@ -114,8 +122,8 @@ If all the steps have been successfully executed a new browser window will open 
 ## Milestones
 Document here the major milestones of your code and future planned steps.\
 - [x] Week 1
-  - [x] Completed Sub-task: [#20984ec2](https://gitlab.inf.ethz.ch/COURSE-XAI-IML22/dummy-fullstack/-/commit/20984ec2197fa8dcdc50f19723e5aa234b9588a3)
-  - [x] Completed Sub-task: ...
+  - [x] Familiarization with the GitLab repository
+  - [x] Added new backend endpoint for the future Overview of the application: [#0e77e896](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/commit/0e77e896b66e4f9176b28d1646ae0ca410daddb3)
 
 - [ ] Week 2
   - [ ] Sub-task: [#2](https://gitlab.inf.ethz.ch/COURSE-XAI-IML22/dummy-fullstack/-/issues/2)

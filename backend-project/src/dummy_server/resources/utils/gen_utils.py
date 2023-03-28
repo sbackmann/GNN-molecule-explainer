@@ -15,6 +15,14 @@ from torch_geometric.utils import (
     subgraph,
 )
 
+def from_edge_index_to_adj(edge_index, edge_weight, max_n):
+    adj = to_scipy_sparse_matrix(edge_index, edge_attr=edge_weight).toarray()
+    assert len(adj) <= max_n, "The adjacency matrix contains more nodes than the graph!"
+    if len(adj) < max_n:
+        adj = np.pad(adj, (0, max_n - len(adj)), mode="constant")
+    return torch.FloatTensor(adj)
+
+
 def padded_datalist(data_list, adj_list, max_num_nodes):
     for i, data in enumerate(data_list):
         data.adj_padded = padding_graphs(adj_list[i], max_num_nodes)

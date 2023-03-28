@@ -7,6 +7,6 @@ API = "/api/v1/"  # optional string
 def add_routes(app):
     api = Api(app)
 
-    api.add_resource(res.scatter_data.MoleculeDataset, API + "data/<string:name>")
+    api.add_resource(res.mol_dataset.MoleculeDataset, API + "data/<string:name>")
 
     return api

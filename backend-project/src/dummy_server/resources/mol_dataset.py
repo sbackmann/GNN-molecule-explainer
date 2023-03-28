@@ -4,7 +4,7 @@ import torch
 import numpy as np
 from torch_geometric.utils import dense_to_sparse
 from torch_geometric.data import Data, InMemoryDataset, download_url
-from utils.gen_utils import padded_datalist
+from utils.gen_utils import padded_datalist, from_edge_index_to_adj
 
 try:
     from rdkit import Chem

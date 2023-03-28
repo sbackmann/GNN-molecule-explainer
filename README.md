@@ -140,6 +140,8 @@ This will help you have a clearer overview of what you are currently doing, trac
 ## Weekly Summary 
 Write here a short summary with weekly progress, including challanges and open questions.\
 We will use this to understand what your struggles and where did the weekly effort go to.
+### Week 1
+The week was mainly dedicated to familiarize ourselves with the GitLab repository and the development workflow and creating the initial README. Also an API endpoint was added that will serve as the overview for the application. An open challenge is to determine what exactly should be implemented for Backend milestone, a question that will be discussed in the open office hour in Week 2.
 
 ## Versioning
 Create stable versions of your code each week by using gitlab tags.\
@@ -149,9 +151,6 @@ Then list here the weekly tags. \
 We will evaluate your code every week, based on the corresponding version.
 
 Tags:
-- Week 1: [Week 1 Tag](https://gitlab.inf.ethz.ch/COURSE-XAI-IML22/dummy-fullstack/-/tags/stable-readme)
-- Week 2: ..
-- Week 3: ..
-- ...
+- Week 1: [Week 1 Tag](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/tags/Week-1)
 
 

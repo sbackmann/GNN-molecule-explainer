@@ -42,3 +42,5 @@ def padding_features(features, max_num_nodes):
     features_padded[:num_nodes] = features
     return torch.tensor(features_padded, dtype=torch.float)
 
+def data_to_dict(data_obj):
+    return {key: data.numpy().tolist() for key, data in data_obj}

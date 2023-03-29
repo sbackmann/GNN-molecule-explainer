@@ -4,6 +4,15 @@ import networkx as nx
 import matplotlib.pyplot as plt
 from torch_geometric.data import Data
 
+
+# data = Data(...) # one small graph
+# data.x --> num_nodes x num_node_feat
+# data.edge_index --> 2 x num_edges
+# ex: edge_index = [[0,0,1,2], [1,2,3,3]]
+# data.edge_attr --> num_edges x num_edge_feat
+# data.y --> 1 # label {0 or 1}
+# data.idx --> 1 # index of the graph
+
 def visualize_mol(data: Data):
     graphid = data.idx
     topk = 4

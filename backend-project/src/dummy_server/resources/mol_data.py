@@ -1,12 +1,11 @@
-import os
 from flask_restful import Resource
-import torch
+from .mol_dataset import MoleculeDataset
+from .utils.gen_utils import data_to_dict
 
 class DatasetResource(Resource):
-    data_root = os.path.join(".", "data", "mutag", "processed")
 
     def get(self):
-        path_name = os.path.join(self.data_root, "data.pt")
-        data = torch.load(path_name)
-        data_serial = {k: v.numpy().tolist() for k, v in data[1].items()}
+        dataset = MoleculeDataset(root="./backend-project/data", name="MUTAG")
+        data_serial = {idx: data_to_dict(graph) for idx, graph in enumerate(dataset)}
+
         return data_serial

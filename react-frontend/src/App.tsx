@@ -9,13 +9,18 @@ function App() {
   const [exampleData, setExampleData] = useState<DataArray>();
   const [dataChoice, setDataChoice] = useState<string>();
   const [selected, setSelected] = useState<DataPoint>();
+  const initialDataChoice = "1";
 
   useEffect(() => {
-    dataChoice &&
-      postPoints(dataChoice).then((exampleData) => {
-        setExampleData(exampleData);
-        setSelected(exampleData![parseInt(dataChoice, 10)]);
-      });
+    initialDataChoice &&
+    postPoints(initialDataChoice).then((exampleData) => {
+      setExampleData(exampleData);
+    });
+  }, [initialDataChoice]);
+
+  useEffect(() => {
+    dataChoice && 
+    setSelected(exampleData![parseInt(dataChoice, 10)]);
   }, [dataChoice]);
 
   function choiceMade(choice: string) {
@@ -26,10 +31,10 @@ function App() {
     <div className="App">
       <header className="App-header"> Molecule visualisation </header>
       <DataChoiceComponent onChoiceMade={choiceMade} />
-      
+      <p>The selected molecule is toxic:</p>
+      {selected ? selected.y : null}
     </div>
   );
 }
-// {this.props.selected ? selected!.edge_attr}
 // <ScatterPlot width={1100} height={550} data={exampleData} graphid={dataChoice}/>
 export default App;

@@ -4,7 +4,7 @@ import { DataArray } from "../types/data";
 import { ChartStyle, getChildOrAppend, getMargin } from './utils';
 import './ScatterPlot.css'
 
-
+/*
 interface ScatterPlotProp extends ChartStyle {
     data?: DataArray
 }
@@ -29,7 +29,7 @@ const ScatterPlot = (props: ScatterPlotProp) => {
  * @param root the root SVG element
  * @param data the data for visualization
  * @param props the parameters of the scatterplot
-*/
+
 function renderScatterPlot(
     root: SVGElement | SVGGElement,
     data: DataArray,
@@ -72,3 +72,4 @@ function renderScatterPlot(
 
 
 export default ScatterPlot;
+*/

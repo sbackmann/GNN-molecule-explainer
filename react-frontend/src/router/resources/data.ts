@@ -6,7 +6,7 @@ import axiosClient from '../apiClient'
  * @param id the identifier of the point array
 */
 export function postPoints(id: string): Promise<DataArray | undefined> {
-  const url = `data/${id}`
+  const url = `data/mutag`
   const promise = axiosClient.get<DataArray>(url)
   return promise
     .then((res) => {

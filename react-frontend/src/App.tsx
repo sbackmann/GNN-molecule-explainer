@@ -1,19 +1,26 @@
-import { useEffect, useState } from 'react';
-import './App.css';
-import { DataArray } from './types/data';
-import DataChoiceComponent from './components/DataChoice';
-import ScatterPlot from './components/ScatterPlot';
-import { postPoints } from './router/resources/data';
+import { useEffect, useState } from "react";
+import "./App.css";
+import { DataArray, DataPoint } from "./types/data";
+import DataChoiceComponent from "./components/DataChoice";
+// import ScatterPlot from "./components/ScatterPlot";
+import { postPoints } from "./router/resources/data";
 
 function App() {
-
   const [exampleData, setExampleData] = useState<DataArray>();
   const [dataChoice, setDataChoice] = useState<string>();
+  const [selected, setSelected] = useState<DataPoint>();
+  const initialDataChoice = "1";
 
   useEffect(() => {
-    dataChoice && postPoints(dataChoice).then(exampleData => {
+    initialDataChoice &&
+    postPoints(initialDataChoice).then((exampleData) => {
       setExampleData(exampleData);
     });
+  }, [initialDataChoice]);
+
+  useEffect(() => {
+    dataChoice && 
+    setSelected(exampleData![parseInt(dataChoice, 10)]);
   }, [dataChoice]);
 
   function choiceMade(choice: string) {
@@ -22,12 +29,12 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header"> K-Means clustering
-      </header>
+      <header className="App-header"> Molecule visualisation </header>
       <DataChoiceComponent onChoiceMade={choiceMade} />
-      <ScatterPlot width={1100} height={550} data={exampleData} />
+      <p>The selected molecule is toxic:</p>
+      {selected ? selected.y : null}
     </div>
-  )
+  );
 }
-
+// <ScatterPlot width={1100} height={550} data={exampleData} graphid={dataChoice}/>
 export default App;

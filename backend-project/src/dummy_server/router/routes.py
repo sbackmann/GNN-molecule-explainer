@@ -1,5 +1,5 @@
 from flask_restful import Api
-import dummy_server.resources as res
+from ..resources import mol_data
 
 API = "/api/v1/"  # optional string
 
@@ -7,6 +7,6 @@ API = "/api/v1/"  # optional string
 def add_routes(app):
     api = Api(app)
 
-    api.add_resource(res.scatter_data.DatasetResource, API + "data/<string:name>")
-
+    api.add_resource(mol_data.DatasetResource, API + "data/<string:name>")
+    
     return api

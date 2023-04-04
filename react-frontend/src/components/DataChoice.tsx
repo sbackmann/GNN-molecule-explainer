@@ -1,11 +1,12 @@
-import React from 'react';
+import React from "react";
 
-
-class DataChoiceComponent extends React.Component<{ onChoiceMade: any }, { text: string }>{
-
+class DataChoiceComponent extends React.Component<
+  { onChoiceMade: any },
+  { text: string }
+> {
   constructor(props: any) {
     super(props);
-    this.state = { text: '' };
+    this.state = { text: "" };
     this.handleChange = this.handleChange.bind(this);
     this.handleChoice = this.handleChoice.bind(this);
   }
@@ -14,16 +15,14 @@ class DataChoiceComponent extends React.Component<{ onChoiceMade: any }, { text:
     return (
       <div>
         <label htmlFor="data-choice">
-          Which dataset do you want to use? (moons, blobs, circles)
+          Which molecule do you want to visualize?
         </label>
         <input
           id="data-choice"
           onChange={this.handleChange}
           value={this.state.text}
         />
-        <button onClick={this.handleChoice}>
-          Confirm
-        </button>
+        <button onClick={this.handleChoice}>Confirm</button>
       </div>
     );
   }
@@ -33,10 +32,10 @@ class DataChoiceComponent extends React.Component<{ onChoiceMade: any }, { text:
   }
 
   handleChoice(e: any) {
-    console.log('Previous state: ', this.state)
+    console.log("Previous state: ", this.state);
     this.props.onChoiceMade(this.state.text);
     this.setState({
-      text: '',
+      text: "",
     });
   }
 }

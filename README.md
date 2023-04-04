@@ -46,10 +46,28 @@ Specify here the structure of you code and comment what the most important files
 │   │   │     │    ├── app.py
 │   │   │     │    └── __init__.py
 │   │   │     └── resources
+│   │   │         ├── utils
+│   │   │         │     ├── gen_utils.py
+│   │   │         │     ├── __init__.py
+│   │   │         ├── mol_data.py
+│   │   │         ├── mol_dataset.py
 │   │   │         ├── scatter_data.py
+│   │   │         ├── visualize_mol.py
 │   │   │         └── __init__.py
 │   │   └── __init__.py 
 │   ├── data
+│   │   ├── mutag
+│   │   │     ├── processed
+│   │   │     │    ├── data.pt
+│   │   │     │    ├── pre_filter.pt
+│   │   │     │    ├── pre_transform.pt
+│   │   │     ├── raw
+│   │   │     │    ├── MUTAG_A.txt
+│   │   │     │    ├── MUTAG_edge_labels.txt
+│   │   │     │    ├── MUTAG_graph_indicator.txt
+│   │   │     │    ├── MUTAG_graph_labels.txt
+│   │   │     │    ├── MUTAG_node_labels.txt
+│   │   │     │    ├── README.txt
 │   │   ├── dataset_blobs.csv
 │   │   ├── dataset_circles.csv
 │   │   ├── dataset_moons.csv
@@ -125,9 +143,12 @@ Document here the major milestones of your code and future planned steps.\
   - [x] Familiarization with the GitLab repository
   - [x] Added new backend endpoint for the future Overview of the application: [#0e77e896](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/commit/0e77e896b66e4f9176b28d1646ae0ca410daddb3)
 
-- [ ] Week 2
-  - [ ] Sub-task: [#2](https://gitlab.inf.ethz.ch/COURSE-XAI-IML22/dummy-fullstack/-/issues/2)
-  - [ ] Sub-task: ...
+- [x] Week 2
+  - [x] Add the mutag data to the repo: [#992c6319](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/commit/992c6319e514f8eafef9d717a5f3f4eeabb51540)
+  - [x] Added a graph visualization script for the molecules: [#d5e68e27](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/commit/d5e68e2770622332fdae7b5aee6ee78e00243709)
+  - [x] Added a backend endpoint for the MUTAG dataset: [#5605d58b](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/commit/5605d58ba68fa381ee8ed613fef4e6f00f369830)
+  - [x] Implemented a transformation function that transforms a Pytorch Data object into a JSON object: [#707807d3](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/commit/707807d3fc914727a23030e6376d1fc958930499)
+  - [x] Changed the frontend so that the MUTAG data in the backend is retrieved and upon user request the toxicity of a chosen molecule is displayed: [#30e43cda](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/commits/development-backend)
 
 Create a list subtask.\
 Open an issue for each subtask. Once you create a subtask, link the corresponding issue.\
@@ -142,6 +163,8 @@ Write here a short summary with weekly progress, including challanges and open q
 We will use this to understand what your struggles and where did the weekly effort go to.
 ### Week 1
 The week was mainly dedicated to familiarize ourselves with the GitLab repository and the development workflow and creating the initial README. Also an API endpoint was added that will serve as the overview for the application. An open challenge is to determine what exactly should be implemented for Backend milestone, a question that will be discussed in the open office hour in Week 2.
+### Week 2
+It was communicated that the main focus of the backend deliverable is to add the data as an API endpoint and show that we can access it in the application. Thus, the MUTAG dataset was added and a simple query in the frontend that just displays the molecule's toxicity was implemented. Challenges were to understand how exactly the communication between the Flask-Python backend and the React frontend works and to get used to the React syntax and programming style. Additionally, the mutag data, which was processed as a Pytorch Data object, had to be made JSON compatible.
 
 ## Versioning
 Create stable versions of your code each week by using gitlab tags.\

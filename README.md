@@ -175,5 +175,6 @@ We will evaluate your code every week, based on the corresponding version.
 
 Tags:
 - Week 1: [Week 1 Tag](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/tags/Week-1)
+- Week 2: [Week 2 Tag](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/tags/Week-2)
 
 

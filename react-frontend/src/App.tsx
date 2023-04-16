@@ -64,7 +64,7 @@ function App() {
 function Dashboard(){
   return(
     <>
-    <Card style={{ width: '18rem' }}>
+    {/* <Card style={{ width: '18rem' }}>
       <Card.Body>
         <Card.Title>Choose a molecule</Card.Title>
         <Card.Text>
@@ -72,25 +72,102 @@ function Dashboard(){
         </Card.Text>
         <Button variant="primary">Select</Button>
       </Card.Body>
-    </Card>
+    </Card> */}
     {/* <p>Hello World</p> */}
     {/* <Container>
       <Row>
         <Col>1 of 1</Col>
       </Row>
     </Container> */}
-    {/* <Container fluid>
+    <Container fluid>
         <Row>
-          <Col>
-            <Card>
+          <Col lg="3" sm="6">
+            <Card className="card-stats">
               <Card.Body>
-                <Card.Title>Title</Card.Title>
-                <Card.Text>Text</Card.Text>
+              <Card.Title>Choose a molecule</Card.Title>
+        <Card.Text>
+          Here will be the graph to show whether the current molecule is toxic.
+        </Card.Text>
+        <Button variant="primary">Select</Button>
+              </Card.Body>
+              <Card.Footer>
+                
+              </Card.Footer>
+            </Card>
+          </Col>
+          <Col lg="3" sm="6">
+            <Card className="card-stats">
+              <Card.Body>
+              <Card.Title>Customize your need</Card.Title>
+        <Card.Text>
+          Here will be several option for user to select their need.
+        </Card.Text>
+        <Button variant="primary">Select</Button>
+              </Card.Body>
+              <Card.Footer>
+                
+              </Card.Footer>
+            </Card>
+          </Col>
+          <Col lg="3" sm="6">
+            <Card className="card-stats">
+              <Card.Body>
+              <Card.Title>Mask Property</Card.Title>
+        <Card.Text>
+          Size; Entropy; Max value.
+        </Card.Text>
+        
+              </Card.Body>
+              <Card.Footer>
+                
+              </Card.Footer>
+            </Card>
+          </Col>
+          
+          
+        </Row>
+        <Row>
+        <Col md="2">
+            <Card>
+              <Card.Header>
+                <Card.Title as="h4">Rank of Explainer</Card.Title>
+                <p className="card-category">Rank</p>
+              </Card.Header>
+              <Card.Body>
+                
+              </Card.Body>
+              <Card.Footer>
+                
+              </Card.Footer>
+            </Card>
+          </Col>
+          <Col md="6">
+            <Card>
+              <Card.Header>
+                <Card.Title as="h4">Graph Explaination</Card.Title>
+                <p className="card-category">Graph</p>
+              </Card.Header>
+              <Card.Body>
+                
+              </Card.Body>
+              <Card.Footer>
+                
+              </Card.Footer>
+            </Card>
+          </Col>
+          <Col md="2">
+            <Card>
+              <Card.Header>
+                <Card.Title as="h4">Explainer performance</Card.Title>
+                <p className="card-category">Figure</p>
+              </Card.Header>
+              <Card.Body>
+                
               </Card.Body>
             </Card>
           </Col>
         </Row>
-      </Container> */}
+        </Container>
       </>
   )
 }

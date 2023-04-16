@@ -29,7 +29,14 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header"> Molecule visualisation </header>
+      <header className="App-header"> GNN Explainer </header>
+      <div className="home-container1">
+        <button className="home-button button">Load Dataset</button>
+        <span className="home-text">
+          <span>GNN Explainer</span>
+          <br></br>
+        </span>
+      </div>
       <DataChoiceComponent onChoiceMade={choiceMade} />
       <p>The selected molecule is toxic:</p>
       {selected ? selected.y : null}

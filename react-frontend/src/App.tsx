@@ -1,4 +1,18 @@
 import { useEffect, useState } from "react";
+import {
+  Badge,
+  Button,
+  Card,
+  Navbar,
+  Nav,
+  Table,
+  Container,
+  Row,
+  Col,
+  Form,
+  OverlayTrigger,
+  Tooltip,
+} from "react-bootstrap";
 import "./App.css";
 import { DataArray, DataPoint } from "./types/data";
 import DataChoiceComponent from "./components/DataChoice";
@@ -27,21 +41,33 @@ function App() {
     setDataChoice(choice);
   }
 
-  return (
+  return (    
     <div className="App">
-      <header className="App-header"> GNN Explainer </header>
-      <div className="home-container1">
-        <button className="home-button button">Load Dataset</button>
-        <span className="home-text">
-          <span>GNN Explainer</span>
-          <br></br>
-        </span>
-      </div>
+      <header className="App-header"> GNN Explainer </header>      
+      
       <DataChoiceComponent onChoiceMade={choiceMade} />
-      <p>The selected molecule is toxic:</p>
+      <p>The selected molecule is toxic:</p>      
+      
       {selected ? selected.y : null}
     </div>
   );
+}
+
+function Dashboard(){
+  return(
+    <Container>
+        <Row>
+          <Col>
+            <Card>
+              <Card.Body>
+                <Card.Title>Title</Card.Title>
+                <Card.Text>Text</Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+      </Container>
+  )
 }
 // <ScatterPlot width={1100} height={550} data={exampleData} graphid={dataChoice}/>
 export default App;

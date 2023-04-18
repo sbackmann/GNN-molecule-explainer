@@ -20,15 +20,19 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import "./App.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { DataArray, DataPoint } from "./types/data";
+import { DataArray, DataPoint, EmbeddingArray, EmbeddingPoint } from "./types/data";
 import DataChoiceComponent from "./components/DataChoice";
-// import ScatterPlot from "./components/ScatterPlot";
-import { postPoints } from "./router/resources/data";
+import ScatterPlot from "./components/ScatterPlot";
+import { postPoints, postEmbeddings } from "./router/resources/data";
+import React from 'react';
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
 
 function App() {
   const [exampleData, setExampleData] = useState<DataArray>();
   const [dataChoice, setDataChoice] = useState<string>();
   const [selected, setSelected] = useState<DataPoint>();
+  const [embeddingData, setEmbeddingData] = useState<EmbeddingArray>();
   const initialDataChoice = "1";
 
   useEffect(() => {
@@ -37,6 +41,12 @@ function App() {
       setExampleData(exampleData);
     });
   }, [initialDataChoice]);
+
+  useEffect(() => {
+    postEmbeddings().then((embeddingData) => {
+      setEmbeddingData(embeddingData);
+    });
+  }, []);
 
   useEffect(() => {
     dataChoice && 
@@ -56,12 +66,21 @@ function App() {
       <p>The selected molecule is toxic:</p>      
       
       {selected ? selected.y : null}
+      <ScatterPlot width={1100} height={550} data={embeddingData} />
     </div>    
     </>  
   );
 }
 
 function Dashboard(){
+  const [embeddingData, setEmbeddingData] = useState<EmbeddingArray>();
+
+  useEffect(() => {
+    postEmbeddings().then((embeddingData) => {
+      setEmbeddingData(embeddingData);
+    });
+  }, []);
+
   return(
     <>
     {/* <Card style={{ width: '18rem' }}>
@@ -81,14 +100,17 @@ function Dashboard(){
     </Container> */}
     <Container fluid>
         <Row>
-          <Col lg="3" sm="6">
-            <Card className="card-stats">
+          <Col md="5">
+            <Card className="card-category">
               <Card.Body>
               <Card.Title>Choose a molecule</Card.Title>
         <Card.Text>
           Here will be the graph to show whether the current molecule is toxic.
         </Card.Text>
-        <Button variant="primary">Select</Button>
+        <ScatterPlot width={500} height={250} data={embeddingData} />
+        <Popup trigger={<Button variant="primary"> Select</Button>} position="right center">
+          <div>Popup content here !!</div>
+        </Popup>
               </Card.Body>
               <Card.Footer>
                 
@@ -171,5 +193,5 @@ function Dashboard(){
       </>
   )
 }
-// <ScatterPlot width={1100} height={550} data={exampleData} graphid={dataChoice}/>
+// <ScatterPlot width={1100} height={550} data={embeddingData} graphid={dataChoice}/>
 export default Dashboard;

@@ -1,12 +1,11 @@
 import { useEffect, createRef } from 'react'
 import * as d3 from 'd3'
-import { DataArray } from "../types/data";
+import { DataArray, EmbeddingArray } from "../types/data";
 import { ChartStyle, getChildOrAppend, getMargin } from './utils';
 import './ScatterPlot.css'
 
-/*
 interface ScatterPlotProp extends ChartStyle {
-    data?: DataArray
+    data?: EmbeddingArray
 }
 
 const ScatterPlot = (props: ScatterPlotProp) => {
@@ -29,10 +28,10 @@ const ScatterPlot = (props: ScatterPlotProp) => {
  * @param root the root SVG element
  * @param data the data for visualization
  * @param props the parameters of the scatterplot
-
+*/
 function renderScatterPlot(
     root: SVGElement | SVGGElement,
-    data: DataArray,
+    data: EmbeddingArray,
     props: ChartStyle
 ) {
     const margin = getMargin(props.margin)
@@ -43,9 +42,9 @@ function renderScatterPlot(
     const base = getChildOrAppend<SVGGElement, SVGElement>(visRoot, "g", "base")
         .attr("transform", `translate(${margin.left}, ${margin.top})`)
 
-    const xValues = data.map(d => d.X1)
+    const xValues = data.map(d => d.pca_x)
     const x = d3.scaleLinear().domain([d3.min(xValues) || 0, d3.max(xValues) || 1]).range([0, width])
-    const yValues = data.map(d => d.X2)
+    const yValues = data.map(d => d.pca_y)
     const y = d3.scaleLinear().domain([d3.min(yValues) || 0, d3.max(yValues) || 1]).range([height, 0])
     const colors = d3.scaleOrdinal(["1", "2"], ["blue", "red"])
 
@@ -57,10 +56,10 @@ function renderScatterPlot(
             update => update,
             exit => exit.remove()
         )
-        .attr("cx", d => x(d.X1))
-        .attr("cy", d => y(d.X2))
+        .attr("cx", d => x(d.pca_x))
+        .attr("cy", d => y(d.pca_y))
         .attr("r", 5)
-        .style("fill", d => colors(d.cluster) || "#fff")
+        .style("fill", d => colors(d.true_label) || "#fff")
 
     getChildOrAppend<SVGGElement, SVGGElement>(base, "g", "y-axis-base")
         .call(d3.axisLeft(y).ticks(4));
@@ -72,4 +71,4 @@ function renderScatterPlot(
 
 
 export default ScatterPlot;
-*/
+

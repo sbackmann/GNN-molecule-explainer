@@ -11,6 +11,7 @@ export interface EmbeddingPoint {
     idx: number;
     pca_x: number;
     pca_y: number;
+    gnn_label: string;
     true_label: string;
 }
 

@@ -25,8 +25,9 @@ import DataChoiceComponent from "./components/DataChoice";
 import ScatterPlot from "./components/ScatterPlot";
 import { postPoints, postEmbeddings } from "./router/resources/data";
 import React from 'react';
-import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
+import ModalPopup from "./components/ModalPopup";
+import './components/ModalPopup.css'
 
 function App() {
   const [exampleData, setExampleData] = useState<DataArray>();
@@ -100,20 +101,19 @@ function Dashboard(){
     </Container> */}
     <Container fluid>
         <Row>
-          <Col md="5">
-            <Card className="card-category">
+          <Col lg="3" sm="6">
+            <Card className="card-stats">
               <Card.Body>
               <Card.Title>Choose a molecule</Card.Title>
         <Card.Text>
           Here will be the graph to show whether the current molecule is toxic.
-        </Card.Text>
-        <ScatterPlot width={500} height={250} data={embeddingData} />
-        <Popup trigger={<Button variant="primary"> Select</Button>} position="right center">
-          <div>Popup content here !!</div>
-        </Popup>
+        </Card.Text>        
+              <ModalPopup
+                triggerButton={<Button variant="primary">Select</Button>}
+                modalTitle="Embedded Molecules"
+              />
               </Card.Body>
               <Card.Footer>
-                
               </Card.Footer>
             </Card>
           </Col>

@@ -10,7 +10,7 @@ class EmbeddingResource(Resource):
     data_root = os.path.join(".", "data")
 
     def get(self):
-        path_name = os.path.join(self.data_root, f"dummy_embeddings.csv")
-        data = pd.read_csv(path_name, sep=";")
+        path_name = os.path.join(self.data_root, f"embeddings.csv")
+        data = pd.read_csv(path_name)
         # Convert to dictionary
         return data.to_dict(orient="records")

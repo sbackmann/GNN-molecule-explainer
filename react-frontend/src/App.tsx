@@ -13,6 +13,8 @@ import { useEffect, useState } from "react";
 //   OverlayTrigger,
 //   Tooltip,
 // } from "react-bootstrap";
+import PlaceholderButton from "react-bootstrap/esm/PlaceholderButton";
+import ListGroupItem from 'react-bootstrap/ListGroupItem'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
@@ -24,6 +26,7 @@ import { DataArray, DataPoint } from "./types/data";
 import DataChoiceComponent from "./components/DataChoice";
 // import ScatterPlot from "./components/ScatterPlot";
 import { postPoints } from "./router/resources/data";
+import { ListGroup } from "react-bootstrap";
 
 function App() {
   const [exampleData, setExampleData] = useState<DataArray>();
@@ -74,13 +77,8 @@ function Dashboard(){
       </Card.Body>
     </Card> */}
     {/* <p>Hello World</p> */}
-    {/* <Container>
-      <Row>
-        <Col>1 of 1</Col>
-      </Row>
-    </Container> */}
     <Container fluid>
-        <Row>
+        <Row lg="3">
           <Col lg="3" sm="6">
             <Card className="card-stats">
               <Card.Body>
@@ -95,14 +93,16 @@ function Dashboard(){
               </Card.Footer>
             </Card>
           </Col>
-          <Col lg="3" sm="6">
-            <Card className="card-stats">
+          <Col lg="6" sm="6">
+            <Card className="card-stats" h-100>
               <Card.Body>
               <Card.Title>Customize your need</Card.Title>
         <Card.Text>
-          Here will be several option for user to select their need.
+          Here will be several option for user to select their need.  
+          <p>!</p>
+          <p>!</p>
         </Card.Text>
-        <Button variant="primary">Select</Button>
+        {/* <Button variant="primary">Confi</Button> */}
               </Card.Body>
               <Card.Footer>
                 
@@ -110,12 +110,15 @@ function Dashboard(){
             </Card>
           </Col>
           <Col lg="3" sm="6">
-            <Card className="card-stats">
+            <Card className="card-stats" h-100>
               <Card.Body>
               <Card.Title>Mask Property</Card.Title>
-        <Card.Text>
-          Size; Entropy; Max value.
-        </Card.Text>
+        
+        <ListGroup>
+          <ListGroupItem>Size</ListGroupItem>
+          <ListGroupItem>Entropy</ListGroupItem>
+          <ListGroupItem>Max value</ListGroupItem>
+        </ListGroup>
         
               </Card.Body>
               <Card.Footer>
@@ -126,9 +129,10 @@ function Dashboard(){
           
           
         </Row>
+        <p></p>
         <Row>
-        <Col md="2">
-            <Card>
+        <Col md="3" mh-100>
+            <Card >
               <Card.Header>
                 <Card.Title as="h4">Rank of Explainer</Card.Title>
                 <p className="card-category">Rank</p>
@@ -136,11 +140,19 @@ function Dashboard(){
               <Card.Body>
                 
               </Card.Body>
-              <Card.Footer>
-                
-              </Card.Footer>
             </Card>
-          </Col>
+            <p>            
+            </p>
+            <Card>
+              <Card.Header>
+                <Card.Title as="h4">Explainer performance</Card.Title>
+                <p className="card-category">Figure</p>
+              </Card.Header>
+              <Card.Body>
+                
+              </Card.Body>
+            </Card>
+          </Col>          
           <Col md="6">
             <Card>
               <Card.Header>
@@ -148,14 +160,31 @@ function Dashboard(){
                 <p className="card-category">Graph</p>
               </Card.Header>
               <Card.Body>
-                
+                <p>!</p>
+                <p>!</p>
+                <p>!</p>
+                <p>!</p>
               </Card.Body>
-              <Card.Footer>
-                
-              </Card.Footer>
+              </Card>
+              
+          </Col>
+          <Col md="3">
+            <Card>
+              <Card.Header>
+                <Card.Title as="h4">Explainer performance</Card.Title>
+                <p className="card-category">Figure</p>
+              </Card.Header>
+              <Card.Body>
+              <p>!</p>
+                <p>!</p>
+                <p>!</p>
+                <p>!</p>
+              </Card.Body>
             </Card>
           </Col>
-          <Col md="2">
+        </Row>
+        {/* <Row>
+        <Col md="3">
             <Card>
               <Card.Header>
                 <Card.Title as="h4">Explainer performance</Card.Title>
@@ -166,7 +195,7 @@ function Dashboard(){
               </Card.Body>
             </Card>
           </Col>
-        </Row>
+        </Row> */}
         </Container>
       </>
   )

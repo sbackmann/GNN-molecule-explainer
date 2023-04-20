@@ -1,8 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { postEmbeddings } from "../router/resources/data";
-import Modal from 'react-modal';
-import { EmbeddingArray, EmbeddingPoint } from "../types/data";
-import Button from 'react-bootstrap/Button';
+import React, { useEffect, useState } from "react";
+import { postPoints, postEmbeddings } from "../router/resources/data";
+import Modal from "react-modal";
+import {
+  DataArray,
+  DataPoint,
+  EmbeddingArray,
+  EmbeddingPoint,
+} from "../types/data";
+import Button from "react-bootstrap/Button";
 import ScatterPlot from "./ScatterPlot";
 
 type ModalPopupProps = {
@@ -10,15 +15,24 @@ type ModalPopupProps = {
   modalTitle: string;
 };
 
-
-const ModalPopup: React.FC<ModalPopupProps> = ({ triggerButton, modalTitle }) => {
+const ModalPopup: React.FC<ModalPopupProps> = ({
+  triggerButton,
+  modalTitle,
+}) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const [embeddingData, setEmbeddingData] = useState<EmbeddingArray>();
+  const [Data, setData] = useState<DataArray>();
 
   useEffect(() => {
     postEmbeddings().then((embeddingData) => {
       setEmbeddingData(embeddingData);
+    });
+  }, []);
+
+  useEffect(() => {
+    postPoints().then((Data) => {
+      setData(Data);
     });
   }, []);
 
@@ -32,7 +46,9 @@ const ModalPopup: React.FC<ModalPopupProps> = ({ triggerButton, modalTitle }) =>
 
   return (
     <>
-      <Button variant="primary" onClick={openModal}>{triggerButton}</Button>
+      <Button variant="primary" onClick={openModal}>
+        {triggerButton}
+      </Button>
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
@@ -44,7 +60,12 @@ const ModalPopup: React.FC<ModalPopupProps> = ({ triggerButton, modalTitle }) =>
           X
         </Button>
         <h2>{modalTitle}</h2>
-        <ScatterPlot width={800} height={400} data={embeddingData} />
+        <ScatterPlot
+          width={800}
+          height={400}
+          data={embeddingData}
+          mol_data={Data}
+        />
       </Modal>
     </>
   );

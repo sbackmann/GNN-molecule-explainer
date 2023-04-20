@@ -97,16 +97,19 @@ function renderScatterPlot(
 
     const d_mol = mol_data.find((mol) => mol.idx[0] === d.idx);
 
-    tooltip.html(
-      `Molecule ID: ${d.idx}
-        <br/>Toxicity: ${d.true_label}
-        <br/>Predicted toxicity: ${d.gnn_label}`
-    );
-
     if (d_mol) {
       tooltip.html(
-        `Number of nodes: ${d_mol.x.length}
-            <br/>Number of edges: ${d_mol.edge_index[0]?.length || 0}`
+        `Molecule ID: ${d.idx}
+        <br/>Toxicity: ${d.true_label}
+        <br/>Predicted toxicity: ${d.gnn_label}
+        <br/>Number of nodes: ${d_mol.x.length}
+        <br/>Number of edges: ${d_mol.edge_index[0]?.length || 0}`
+      );
+    } else {
+      tooltip.html(
+        `Molecule ID: ${d.idx}
+              <br/>Toxicity: ${d.true_label}
+              <br/>Predicted toxicity: ${d.gnn_label}`
       );
     }
   }

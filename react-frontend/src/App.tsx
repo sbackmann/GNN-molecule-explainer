@@ -14,6 +14,8 @@ import { useEffect, useState } from "react";
 //   Tooltip,
 // } from "react-bootstrap";
 import PlaceholderButton from "react-bootstrap/esm/PlaceholderButton";
+import FormCheckInput from "react-bootstrap/esm/FormCheckInput";
+import FormCheckLabel from "react-bootstrap/esm/FormCheckLabel";
 import ListGroupItem from 'react-bootstrap/ListGroupItem'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -26,7 +28,7 @@ import { DataArray, DataPoint } from "./types/data";
 import DataChoiceComponent from "./components/DataChoice";
 // import ScatterPlot from "./components/ScatterPlot";
 import { postPoints } from "./router/resources/data";
-import { ListGroup } from "react-bootstrap";
+import { Form, ListGroup } from "react-bootstrap";
 
 function App() {
   const [exampleData, setExampleData] = useState<DataArray>();
@@ -88,9 +90,7 @@ function Dashboard(){
         </Card.Text>
         <Button variant="primary">Select</Button>
               </Card.Body>
-              <Card.Footer>
-                
-              </Card.Footer>
+              
             </Card>
           </Col>
           <Col lg="6" sm="6">
@@ -99,14 +99,72 @@ function Dashboard(){
               <Card.Title>Customize your need</Card.Title>
         <Card.Text>
           Here will be several option for user to select their need.  
-          <p>!</p>
-          <p>!</p>
+         
         </Card.Text>
-        {/* <Button variant="primary">Confi</Button> */}
+        {/* <Form>
+        <Form.Check
+          type="checkbox"
+          label="Check me out"
+        />
+        </Form> */}
               </Card.Body>
-              <Card.Footer>
-                
-              </Card.Footer>
+              <Card.Footer className="d-flex">
+    <Form.Group className="mr-3">
+      <Form.Label>Focus</Form.Label>
+      <div>
+        <Form.Check
+          type="checkbox"
+          label="Phenomenon"
+          defaultChecked={true}
+        />
+        <Form.Check
+          type="checkbox"
+          label="Model"
+        />
+      </div>
+    </Form.Group>
+    <Form.Group className="mr-8">
+      <Form.Label>Mask Nature</Form.Label>
+      <div>
+        <Form.Check
+          type="checkbox"
+          label="Hard"
+          defaultChecked={true}
+        />
+        <Form.Check
+          type="checkbox"
+          label="Soft"
+        />
+      </div>
+    </Form.Group>
+    <Form.Group className="mr-8">
+      <Form.Label>Mask Transformation</Form.Label>
+      <div className="d-flex">
+        <div><Form.Check
+            type="checkbox"
+            label="Top k"
+            defaultChecked={true}
+          /> 
+          </div>
+          <div><Form.Control placeholder="Enter text here" className="ml-2" /></div>
+          </div>
+          <div className="d-flex">
+        <div>
+          <Form.Check
+            type="checkbox"
+            label="Threshold"
+          />
+        </div>
+        <div className="d-flex align-items-center ml-3">
+          <Form.Check
+            type="checkbox"
+            label="Sparsity"
+          />
+          
+        </div>
+      </div>
+    </Form.Group>
+  </Card.Footer>
             </Card>
           </Col>
           <Col lg="3" sm="6">

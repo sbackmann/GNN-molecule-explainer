@@ -1,4 +1,4 @@
-import { useEffect, createRef } from "react";
+import { useEffect, createRef, useState } from "react";
 import * as d3 from "d3";
 import { DataArray, EmbeddingArray } from "../types/data";
 import { ChartStyle, getChildOrAppend, getMargin } from "./utils";
@@ -7,15 +7,17 @@ import "./ScatterPlot.css";
 interface ScatterPlotProp extends ChartStyle {
   data?: EmbeddingArray;
   mol_data?: DataArray;
+  closeModal: () => void; // State updater function for selected data
 }
 
 const ScatterPlot = (props: ScatterPlotProp) => {
   const ref = createRef<SVGSVGElement>();
-  const { data, mol_data, ...style } = props;
+  const { data, mol_data, closeModal, ...style } = props;
+
   useEffect(() => {
     const root = ref.current;
     if (data && mol_data && root) {
-      renderScatterPlot(root, data, mol_data, style);
+      renderScatterPlot(root, data, mol_data, style, closeModal);
     }
   }, [props]);
 
@@ -36,7 +38,8 @@ function renderScatterPlot(
   root: SVGElement | SVGGElement,
   data: EmbeddingArray,
   mol_data: DataArray,
-  props: ChartStyle
+  props: ChartStyle,
+  closeModal: () => void
 ) {
   const margin = getMargin(props.margin);
   const height = props.height - margin.top - margin.bottom;
@@ -72,6 +75,15 @@ function renderScatterPlot(
     .style("border", "1px solid black")
     .style("padding", "5px");
 
+  const hideTooltipAndCloseModal = () => {
+    // Hide tooltip
+    const tooltip = d3.select("#tooltip");
+    tooltip.style("display", "none");
+
+    // Close modal
+    closeModal();
+  };
+
   base
     .selectAll("circle.dot")
     .data(data)
@@ -84,7 +96,13 @@ function renderScatterPlot(
     .attr("cy", (d) => y(d.pca_y))
     .attr("r", 5)
     .style("fill", (d) => colors(d.true_label) || "#fff")
-    .on("mouseover", handleMouseOver);
+    .on("mouseover", handleMouseOver)
+    .on("mouseout", (event, d) => {
+      // Hide tooltip
+      const tooltip = d3.select("#tooltip");
+      tooltip.style("display", "none");
+    })
+    .on("click", hideTooltipAndCloseModal);
 
   // Define mouseover event handler
   function handleMouseOver(event: MouseEvent, d: any) {
@@ -93,7 +111,8 @@ function renderScatterPlot(
       .select("#tooltip")
       .style("display", "block")
       .style("left", event.pageX + 10 + "px")
-      .style("top", event.pageY - 10 + "px");
+      .style("top", event.pageY - 10 + "px")
+      .attr("class", "tooltip-text");
 
     const d_mol = mol_data.find((mol) => mol.idx[0] === d.idx);
 

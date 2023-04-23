@@ -65,6 +65,7 @@ const ModalPopup: React.FC<ModalPopupProps> = ({
           height={400}
           data={embeddingData}
           mol_data={Data}
+          closeModal={closeModal}
         />
       </Modal>
     </>

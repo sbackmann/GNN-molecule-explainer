@@ -41,6 +41,11 @@ function App() {
   const [embeddingData, setEmbeddingData] = useState<EmbeddingArray>();
   const initialDataChoice = "1";
 
+  const [modalIsOpen, setModalIsOpen] = useState(true);
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+
   useEffect(() => {
     initialDataChoice &&
       postPoints().then((exampleData) => {
@@ -71,7 +76,13 @@ function App() {
         <p>The selected molecule is toxic:</p>
 
         {selected ? selected.y : null}
-        <ScatterPlot width={1100} height={550} data={embeddingData} />
+        <ScatterPlot
+          width={1100}
+          height={550}
+          data={embeddingData}
+          mol_data={exampleData}
+          closeModal={closeModal}
+        />
       </div>
     </>
   );
@@ -185,5 +196,4 @@ function Dashboard() {
     </>
   );
 }
-// <ScatterPlot width={1100} height={550} data={embeddingData} graphid={dataChoice}/>
 export default Dashboard;

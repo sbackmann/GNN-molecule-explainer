@@ -13,11 +13,15 @@
 //   OverlayTrigger,
 //   Tooltip,
 // } from "react-bootstrap";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
-import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
+import PlaceholderButton from "react-bootstrap/esm/PlaceholderButton";
+import FormCheckInput from "react-bootstrap/esm/FormCheckInput";
+import FormCheckLabel from "react-bootstrap/esm/FormCheckLabel";
+import ListGroupItem from 'react-bootstrap/ListGroupItem'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import Container from 'react-bootstrap/Container'
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 /*
@@ -116,14 +120,9 @@ function Dashboard() {
         <Button variant="primary">Select</Button>
       </Card.Body>
     </Card> */}
-      {/* <p>Hello World</p> */}
-      {/* <Container>
-      <Row>
-        <Col>1 of 1</Col>
-      </Row>
-    </Container> */}
-      <Container fluid>
-        <Row>
+    {/* <p>Hello World</p> */}
+    <Container fluid>
+        <Row lg="3">
           <Col lg="3" sm="6">
             <Card className="card-stats">
               <Card.Body>
@@ -137,53 +136,155 @@ function Dashboard() {
                   modalTitle="Embedded Molecules"
                 />
               </Card.Body>
-              <Card.Footer></Card.Footer>
+              
             </Card>
           </Col>
-          <Col lg="3" sm="6">
-            <Card className="card-stats">
+          <Col lg="6" sm="6">
+            <Card className="card-stats" h-100>
               <Card.Body>
-                <Card.Title>Customize your need</Card.Title>
-                <Card.Text>
-                  Here will be several option for user to select their need.
-                </Card.Text>
-                <Button variant="primary">Select</Button>
+              <Card.Title>Customize your need</Card.Title>
+        <Card.Text>
+          Here will be several option for user to select their need.  
+         
+        </Card.Text>
+        {/* <Form>
+        <Form.Check
+          type="checkbox"
+          label="Check me out"
+        />
+        </Form> */}
               </Card.Body>
-              <Card.Footer></Card.Footer>
+              <Card.Footer className="d-flex">
+    <Form.Group className="mr-3">
+      <Form.Label>Focus</Form.Label>
+      <div>
+        <Form.Check
+          type="checkbox"
+          label="Phenomenon"
+          defaultChecked={true}
+        />
+        <Form.Check
+          type="checkbox"
+          label="Model"
+        />
+      </div>
+    </Form.Group>
+    <Form.Group className="mr-8">
+      <Form.Label>Mask Nature</Form.Label>
+      <div>
+        <Form.Check
+          type="checkbox"
+          label="Hard"
+          defaultChecked={true}
+        />
+        <Form.Check
+          type="checkbox"
+          label="Soft"
+        />
+      </div>
+    </Form.Group>
+    <Form.Group className="mr-8">
+      <Form.Label>Mask Transformation</Form.Label>
+      <div className="d-flex">
+        <div><Form.Check
+            type="checkbox"
+            label="Top k"
+            defaultChecked={true}
+          /> 
+          </div>
+          <div><Form.Control placeholder="Enter text here" className="ml-2" /></div>
+          </div>
+          <div className="d-flex">
+        <div>
+          <Form.Check
+            type="checkbox"
+            label="Threshold"
+          />
+        </div>
+        <div className="d-flex align-items-center ml-3">
+          <Form.Check
+            type="checkbox"
+            label="Sparsity"
+          />
+          
+        </div>
+      </div>
+    </Form.Group>
+  </Card.Footer>
             </Card>
           </Col>
           <Col lg="3" sm="6">
-            <Card className="card-stats">
+            <Card className="card-stats" h-100>
               <Card.Body>
-                <Card.Title>Mask Property</Card.Title>
-                <Card.Text>Size; Entropy; Max value.</Card.Text>
+              <Card.Title>Mask Property</Card.Title>
+        
+        <ListGroup>
+          <ListGroupItem>Size</ListGroupItem>
+          <ListGroupItem>Entropy</ListGroupItem>
+          <ListGroupItem>Max value</ListGroupItem>
+        </ListGroup>
+        
               </Card.Body>
               <Card.Footer></Card.Footer>
             </Card>
           </Col>
         </Row>
+        <p></p>
         <Row>
-          <Col md="2">
-            <Card>
+        <Col md="3" mh-100>
+            <Card >
               <Card.Header>
                 <Card.Title as="h4">Rank of Explainer</Card.Title>
                 <p className="card-category">Rank</p>
               </Card.Header>
-              <Card.Body></Card.Body>
-              <Card.Footer></Card.Footer>
+              <Card.Body>
+                
+              </Card.Body>
             </Card>
-          </Col>
+            <p>            
+            </p>
+            <Card>
+              <Card.Header>
+                <Card.Title as="h4">Explainer performance</Card.Title>
+                <p className="card-category">Figure</p>
+              </Card.Header>
+              <Card.Body>
+                
+              </Card.Body>
+            </Card>
+          </Col>          
           <Col md="6">
             <Card>
               <Card.Header>
                 <Card.Title as="h4">Graph Explaination</Card.Title>
                 <p className="card-category">Graph</p>
               </Card.Header>
-              <Card.Body></Card.Body>
-              <Card.Footer></Card.Footer>
+              <Card.Body>
+                <p>!</p>
+                <p>!</p>
+                <p>!</p>
+                <p>!</p>
+              </Card.Body>
+              </Card>
+              
+          </Col>
+          <Col md="3">
+            <Card>
+              <Card.Header>
+                <Card.Title as="h4">Explainer performance</Card.Title>
+                <p className="card-category">Figure</p>
+              </Card.Header>
+              <Card.Body>
+              <p>!</p>
+                <p>!</p>
+                <p>!</p>
+                <p>!</p>
+              </Card.Body>
             </Card>
           </Col>
-          <Col md="2">
+        </Row>
+        {/* <Row>
+        <Col md="3">
             <Card>
               <Card.Header>
                 <Card.Title as="h4">Explainer performance</Card.Title>
@@ -192,9 +293,9 @@ function Dashboard() {
               <Card.Body></Card.Body>
             </Card>
           </Col>
-        </Row>
-      </Container>
-    </>
-  );
+        </Row> */}
+        </Container>
+      </>
+  )
 }
 export default Dashboard;

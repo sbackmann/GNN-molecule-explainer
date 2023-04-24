@@ -24,15 +24,13 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-/*
-import {
-  DataArray,
-  EmbeddingArray
-} from "./types/data";
+import { DataArray, DataPoint } from "./types/data";
+
 import DataChoiceComponent from "./components/DataChoice";
-import ScatterPlot from "./components/ScatterPlot";
+// import ScatterPlot from "./components/ScatterPlot";
 import { postPoints, postEmbeddings } from "./router/resources/data";
-*/
+import { Form, ListGroup } from "react-bootstrap";
+
 import React from "react";
 import "reactjs-popup/dist/index.css";
 import ModalPopup from "./components/ModalPopup";

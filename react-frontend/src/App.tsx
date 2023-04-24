@@ -178,10 +178,12 @@ function Dashboard() {
           type="checkbox"
           label="Phenomenon"
           defaultChecked={true}
+          name="group1"
         />
         <Form.Check
           type="checkbox"
           label="Model"
+          name="group1"
         />
       </div>
     </Form.Group>
@@ -192,10 +194,12 @@ function Dashboard() {
           type="checkbox"
           label="Hard"
           defaultChecked={true}
+          name="group2"
         />
         <Form.Check
           type="checkbox"
           label="Soft"
+          name="group2"
         />
       </div>
     </Form.Group>
@@ -206,6 +210,7 @@ function Dashboard() {
             type="checkbox"
             label="Top k"
             defaultChecked={true}
+            name="group3"
           />
           </div>
           <div><Form.Control placeholder="Enter text here" className="ml-2" /></div>
@@ -215,12 +220,14 @@ function Dashboard() {
           <Form.Check
             type="checkbox"
             label="Threshold"
+            name="group3"
           />
         </div>
         <div className="d-flex align-items-center ml-3">
           <Form.Check
             type="checkbox"
             label="Sparsity"
+            name="group3"           
           />
           
         </div>

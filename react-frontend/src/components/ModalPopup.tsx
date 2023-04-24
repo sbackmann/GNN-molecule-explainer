@@ -3,9 +3,7 @@ import { postPoints, postEmbeddings } from "../router/resources/data";
 import Modal from "react-modal";
 import {
   DataArray,
-  DataPoint,
-  EmbeddingArray,
-  EmbeddingPoint,
+  EmbeddingArray
 } from "../types/data";
 import Button from "react-bootstrap/Button";
 import ScatterPlot from "./ScatterPlot";

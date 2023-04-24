@@ -1,4 +1,4 @@
-import { useEffect, createRef, useState } from "react";
+import { useEffect, createRef } from "react";
 import * as d3 from "d3";
 import { DataArray, EmbeddingArray } from "../types/data";
 import { ChartStyle, getChildOrAppend, getMargin } from "./utils";

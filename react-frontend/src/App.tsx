@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 // import {
 //   Badge,
 //   Button,
@@ -20,20 +20,20 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+/*
 import {
   DataArray,
-  DataPoint,
-  EmbeddingArray,
-  EmbeddingPoint,
+  EmbeddingArray
 } from "./types/data";
 import DataChoiceComponent from "./components/DataChoice";
 import ScatterPlot from "./components/ScatterPlot";
 import { postPoints, postEmbeddings } from "./router/resources/data";
+*/
 import React from "react";
 import "reactjs-popup/dist/index.css";
 import ModalPopup from "./components/ModalPopup";
 import "./components/ModalPopup.css";
-
+/*
 function App() {
   const [exampleData, setExampleData] = useState<DataArray>();
   const [dataChoice, setDataChoice] = useState<string>();
@@ -86,9 +86,10 @@ function App() {
       </div>
     </>
   );
-}
+}*/
 
 function Dashboard() {
+  /*
   const [embeddingData, setEmbeddingData] = useState<EmbeddingArray>();
   const [Data, setData] = useState<DataArray>();
 
@@ -103,7 +104,7 @@ function Dashboard() {
       setData(Data);
     });
   }, []);
-
+  */
   return (
     <>
       {/* <Card style={{ width: '18rem' }}>

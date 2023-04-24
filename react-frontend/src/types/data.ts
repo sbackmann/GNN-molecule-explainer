@@ -7,5 +7,13 @@ export interface DataPoint {
     adj_padded: number[][];
     x_padded: number[][];
 }
+export interface EmbeddingPoint {
+    idx: number;
+    pca_x: number;
+    pca_y: number;
+    gnn_label: string;
+    true_label: string;
+}
 
 export type DataArray = DataPoint[];
+export type EmbeddingArray = EmbeddingPoint[];

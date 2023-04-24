@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 // import {
 //   Badge,
 //   Button,
@@ -23,53 +23,93 @@ import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import "./App.css";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 import { DataArray, DataPoint } from "./types/data";
+
 import DataChoiceComponent from "./components/DataChoice";
 // import ScatterPlot from "./components/ScatterPlot";
-import { postPoints } from "./router/resources/data";
+import { postPoints, postEmbeddings } from "./router/resources/data";
 import { Form, ListGroup } from "react-bootstrap";
 
+import React from "react";
+import "reactjs-popup/dist/index.css";
+import ModalPopup from "./components/ModalPopup";
+import "./components/ModalPopup.css";
+/*
 function App() {
   const [exampleData, setExampleData] = useState<DataArray>();
   const [dataChoice, setDataChoice] = useState<string>();
   const [selected, setSelected] = useState<DataPoint>();
+  const [embeddingData, setEmbeddingData] = useState<EmbeddingArray>();
   const initialDataChoice = "1";
+
+  const [modalIsOpen, setModalIsOpen] = useState(true);
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
 
   useEffect(() => {
     initialDataChoice &&
-    postPoints(initialDataChoice).then((exampleData) => {
-      setExampleData(exampleData);
-    });
+      postPoints().then((exampleData) => {
+        setExampleData(exampleData);
+      });
   }, [initialDataChoice]);
 
   useEffect(() => {
-    dataChoice && 
-    setSelected(exampleData![parseInt(dataChoice, 10)]);
+    postEmbeddings().then((embeddingData) => {
+      setEmbeddingData(embeddingData);
+    });
+  }, []);
+
+  useEffect(() => {
+    dataChoice && setSelected(exampleData![parseInt(dataChoice, 10)]);
   }, [dataChoice]);
 
   function choiceMade(choice: string) {
     setDataChoice(choice);
   }
 
-  return (  
+  return (
     <>
-    <div className="App">
-      <header className="App-header"> GNN Explainer </header>      
-      
-      <DataChoiceComponent onChoiceMade={choiceMade} />
-      <p>The selected molecule is toxic:</p>      
-      
-      {selected ? selected.y : null}
-    </div>    
-    </>  
-  );
-}
+      <div className="App">
+        <header className="App-header"> GNN Explainer </header>
 
-function Dashboard(){
-  return(
+        <DataChoiceComponent onChoiceMade={choiceMade} />
+        <p>The selected molecule is toxic:</p>
+
+        {selected ? selected.y : null}
+        <ScatterPlot
+          width={1100}
+          height={550}
+          data={embeddingData}
+          mol_data={exampleData}
+          closeModal={closeModal}
+        />
+      </div>
+    </>
+  );
+}*/
+
+function Dashboard() {
+  /*
+  const [embeddingData, setEmbeddingData] = useState<EmbeddingArray>();
+  const [Data, setData] = useState<DataArray>();
+
+  useEffect(() => {
+    postEmbeddings().then((embeddingData) => {
+      setEmbeddingData(embeddingData);
+    });
+  }, []);
+
+  useEffect(() => {
+    postPoints().then((Data) => {
+      setData(Data);
+    });
+  }, []);
+  */
+  return (
     <>
-    {/* <Card style={{ width: '18rem' }}>
+      {/* <Card style={{ width: '18rem' }}>
       <Card.Body>
         <Card.Title>Choose a molecule</Card.Title>
         <Card.Text>
@@ -84,11 +124,15 @@ function Dashboard(){
           <Col lg="3" sm="6">
             <Card className="card-stats">
               <Card.Body>
-              <Card.Title>Choose a molecule</Card.Title>
-        <Card.Text>
-          Here will be the graph to show whether the current molecule is toxic.
-        </Card.Text>
-        <Button variant="primary">Select</Button>
+                <Card.Title>Choose a molecule</Card.Title>
+                <Card.Text>
+                  Here will be the graph to show whether the current molecule is
+                  toxic.
+                </Card.Text>
+                <ModalPopup
+                  triggerButton={<Button variant="primary">Select</Button>}
+                  modalTitle="Embedded Molecules"
+                />
               </Card.Body>
               
             </Card>
@@ -179,13 +223,9 @@ function Dashboard(){
         </ListGroup>
         
               </Card.Body>
-              <Card.Footer>
-                
-              </Card.Footer>
+              <Card.Footer></Card.Footer>
             </Card>
           </Col>
-          
-          
         </Row>
         <p></p>
         <Row>
@@ -248,9 +288,7 @@ function Dashboard(){
                 <Card.Title as="h4">Explainer performance</Card.Title>
                 <p className="card-category">Figure</p>
               </Card.Header>
-              <Card.Body>
-                
-              </Card.Body>
+              <Card.Body></Card.Body>
             </Card>
           </Col>
         </Row> */}
@@ -258,5 +296,4 @@ function Dashboard(){
       </>
   )
 }
-// <ScatterPlot width={1100} height={550} data={exampleData} graphid={dataChoice}/>
 export default Dashboard;

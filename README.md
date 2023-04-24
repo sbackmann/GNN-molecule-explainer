@@ -48,7 +48,8 @@ Specify here the structure of you code and comment what the most important files
 │   │   │     └── resources
 │   │   │         ├── utils
 │   │   │         │     ├── gen_utils.py
-│   │   │         │     ├── __init__.py
+│   │   │         │     └── __init__.py
+│   │   │         ├── embedding_data.py
 │   │   │         ├── mol_data.py
 │   │   │         ├── mol_dataset.py
 │   │   │         ├── scatter_data.py
@@ -71,7 +72,12 @@ Specify here the structure of you code and comment what the most important files
 │   │   ├── dataset_blobs.csv
 │   │   ├── dataset_circles.csv
 │   │   ├── dataset_moons.csv
-│   │   └── generate_data.py    # script to create data
+│   │   ├── embeddings.csv
+│   │   ├── generate_data.py    # script to create data
+│   │   ├── gin_3l_embeddings.csv
+│   │   ├── gin_3l_predictions.csv
+│   │   ├── mutag_xy.csv
+│   │   └── process.py
 │   └── MANIFEST.in
 ├── react-frontend
 │   ├── README.md
@@ -81,16 +87,19 @@ Specify here the structure of you code and comment what the most important files
 │   │   ├── App.css
 │   │   ├── App.test.tsx
 │   │   ├── App.tsx
-│   │   ├── Visualization.tsx
 │   │   ├── router
 │   │   │   ├── resources
 │   │   │   │   └── data.ts
 │   │   │   └── apiClient.ts
 │   │   ├── components
-│   │   │   ├── utils.ts
-│   │   │   ├── ScatterPlot.tsx
 │   │   │   ├── DataChoice.tsx
-│   │   │   └── ScatterPlot.css
+│   │   │   ├── ModalPopup.tsx
+│   │   │   ├── ModalPopup.css
+│   │   │   ├── ScatterPlot.css
+│   │   │   ├── ScatterPlot.tsx
+│   │   │   ├── Slider.css
+│   │   │   ├── Slider.tsx
+│   │   │   └── utils.ts
 │   │   ├── index.css
 │   │   ├── index.tsx
 │   │   ├── logo.svg
@@ -148,7 +157,11 @@ Document here the major milestones of your code and future planned steps.\
   - [x] Added a graph visualization script for the molecules: [#d5e68e27](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/commit/d5e68e2770622332fdae7b5aee6ee78e00243709)
   - [x] Added a backend endpoint for the MUTAG dataset: [#5605d58b](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/commit/5605d58ba68fa381ee8ed613fef4e6f00f369830)
   - [x] Implemented a transformation function that transforms a Pytorch Data object into a JSON object: [#707807d3](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/commit/707807d3fc914727a23030e6376d1fc958930499)
-  - [x] Changed the frontend so that the MUTAG data in the backend is retrieved and upon user request the toxicity of a chosen molecule is displayed: [#30e43cda](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/commits/development-backend)
+  - [x] Changed the frontend so that the MUTAG data in the backend is retrieved and upon user request the toxicity of a chosen molecule is displayed: [#204129](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/commit/30e43cdadc34bede79b144aec1ec742ba0ade88a)
+
+- [x] Week 3 & 4
+  - Visualize the molecules as embedded data points in terms of a scatter plot that opens as a pop-up window, display information about a specific molecule when hovering about it and make it choosable: [#206959](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/commit/8db3a2b05ae1974b4ac1d3a4d0b3140ef4a83d22)
+  - Convert the frontend sketches (Insert Link to Sketches here) into a static frontend:
 
 Create a list subtask.\
 Open an issue for each subtask. Once you create a subtask, link the corresponding issue.\
@@ -165,6 +178,8 @@ We will use this to understand what your struggles and where did the weekly effo
 The week was mainly dedicated to familiarize ourselves with the GitLab repository and the development workflow and creating the initial README. Also an API endpoint was added that will serve as the overview for the application. An open challenge is to determine what exactly should be implemented for Backend milestone, a question that will be discussed in the open office hour in Week 2.
 ### Week 2
 It was communicated that the main focus of the backend deliverable is to add the data as an API endpoint and show that we can access it in the application. Thus, the MUTAG dataset was added and a simple query in the frontend that just displays the molecule's toxicity was implemented. Challenges were to understand how exactly the communication between the Flask-Python backend and the React frontend works and to get used to the React syntax and programming style. Additionally, the mutag data, which was processed as a Pytorch Data object, had to be made JSON compatible.
+### Week 3 & 4
+The work was focused on implementing the steps for the third milestone. This meant first and foremost to convert the application sketches into an (until here) static frontend. Next to building the general structure and inserting the basic components, the greatest challenge here was to implement the possibility to display the molecules in the embedded space and make them choosable. First we needed to find a 2-D representation of the molecules. For this we used PCA and added this as the embeddings.csv file. While the scatter plot functionality could largely be reused from the 'dummy-fullstack' project, we needed to find a way to implement a modal pop-up window in React and to display the necesary molecule information when hovering over them.
 
 ## Versioning
 Create stable versions of your code each week by using gitlab tags.\

@@ -1,4 +1,4 @@
-// import { useEffect, useState } from "react";
+import { useState } from "react";
 // import {
 //   Badge,
 //   Button,
@@ -30,6 +30,7 @@ import DataChoiceComponent from "./components/DataChoice";
 // import ScatterPlot from "./components/ScatterPlot";
 import { postPoints, postEmbeddings } from "./router/resources/data";
 import { Form, ListGroup } from "react-bootstrap";
+import Slider from './components/Slider';
 
 import React from "react";
 import "reactjs-popup/dist/index.css";
@@ -107,6 +108,23 @@ function Dashboard() {
     });
   }, []);
   */
+  
+  const [sizeValue, setSizeValue] = useState(50);
+  const [entropyValue, setEntropyValue] = useState(50);
+  const [maxValue, setMaxValue] = useState(50);
+
+  const handleSizeChange = (newValue: number) => {
+    setSizeValue(newValue);
+  };
+
+  const handleEntropyChange = (newValue: number) => {
+    setSizeValue(newValue);
+  };
+
+  const handleMaxChange = (newValue: number) => {
+    setSizeValue(newValue);
+  };
+
   return (
     <>
       {/* <Card style={{ width: '18rem' }}>
@@ -154,7 +172,7 @@ function Dashboard() {
               </Card.Body>
               <Card.Footer className="d-flex">
     <Form.Group className="mr-3">
-      <Form.Label>Focus</Form.Label>
+      <Form.Label style={{ marginRight: "10px", minWidth: "150px" }}>Focus</Form.Label>
       <div>
         <Form.Check
           type="checkbox"
@@ -168,7 +186,7 @@ function Dashboard() {
       </div>
     </Form.Group>
     <Form.Group className="mr-8">
-      <Form.Label>Mask Nature</Form.Label>
+      <Form.Label style={{ marginRight: "10px", minWidth: "150px" }}>Mask Nature</Form.Label>&nbsp;
       <div>
         <Form.Check
           type="checkbox"
@@ -182,18 +200,18 @@ function Dashboard() {
       </div>
     </Form.Group>
     <Form.Group className="mr-8">
-      <Form.Label>Mask Transformation</Form.Label>
+      <Form.Label style={{ marginRight: "10px", minWidth: "150px" }}>Mask Transformation</Form.Label>
       <div className="d-flex">
-        <div><Form.Check
+        <div style={{ marginRight: "10px", minWidth: "100px" }}><Form.Check
             type="checkbox"
             label="Top k"
             defaultChecked={true}
-          /> 
+          />
           </div>
           <div><Form.Control placeholder="Enter text here" className="ml-2" /></div>
           </div>
           <div className="d-flex">
-        <div>
+        <div style={{ marginRight: "10px", minWidth: "100px" }}>
           <Form.Check
             type="checkbox"
             label="Threshold"
@@ -217,9 +235,21 @@ function Dashboard() {
               <Card.Title>Mask Property</Card.Title>
         
         <ListGroup>
-          <ListGroupItem>Size</ListGroupItem>
-          <ListGroupItem>Entropy</ListGroupItem>
-          <ListGroupItem>Max value</ListGroupItem>
+          <ListGroupItem>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <span style={{ marginRight: "10px", minWidth: "80px" }}>Size:</span>
+                <Slider min={0} max={100} step={1} value={sizeValue} onChange={handleSizeChange} />
+            </div></ListGroupItem>
+          <ListGroupItem>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <span style={{ marginRight: "10px", minWidth: "80px" }}>Entropy:</span>
+                <Slider min={0} max={100} step={1} value={entropyValue} onChange={handleEntropyChange} />
+            </div></ListGroupItem>
+          <ListGroupItem>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <span style={{ marginRight: "10px", minWidth: "80px" }}>Max Value:</span>
+                <Slider min={0} max={100} step={1} value={maxValue} onChange={handleMaxChange} />
+            </div></ListGroupItem>
         </ListGroup>
         
               </Card.Body>
@@ -236,7 +266,31 @@ function Dashboard() {
                 <p className="card-category">Rank</p>
               </Card.Header>
               <Card.Body>
-                
+                <div>
+                  <ol>
+                    <li>
+                      <Form.Check
+                      type="checkbox"
+                      label="Integrated Grad"
+                      defaultChecked={true}
+                      />
+                    </li>
+                    <li>
+                      <Form.Check
+                      type="checkbox"
+                      label="GNNExplainer"
+                      defaultChecked={false}
+                      />
+                    </li>
+                    <li>
+                      <Form.Check
+                      type="checkbox"
+                      label="Saliency"
+                      defaultChecked={false}
+                      />
+                    </li>
+                  </ol>
+                </div>  
               </Card.Body>
             </Card>
             <p>            

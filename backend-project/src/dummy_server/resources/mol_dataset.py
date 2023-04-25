@@ -338,4 +338,4 @@ class MoleculeDataset(InMemoryDataset):
 
 
 if __name__ == "__main__":
-    dataset = MoleculeDataset(root="./backend-project/data", name="MUTAG")
+    dataset = MoleculeDataset(root="./data", name="MUTAG")

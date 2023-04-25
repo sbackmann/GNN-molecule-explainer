@@ -157,11 +157,11 @@ Document here the major milestones of your code and future planned steps.\
   - [x] Added a graph visualization script for the molecules: [#d5e68e27](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/commit/d5e68e2770622332fdae7b5aee6ee78e00243709)
   - [x] Added a backend endpoint for the MUTAG dataset: [#5605d58b](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/commit/5605d58ba68fa381ee8ed613fef4e6f00f369830)
   - [x] Implemented a transformation function that transforms a Pytorch Data object into a JSON object: [#707807d3](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/commit/707807d3fc914727a23030e6376d1fc958930499)
-  - [x] Changed the frontend so that the MUTAG data in the backend is retrieved and upon user request the toxicity of a chosen molecule is displayed: [#204129](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/commit/30e43cdadc34bede79b144aec1ec742ba0ade88a)
+  - [x] Changed the frontend so that the MUTAG data in the backend is retrieved and upon user request the toxicity of a chosen molecule is displayed: [#30e43cda](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/commit/30e43cdadc34bede79b144aec1ec742ba0ade88a)
 
 - [x] Week 3 & 4
-  - Visualize the molecules as embedded data points in terms of a scatter plot that opens as a pop-up window, display information about a specific molecule when hovering about it and make it choosable: [#206959](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/commit/8db3a2b05ae1974b4ac1d3a4d0b3140ef4a83d22)
-  - Convert the frontend sketches (Insert Link to Sketches here) into a static frontend:
+  - [x] Visualize the molecules as embedded data points in terms of a scatter plot that opens as a pop-up window, display information about a specific molecule when hovering about it and make it choosable: [#8db3a2b0](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/commit/8db3a2b05ae1974b4ac1d3a4d0b3140ef4a83d22)
+  - [x] Convert the [frontend sketches](https://app.moqups.com/tSlXp0j1gCEOxqUO249wkzcFM0EmMkJZ/view/page/ab9bb6bb5?ui=0) into a static frontend: [#7ebc9c61](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/commit/7ebc9c61a9834a0b1d78e1991e11c7191e6eb3f5)
 
 Create a list subtask.\
 Open an issue for each subtask. Once you create a subtask, link the corresponding issue.\
@@ -191,5 +191,6 @@ We will evaluate your code every week, based on the corresponding version.
 Tags:
 - Week 1: [Week 1 Tag](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/tags/Week-1)
 - Week 2: [Week 2 Tag](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/tags/Week-2)
+- Week 3 & 4: [Week 3 & 4 Tag](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/tags/Week-3-4)
 
 

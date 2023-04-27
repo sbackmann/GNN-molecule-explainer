@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // import {
 //   Badge,
 //   Button,
@@ -28,7 +28,7 @@ import { DataArray, DataPoint } from "./types/data";
 
 import DataChoiceComponent from "./components/DataChoice";
 // import ScatterPlot from "./components/ScatterPlot";
-import { postPoints, postEmbeddings } from "./router/resources/data";
+import { postPoints, postEmbeddings, postExplanations } from "./router/resources/data";
 import { Form, ListGroup } from "react-bootstrap";
 import Slider from './components/Slider';
 
@@ -36,6 +36,10 @@ import React from "react";
 import "reactjs-popup/dist/index.css";
 import ModalPopup from "./components/ModalPopup";
 import "./components/ModalPopup.css";
+import Graph from './components/Graph';
+import { Network, Node, Edge } from 'vis-network';
+
+  
 /*
 function App() {
   const [exampleData, setExampleData] = useState<DataArray>();
@@ -92,26 +96,102 @@ function App() {
 }*/
 
 function Dashboard() {
-  /*
-  const [embeddingData, setEmbeddingData] = useState<EmbeddingArray>();
-  const [Data, setData] = useState<DataArray>();
+
+  const [sizeValue, setSizeValue] = useState(50);
+  const [entropyValue, setEntropyValue] = useState(50);
+  const [maxValue, setMaxValue] = useState(50);
+  const [explanations, setExplanations] = useState<number[]>();
+  const [level, setLevel] = useState("10");
+
+  const handleLevelChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLevel(e.target.value);
+  };
+
+  type Explainer = "ig" | "gnnexplainer" | "sa";
+  type Focus = "phenomenon" | "model";
+  type MaskNature = "hard" | "soft";
+  type MaskTransformation = "topk" | "threshold" | "sparsity";
+  type CheckboxState = {
+    explainer: Explainer;
+    focus: Focus;
+    mask_nature: MaskNature;
+    mask_transformation: MaskTransformation;
+  };
+
+  const initialCheckboxState: CheckboxState = {
+    explainer: "ig",
+    focus: "phenomenon",
+    mask_nature: "hard",
+    mask_transformation: "topk",
+  };
+
+  
+  const [checkboxState, setCheckboxState] = useState<CheckboxState>(
+    initialCheckboxState
+  );
+  // const [selectedFocus, setSelectedFocus] = useState<Focus>("phenomenon");
+
+  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>, checkboxName: keyof CheckboxState) => {
+    const value = event.target.value;
+    setCheckboxState({
+      ...checkboxState,
+      [checkboxName]: value
+    });
+  };
+
+
 
   useEffect(() => {
-    postEmbeddings().then((embeddingData) => {
-      setEmbeddingData(embeddingData);
+    postExplanations(String(checkboxState.explainer),
+                     String(checkboxState.focus),
+                     "0",
+                     String(checkboxState.mask_nature),
+                     String(checkboxState.mask_transformation),
+                     level).then((explanations) => {
+      setExplanations(explanations);
     });
-  }, []);
-
+  }, [checkboxState, level]);
+  const [Data, setData] = useState<DataArray>();
   useEffect(() => {
     postPoints().then((Data) => {
       setData(Data);
     });
   }, []);
-  */
-  
-  const [sizeValue, setSizeValue] = useState(50);
-  const [entropyValue, setEntropyValue] = useState(50);
-  const [maxValue, setMaxValue] = useState(50);
+  const nodes = [];
+  const edges = [];
+
+  if (Data) {
+    const idx = 0;
+    const calc_idx = Data![idx].idx;
+    const edge_index_from = Data![idx].edge_index[0];
+    const edge_index_to = Data![idx].edge_index[1];
+    const nodes_list = Data![idx].x;
+
+    for (let i = 0; i < nodes_list.length; i++) {
+      const node: Node = {id: i, label: String(i)};
+      nodes.push(node)
+    }
+    for (let i = 0; i < edge_index_from.length; i++) {
+      if (explanations![i] !== 0) {
+        const edge: Edge = {from: edge_index_from[i], to: edge_index_to[i]};
+        edges.push(edge)
+      }
+    }
+  } else {
+    const nodes = [
+      { id: 1, label: 'Node 1' },
+      { id: 2, label: 'Node 2' },
+      { id: 3, label: 'Node 3' },
+    ];
+   
+    const edges = [
+      { from: 1, to: 2 },
+      { from: 1, to: 3 },
+      { from: 2, to: 4 },
+      { from: 3, to: 4 },
+    ];
+    const edgeWeights = [0.7, 0.4, 0.2, 0.9];
+  }
 
   const handleSizeChange = (newValue: number) => {
     setSizeValue(newValue);
@@ -127,16 +207,6 @@ function Dashboard() {
 
   return (
     <>
-      {/* <Card style={{ width: '18rem' }}>
-      <Card.Body>
-        <Card.Title>Choose a molecule</Card.Title>
-        <Card.Text>
-          Here will be the graph to show whether the current molecule is toxic.
-        </Card.Text>
-        <Button variant="primary">Select</Button>
-      </Card.Body>
-    </Card> */}
-    {/* <p>Hello World</p> */}
     <Container fluid>
         <Row lg="3">
           <Col lg="3" sm="6">
@@ -163,12 +233,6 @@ function Dashboard() {
           Here will be several option for user to select their need.  
          
         </Card.Text>
-        {/* <Form>
-        <Form.Check
-          type="checkbox"
-          label="Check me out"
-        />
-        </Form> */}
               </Card.Body>
               <Card.Footer className="d-flex">
     <Form.Group className="mr-3">
@@ -176,14 +240,17 @@ function Dashboard() {
       <div>
         <Form.Check
           type="checkbox"
+          value="phenomenon"
           label="Phenomenon"
-          defaultChecked={true}
-          name="group1"
+          checked={checkboxState.focus === "phenomenon"}
+          onChange={(event) => handleCheckboxChange(event, 'focus')}
         />
         <Form.Check
           type="checkbox"
+          value="model"
           label="Model"
-          name="group1"
+          checked={checkboxState.focus === "model"}
+          onChange={(event) => handleCheckboxChange(event, 'focus')}
         />
       </div>
     </Form.Group>
@@ -192,14 +259,17 @@ function Dashboard() {
       <div>
         <Form.Check
           type="checkbox"
+          value="hard"
           label="Hard"
-          defaultChecked={true}
-          name="group2"
+          checked={checkboxState.mask_nature === "hard"}
+          onChange={(event) => handleCheckboxChange(event, 'mask_nature')}
         />
         <Form.Check
           type="checkbox"
+          value="soft"
           label="Soft"
-          name="group2"
+          checked={checkboxState.mask_nature === "soft"}
+          onChange={(event) => handleCheckboxChange(event, 'mask_nature')}
         />
       </div>
     </Form.Group>
@@ -208,28 +278,38 @@ function Dashboard() {
       <div className="d-flex">
         <div style={{ marginRight: "10px", minWidth: "100px" }}><Form.Check
             type="checkbox"
+            value="topk"
             label="Top k"
-            defaultChecked={true}
-            name="group3"
+            checked={checkboxState.mask_transformation === "topk"}
+            onChange={(event) => handleCheckboxChange(event, 'mask_transformation')}
           />
           </div>
-          <div><Form.Control placeholder="Enter text here" className="ml-2" /></div>
+          <div><Form.Control
+                  placeholder="10"
+                  type="text"
+                  value={level}
+                  onChange={handleLevelChange}
+                  className="ml-2"
+                  /></div>
           </div>
           <div className="d-flex">
         <div style={{ marginRight: "10px", minWidth: "100px" }}>
           <Form.Check
             type="checkbox"
+            value="threshold"
             label="Threshold"
-            name="group3"
+            checked={checkboxState.mask_transformation === "threshold"}
+            onChange={(event) => handleCheckboxChange(event, 'mask_transformation')}
           />
         </div>
         <div className="d-flex align-items-center ml-3">
           <Form.Check
             type="checkbox"
+            value="sparsity"
             label="Sparsity"
-            name="group3"           
+            checked={checkboxState.mask_transformation === "sparsity"}
+            onChange={(event) => handleCheckboxChange(event, 'mask_transformation')}        
           />
-          
         </div>
       </div>
     </Form.Group>
@@ -278,22 +358,28 @@ function Dashboard() {
                     <li>
                       <Form.Check
                       type="checkbox"
+                      value="ig"
                       label="Integrated Grad"
-                      defaultChecked={true}
+                      checked={checkboxState.explainer === "ig"}
+                      onChange={(event) => handleCheckboxChange(event, 'explainer')}   
                       />
                     </li>
                     <li>
                       <Form.Check
                       type="checkbox"
+                      value="gnnexplainer"
                       label="GNNExplainer"
-                      defaultChecked={false}
+                      checked={checkboxState.explainer === "gnnexplainer"}
+                      onChange={(event) => handleCheckboxChange(event, 'explainer')}   
                       />
                     </li>
                     <li>
                       <Form.Check
                       type="checkbox"
+                      value="sa"
                       label="Saliency"
-                      defaultChecked={false}
+                      checked={checkboxState.explainer === "sa"}
+                      onChange={(event) => handleCheckboxChange(event, 'explainer')}   
                       />
                     </li>
                   </ol>
@@ -315,14 +401,11 @@ function Dashboard() {
           <Col md="6">
             <Card>
               <Card.Header>
-                <Card.Title as="h4">Graph Explaination</Card.Title>
+                <Card.Title as="h4">Graph Explanation</Card.Title>
                 <p className="card-category">Graph</p>
               </Card.Header>
               <Card.Body>
-                <p>!</p>
-                <p>!</p>
-                <p>!</p>
-                <p>!</p>
+                <Graph nodes={nodes} edges={edges} edgeWeights={explanations!} />
               </Card.Body>
               </Card>
               
@@ -342,17 +425,6 @@ function Dashboard() {
             </Card>
           </Col>
         </Row>
-        {/* <Row>
-        <Col md="3">
-            <Card>
-              <Card.Header>
-                <Card.Title as="h4">Explainer performance</Card.Title>
-                <p className="card-category">Figure</p>
-              </Card.Header>
-              <Card.Body></Card.Body>
-            </Card>
-          </Col>
-        </Row> */}
         </Container>
       </>
   )

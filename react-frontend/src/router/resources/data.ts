@@ -35,3 +35,24 @@ export function postEmbeddings(): Promise<EmbeddingArray | undefined> {
       throw err;
     });
 }
+
+export function postExplanations(explainer: string,
+                                 focus: string,
+                                 idx: string,
+                                 mask_nature: string,
+                                 mask_transformation: string,
+                                 level: string): Promise<number[] | undefined> {
+  const url = `data/${explainer}_${focus}_${idx}_${mask_nature}_${mask_transformation}_${level}`;
+  const promise = axiosClient.get<number[]>(url);
+  return promise
+    .then((res) => {
+      if (res.status !== 204) {
+        return res.data;
+      }
+      return undefined;
+    })
+    .catch((err) => {
+      console.error(err);
+      throw err;
+    });
+}

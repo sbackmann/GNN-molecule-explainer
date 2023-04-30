@@ -36,12 +36,14 @@ export function postEmbeddings(): Promise<EmbeddingArray | undefined> {
     });
 }
 
-export function postExplanations(explainer: string,
-                                 focus: string,
-                                 idx: string,
-                                 mask_nature: string,
-                                 mask_transformation: string,
-                                 level: string): Promise<number[] | undefined> {
+export function postExplanations(
+  explainer: string,
+  focus: string,
+  idx: string,
+  mask_nature: string,
+  mask_transformation: string,
+  level: string
+): Promise<number[] | undefined> {
   const url = `data/${explainer}_${focus}_${idx}_${mask_nature}_${mask_transformation}_${level}`;
   const promise = axiosClient.get<number[]>(url);
   return promise

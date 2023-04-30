@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { DataSet } from 'vis-data';
-import { Network, Node, Edge } from 'vis-network';
+import React, { useState, useEffect, useRef } from "react";
+import { DataSet } from "vis-data";
+import { Network, Node, Edge } from "vis-network";
 import { postPoints } from "../router/resources/data";
 import { DataArray, DataPoint } from "../types/data";
 
@@ -74,22 +74,24 @@ const Graph: React.FC<GraphProps> = ({ nodes, edges, edgeWeights }) => {
           },
           width: 2,
           color: {
-            color: '#000000',
-            highlight: '#FF0000',
+            color: "gray",
+            highlight: "red",
           },
-          label: ''
+          labelHighlightBold: true,
         },
         nodes: {
           font: {
-            size: 10,
+            size: 20,
+            color: "black",
+            bold: "true",
           },
-          shape: 'circle',
+          shape: "circle",
           color: {
-            background: '#FFFFFF',
-            border: '#000000',
+            background: "#FFFFFF",
+            border: "#000000",
             highlight: {
-              background: '#FF0000',
-              border: '#000000',
+              background: "#FF0000",
+              border: "#000000",
             },
           },
           borderWidth: 3,
@@ -103,14 +105,18 @@ const Graph: React.FC<GraphProps> = ({ nodes, edges, edgeWeights }) => {
       };
 
       // create network object
-      const network = new Network(containerRef.current, { nodes: nodesDataSet, edges: edgesDataSet }, options);
+      const network = new Network(
+        containerRef.current,
+        { nodes: nodesDataSet, edges: edgesDataSet },
+        options
+      );
 
       // save network object to ref
       networkRef.current = network;
     }
   }, [nodes, edges, edgeWeights]);
 
-  return <div ref={containerRef} style={{ width: '100%', height: '400px' }} />;
+  return <div ref={containerRef} style={{ width: "100%", height: "400px" }} />;
 };
 
 export default Graph;

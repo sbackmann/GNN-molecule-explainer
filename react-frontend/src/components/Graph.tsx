@@ -5,53 +5,81 @@ import { postPoints } from "../router/resources/data";
 import { DataArray, DataPoint } from "../types/data";
 
 interface GraphProps {
-  nodes: Node[];
-  edges: Edge[];
-  edgeWeights: number[];
+  //nodes: Node[];
+  //edges: Edge[];
+  explanations: number[];
+  mutagData?: DataArray;
+  selectedId: String;
 }
 
-const Graph: React.FC<GraphProps> = ({ nodes, edges, edgeWeights }) => {
+const Graph: React.FC<GraphProps> = ({ explanations, mutagData, selectedId }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const networkRef = useRef<Network>();
-  /*
-  const edgeWeights_ = [0.5, 0.2, 0.7, 0.1];
-  const [Data, setData] = useState<DataArray>();
-  useEffect(() => {
-    postPoints().then((Data) => {
-      setData(Data);
-    });
-  }, []);
 
-  if (Data) {
-    const idx = 0;
-    const calc_idx = Data![idx].idx;
-    const edge_index_from = Data![idx].edge_index[0]
-    const edge_index_to = Data![idx].edge_index[1]
-    const nodes_list = Data![idx].x
+  const nodes: Node[] = [];
+  const edges: Edge[] = [];
+
+  if (mutagData) {
+    const idx = Number(selectedId);
+    console.log(selectedId);
+    const calc_idx = mutagData![idx].idx;
+    const edge_index_from = mutagData![idx].edge_index[0];
+    const edge_index_to = mutagData![idx].edge_index[1];
+    const nodes_list = mutagData![idx].x;
+
+    const node_label_idx = nodes_list.map((row) =>
+      row.indexOf(Math.max(...row))
+    );
+    const atom_names = ["C", "N", "O", "F", "I", "Cl", "Br"];
+    const color_map = [
+      "gray",
+      "darkgreen",
+      "orange",
+      "blue",
+      "purple",
+      "yellow",
+      "darkred",
+    ];
 
     for (let i = 0; i < nodes_list.length; i++) {
-      const node: Node = {id: i+1, label: String(nodes_list[i])};
-      nodes.push(node)
+      const label = String(atom_names[node_label_idx[i]]);
+      const node: Node = {
+        id: i,
+        label: label,
+        color: color_map[node_label_idx[i]],
+      };
+      nodes.push(node);
     }
-    for (let i = 0; i < edge_index_from.length; i++) {
-      const edge: Edge = {from: edge_index_from[i], to: edge_index_to[i]};
-      edges.push(edge)
+    for (let i = 0; i < explanations!.length; i++) {
+      console.log(String(i));
+      const edge: Edge = {
+        from: edge_index_from[i],
+        to: edge_index_to[i],
+        label: explanations![i].toFixed(2).toString(), // Add label based on edge weight
+        color: {
+          color: "black",
+          highlight: "red",
+          opacity: Number(explanations![i]) * 10,
+        }, // Add color based on edge weight
+      };
+      edges.push(edge);
     }
   } else {
-    nodes = [
-      { id: 1, label: 'Node 1' },
-      { id: 2, label: 'Node 2' },
-      { id: 3, label: 'Node 3' },
+    const nodes = [
+      { id: 1, label: "Node 1" },
+      { id: 2, label: "Node 2" },
+      { id: 3, label: "Node 3" },
     ];
-   
-    edges = [
+
+    const edges = [
       { from: 1, to: 2 },
       { from: 1, to: 3 },
       { from: 2, to: 4 },
       { from: 3, to: 4 },
     ];
-    edgeWeights = [0.7, 0.4, 0.2, 0.9];
-  }*/
+    const edgeWeights = [0.7, 0.4, 0.2, 0.9];
+  }
+
   useEffect(() => {
     if (containerRef.current) {
       // create nodes dataset
@@ -114,7 +142,7 @@ const Graph: React.FC<GraphProps> = ({ nodes, edges, edgeWeights }) => {
       // save network object to ref
       networkRef.current = network;
     }
-  }, [nodes, edges, edgeWeights]);
+  }, [explanations, mutagData]);
 
   return <div ref={containerRef} style={{ width: "100%", height: "400px" }} />;
 };

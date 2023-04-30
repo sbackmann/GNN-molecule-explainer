@@ -41,64 +41,16 @@ import "reactjs-popup/dist/index.css";
 import ModalPopup from "./components/ModalPopup";
 import "./components/ModalPopup.css";
 import Graph from "./components/Graph";
-import { Network, Node, Edge } from "vis-network";
 
-/*
+
 function App() {
-  const [exampleData, setExampleData] = useState<DataArray>();
-  const [dataChoice, setDataChoice] = useState<string>();
-  const [selected, setSelected] = useState<DataPoint>();
-  const [embeddingData, setEmbeddingData] = useState<EmbeddingArray>();
-  const initialDataChoice = "1";
-
-  const [modalIsOpen, setModalIsOpen] = useState(true);
-  const closeModal = () => {
-    setModalIsOpen(false);
-  };
-
+  const [mutagData, setMutagData] = useState<DataArray>();
   useEffect(() => {
-    initialDataChoice &&
-      postPoints().then((exampleData) => {
-        setExampleData(exampleData);
-      });
-  }, [initialDataChoice]);
-
-  useEffect(() => {
-    postEmbeddings().then((embeddingData) => {
-      setEmbeddingData(embeddingData);
+    postPoints().then((mutagData) => {
+      setMutagData(mutagData);
     });
   }, []);
-
-  useEffect(() => {
-    dataChoice && setSelected(exampleData![parseInt(dataChoice, 10)]);
-  }, [dataChoice]);
-
-  function choiceMade(choice: string) {
-    setDataChoice(choice);
-  }
-
-  return (
-    <>
-      <div className="App">
-        <header className="App-header"> GNN Explainer </header>
-
-        <DataChoiceComponent onChoiceMade={choiceMade} />
-        <p>The selected molecule is toxic:</p>
-
-        {selected ? selected.y : null}
-        <ScatterPlot
-          width={1100}
-          height={550}
-          data={embeddingData}
-          mol_data={exampleData}
-          closeModal={closeModal}
-        />
-      </div>
-    </>
-  );
-}*/
-
-function Dashboard() {
+  
   const [sizeValue, setSizeValue] = useState(50);
   const [entropyValue, setEntropyValue] = useState(50);
   const [maxValue, setMaxValue] = useState(50);
@@ -167,75 +119,6 @@ function Dashboard() {
       setExplanations(explanations);
     });
   }, [checkboxState, level, selectedId]);
-  const [Data, setData] = useState<DataArray>();
-  useEffect(() => {
-    postPoints().then((Data) => {
-      setData(Data);
-    });
-  }, []);
-  const nodes = [];
-  const edges = [];
-
-  if (Data) {
-    const idx = Number(selectedId);
-    console.log(selectedId);
-    const calc_idx = Data![idx].idx;
-    const edge_index_from = Data![idx].edge_index[0];
-    const edge_index_to = Data![idx].edge_index[1];
-    const nodes_list = Data![idx].x;
-
-    const node_label_idx = nodes_list.map((row) =>
-      row.indexOf(Math.max(...row))
-    );
-    const atom_names = ["C", "N", "O", "F", "I", "Cl", "Br"];
-    const color_map = [
-      "gray",
-      "darkgreen",
-      "orange",
-      "blue",
-      "purple",
-      "yellow",
-      "darkred",
-    ];
-
-    for (let i = 0; i < nodes_list.length; i++) {
-      const label = String(atom_names[node_label_idx[i]]);
-      const node: Node = {
-        id: i,
-        label: label,
-        color: color_map[node_label_idx[i]],
-      };
-      nodes.push(node);
-    }
-    for (let i = 0; i < explanations!.length; i++) {
-      console.log(String(i));
-      const edge: Edge = {
-        from: edge_index_from[i],
-        to: edge_index_to[i],
-        label: explanations![i].toFixed(2).toString(), // Add label based on edge weight
-        color: {
-          color: "black",
-          highlight: "red",
-          opacity: Number(explanations![i]) * 10,
-        }, // Add color based on edge weight
-      };
-      edges.push(edge);
-    }
-  } else {
-    const nodes = [
-      { id: 1, label: "Node 1" },
-      { id: 2, label: "Node 2" },
-      { id: 3, label: "Node 3" },
-    ];
-
-    const edges = [
-      { from: 1, to: 2 },
-      { from: 1, to: 3 },
-      { from: 2, to: 4 },
-      { from: 3, to: 4 },
-    ];
-    const edgeWeights = [0.7, 0.4, 0.2, 0.9];
-  }
 
   const handleSizeChange = (newValue: number) => {
     setSizeValue(newValue);
@@ -265,7 +148,7 @@ function Dashboard() {
                   triggerButton={<Button variant="primary">Select</Button>}
                   modalTitle="Embedded Molecules"
                   onSelectedIdChange={handleSelectedIdChange}
-                  data={Data}
+                  data={mutagData}
                 />
               </Card.Body>
             </Card>
@@ -509,9 +392,9 @@ function Dashboard() {
               </Card.Header>
               <Card.Body>
                 <Graph
-                  nodes={nodes}
-                  edges={edges}
-                  edgeWeights={explanations!}
+                  explanations={explanations!}
+                  mutagData={mutagData}
+                  selectedId={selectedId}
                 />
               </Card.Body>
             </Card>
@@ -535,4 +418,4 @@ function Dashboard() {
     </>
   );
 }
-export default Dashboard;
+export default App;

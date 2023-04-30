@@ -166,7 +166,7 @@ function Dashboard() {
     ).then((explanations) => {
       setExplanations(explanations);
     });
-  }, [checkboxState, level]);
+  }, [checkboxState, level, selectedId]);
   const [Data, setData] = useState<DataArray>();
   useEffect(() => {
     postPoints().then((Data) => {
@@ -178,6 +178,7 @@ function Dashboard() {
 
   if (Data) {
     const idx = Number(selectedId);
+    console.log(selectedId);
     const calc_idx = Data![idx].idx;
     const edge_index_from = Data![idx].edge_index[0];
     const edge_index_to = Data![idx].edge_index[1];
@@ -206,7 +207,8 @@ function Dashboard() {
       };
       nodes.push(node);
     }
-    for (let i = 0; i < edge_index_from.length; i++) {
+    for (let i = 0; i < explanations!.length; i++) {
+      console.log(String(i));
       const edge: Edge = {
         from: edge_index_from[i],
         to: edge_index_to[i],
@@ -263,6 +265,7 @@ function Dashboard() {
                   triggerButton={<Button variant="primary">Select</Button>}
                   modalTitle="Embedded Molecules"
                   onSelectedIdChange={handleSelectedIdChange}
+                  data={Data}
                 />
               </Card.Body>
             </Card>

@@ -145,12 +145,12 @@ function renderScatterPlot(
   }
 
   getChildOrAppend<SVGGElement, SVGGElement>(base, "g", "y-axis-base").call(
-    d3.axisLeft(y).ticks(4)
+    d3.axisLeft(y).ticks(4).tickFormat(() => "")
   );
 
   getChildOrAppend<SVGGElement, SVGGElement>(base, "g", "x-axis-base")
     .attr("transform", `translate(0, ${height})`)
-    .call(d3.axisBottom(x).ticks(5));
+    .call(d3.axisBottom(x).ticks(5).tickFormat(() => ""));
 }
 
 export default ScatterPlot;

@@ -12,7 +12,11 @@ interface GraphProps {
   selectedId: String;
 }
 
-const Graph: React.FC<GraphProps> = ({ explanations, mutagData, selectedId }) => {
+const Graph: React.FC<GraphProps> = ({
+  explanations,
+  mutagData,
+  selectedId,
+}) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const networkRef = useRef<Network>();
 
@@ -52,17 +56,19 @@ const Graph: React.FC<GraphProps> = ({ explanations, mutagData, selectedId }) =>
     }
     for (let i = 0; i < explanations!.length; i++) {
       console.log(String(i));
-      const edge: Edge = {
-        from: edge_index_from[i],
-        to: edge_index_to[i],
-        label: explanations![i].toFixed(2).toString(), // Add label based on edge weight
-        color: {
-          color: "black",
-          highlight: "red",
-          opacity: Number(explanations![i]) * 10,
-        }, // Add color based on edge weight
-      };
-      edges.push(edge);
+      if (edge_index_from[i] > edge_index_to[i]) {
+        const edge: Edge = {
+          from: edge_index_from[i],
+          to: edge_index_to[i],
+          label: explanations![i].toFixed(2).toString(), // Add label based on edge weight
+          color: {
+            color: "black",
+            highlight: "red",
+            opacity: Number(explanations![i]) * 10,
+          }, // Add color based on edge weight
+        };
+        edges.push(edge);
+      }
     }
   } else {
     const nodes = [

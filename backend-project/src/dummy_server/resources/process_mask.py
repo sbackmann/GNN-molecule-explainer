@@ -27,7 +27,7 @@ def transform(mask, mask_nature, mask_transformation, level):
         mask = np.array(mask)
         level = min(len(mask), level)
         if mask_transformation == "topk":
-            unimportant_indices = (-mask).argsort()[level+1:]
+            unimportant_indices = (-mask).argsort()[int(level):] # +1 in index removed. Why was it there?
             mask[unimportant_indices] = 0
         if mask_transformation == "sparsity":
             mask = control_sparsity(mask, level)

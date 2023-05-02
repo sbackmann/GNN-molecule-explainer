@@ -1,4 +1,4 @@
-import { useEffect, createRef } from "react";
+import { useEffect, createRef, useState } from "react";
 import * as d3 from "d3";
 import { DataArray, EmbeddingArray } from "../types/data";
 import { ChartStyle, getChildOrAppend, getMargin } from "./utils";
@@ -8,16 +8,24 @@ interface ScatterPlotProp extends ChartStyle {
   data?: EmbeddingArray;
   mol_data?: DataArray;
   closeModal: () => void; // State updater function for selected data
+  onSelectedIdChange: (d: any) => void;
 }
 
 const ScatterPlot = (props: ScatterPlotProp) => {
   const ref = createRef<SVGSVGElement>();
-  const { data, mol_data, closeModal, ...style } = props;
+  const { data, mol_data, closeModal, onSelectedIdChange, ...style } = props;
 
   useEffect(() => {
     const root = ref.current;
     if (data && mol_data && root) {
-      renderScatterPlot(root, data, mol_data, style, closeModal);
+      renderScatterPlot(
+        root,
+        data,
+        mol_data,
+        style,
+        closeModal,
+        onSelectedIdChange
+      );
     }
   }, [props]);
 
@@ -39,7 +47,8 @@ function renderScatterPlot(
   data: EmbeddingArray,
   mol_data: DataArray,
   props: ChartStyle,
-  closeModal: () => void
+  closeModal: () => void,
+  onSelectedIdChange: (d: any) => void
 ) {
   const margin = getMargin(props.margin);
   const height = props.height - margin.top - margin.bottom;
@@ -75,11 +84,11 @@ function renderScatterPlot(
     .style("border", "1px solid black")
     .style("padding", "5px");
 
-  const hideTooltipAndCloseModal = () => {
+  const handleDotClick = (event: TouchEvent, d: any) => {
     // Hide tooltip
     const tooltip = d3.select("#tooltip");
     tooltip.style("display", "none");
-
+    onSelectedIdChange(d.idx);
     // Close modal
     closeModal();
   };
@@ -102,7 +111,9 @@ function renderScatterPlot(
       const tooltip = d3.select("#tooltip");
       tooltip.style("display", "none");
     })
-    .on("click", hideTooltipAndCloseModal);
+    .on("click", (event: TouchEvent, d: any) => {
+      handleDotClick(event, d);
+    });
 
   // Define mouseover event handler
   function handleMouseOver(event: MouseEvent, d: any) {
@@ -134,12 +145,12 @@ function renderScatterPlot(
   }
 
   getChildOrAppend<SVGGElement, SVGGElement>(base, "g", "y-axis-base").call(
-    d3.axisLeft(y).ticks(4)
+    d3.axisLeft(y).ticks(4).tickFormat(() => "")
   );
 
   getChildOrAppend<SVGGElement, SVGGElement>(base, "g", "x-axis-base")
     .attr("transform", `translate(0, ${height})`)
-    .call(d3.axisBottom(x).ticks(5));
+    .call(d3.axisBottom(x).ticks(5).tickFormat(() => ""));
 }
 
 export default ScatterPlot;

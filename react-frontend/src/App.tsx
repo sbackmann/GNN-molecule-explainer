@@ -378,10 +378,24 @@ function App() {
             <p></p>
             <Card>
               <Card.Header>
-                <Card.Title as="h4">Explainer performance</Card.Title>
-                <p className="card-category">Figure</p>
+                <Card.Title as="h4">Explainer Description</Card.Title>
+                {/* <p className="card-category">Figure</p> */}
               </Card.Header>
-              <Card.Body></Card.Body>
+              {checkboxState.explainer === "ig" && (
+    <Card.Body>
+      This is the ig description
+    </Card.Body>
+  )}
+              {checkboxState.explainer === "gnnexplainer" && (
+    <Card.Body>
+      This is the GNNExplainer description
+    </Card.Body>
+  )}
+  {checkboxState.explainer === "sa" && (
+    <Card.Body>
+      This is the sa description
+    </Card.Body>
+  )}
             </Card>
           </Col>
           <Col md="6">

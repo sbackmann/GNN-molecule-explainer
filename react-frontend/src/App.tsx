@@ -22,6 +22,8 @@ import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { DataArray, DataPoint } from "./types/data";
@@ -421,9 +423,18 @@ function App() {
               </Card.Header>
               <Card.Body>
                 <p>Molecule id: {selectedId}</p>
-                <p>!</p>
-                <p>!</p>
-                <p>!</p>
+                <Tabs
+      defaultActiveKey="current"
+      id="uncontrolled-tab-example"
+      className="mb-3"
+    >
+      <Tab eventKey="current" title="Current">
+      <p>Current selected molecule performance</p>
+      </Tab>
+      <Tab eventKey="overall" title="Overall ">
+      <p>Overall dataset performance</p>
+      </Tab>
+    </Tabs>
               </Card.Body>
             </Card>
           </Col>

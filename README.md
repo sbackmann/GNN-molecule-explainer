@@ -166,22 +166,22 @@ If all the steps have been successfully executed a new browser window will open 
 
 ## Milestones
 Document here the major milestones of your code and future planned steps.\
-- [x] Week 1
+- [x] Week 1 (21st March - 27th March)
   - [x] Familiarization with the GitLab repository
   - [x] Added new backend endpoint for the future Overview of the application: [#0e77e896](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/commit/0e77e896b66e4f9176b28d1646ae0ca410daddb3)
 
-- [x] Week 2
+- [x] Week 2 (28th March - 03rd April) - Milestone II
   - [x] Add the mutag data to the repo: [#992c6319](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/commit/992c6319e514f8eafef9d717a5f3f4eeabb51540)
   - [x] Added a graph visualization script for the molecules: [#d5e68e27](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/commit/d5e68e2770622332fdae7b5aee6ee78e00243709)
   - [x] Added a backend endpoint for the MUTAG dataset: [#5605d58b](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/commit/5605d58ba68fa381ee8ed613fef4e6f00f369830)
   - [x] Implemented a transformation function that transforms a Pytorch Data object into a JSON object: [#707807d3](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/commit/707807d3fc914727a23030e6376d1fc958930499)
   - [x] Changed the frontend so that the MUTAG data in the backend is retrieved and upon user request the toxicity of a chosen molecule is displayed: [#30e43cda](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/commit/30e43cdadc34bede79b144aec1ec742ba0ade88a)
 
-- [x] Week 3 & 4
+- [x] Week 3 - 5 (04th April - 24th April) - Milestone III
   - [x] Visualize the molecules as embedded data points in terms of a scatter plot that opens as a pop-up window, display information about a specific molecule when hovering about it and make it choosable: [#8db3a2b0](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/commit/8db3a2b05ae1974b4ac1d3a4d0b3140ef4a83d22)
   - [x] Convert the [frontend sketches](https://app.moqups.com/tSlXp0j1gCEOxqUO249wkzcFM0EmMkJZ/view/page/ab9bb6bb5?ui=0) into a static frontend: [#7ebc9c61](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/commit/7ebc9c61a9834a0b1d78e1991e11c7191e6eb3f5)
 
-- [x] Week 5 & 6
+- [x] Week 6 & 7 (25th April - 08th May) - Milestone IV
 	- [x] Add ML-Model results for the different explainer methods to the project: [#f5469cf2](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/commit/f5469cf22103d27a7640bd6809c9b8109ccfe339)
 	- [x] Add Graph visualization for molecule, make visualization dependent on user choices, add edge editability options, add recomputation of the graph: [#85d8eec8](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/commit/85d8eec8997744afbc3e752bac6653c49b4f7b33)
 
@@ -196,13 +196,13 @@ This will help you have a clearer overview of what you are currently doing, trac
 ## Weekly Summary 
 Write here a short summary with weekly progress, including challanges and open questions.\
 We will use this to understand what your struggles and where did the weekly effort go to.
-### Week 1
+### Week 1 (21st March - 27th March)
 The week was mainly dedicated to familiarize ourselves with the GitLab repository and the development workflow and creating the initial README. Also an API endpoint was added that will serve as the overview for the application. An open challenge is to determine what exactly should be implemented for Backend milestone, a question that will be discussed in the open office hour in Week 2.
-### Week 2
+### Week 2 (28th March - 03rd April) - Milestone II
 It was communicated that the main focus of the backend deliverable is to add the data as an API endpoint and show that we can access it in the application. Thus, the MUTAG dataset was added and a simple query in the frontend that just displays the molecule's toxicity was implemented. Challenges were to understand how exactly the communication between the Flask-Python backend and the React frontend works and to get used to the React syntax and programming style. Additionally, the mutag data, which was processed as a Pytorch Data object, had to be made JSON compatible.
-### Week 3 & 4
+### Week 3 - 5 (04th April - 24th April) - Milestone III
 The work was focused on implementing the steps for the third milestone. This meant first and foremost to convert the application sketches into an (until here) static frontend. Next to building the general structure and inserting the basic components, the greatest challenge here was to implement the possibility to display the molecules in the embedded space and make them choosable. First we needed to find a 2-D representation of the molecules. For this we used PCA and added this as the embeddings.csv file. While the scatter plot functionality could largely be reused from the 'dummy-fullstack' project, we needed to find a way to implement a modal pop-up window in React and to display the necesary molecule information when hovering over them.
-### Week 5 & 6
+### Week 6 & 7 (25th April - 08th May) - Milestone IV
 These two weeks were dedicated for the most part to including the ML-Model eplainer results and connecting them to the frontend in that way that the results are retrieved with dynamic filters (i.e. the explainer method, the focus, the mask nature, the mask transformation and the selected molecule). Also, the work was about visualizing the molecules as a graph structure and connect it respectively so that the selected molecule is displayed in the application. This includes correctly displaying the different atoms, displaying the compounds between them as edges and make the edges that are relevant for the explanation stand out. Furthermore, we added interactivity elements, that is users (domain experts) can click on a graph edge and modify its weight if they think, and edge should be included in the network (or not). This change is then propagated and the graph is recomputed.
 
 ## Versioning
@@ -214,7 +214,7 @@ We will evaluate your code every week, based on the corresponding version.
 
 Tags:
 - Week 1: [Week 1 Tag](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/tags/Week-1)
-- Week 2: [Week 2 Tag](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/tags/Week-2)
-- Week 3 & 4: [Week 3 & 4 Tag](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/tags/Week-3-4)
+- Week 2 (Milestone II): [Week 2 Tag](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/tags/Week-2)
+- Week 3 - 5 (Milestone III): [Week 3 - 5 Tag](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/tags/Week-3-4)
 
 

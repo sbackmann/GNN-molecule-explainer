@@ -92,6 +92,9 @@ Specify here the structure of you code and comment what the most important files
 │   │   │     │    ├── MUTAG_graph_labels.txt
 │   │   │     │    ├── MUTAG_node_labels.txt
 │   │   │     │    └── README.txt
+│   │   ├── dataset_blobs.csv
+│   │   ├── dataset_circles.csv
+│   │   ├── dataset_moons.csv
 │   │   ├── embeddings.csv
 │   │   ├── generate_data.py    # script to create data
 │   │   └── process.py
@@ -216,5 +219,6 @@ Tags:
 - Week 1: [Week 1 Tag](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/tags/Week-1)
 - Week 2 (Milestone II): [Week 2 Tag](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/tags/Week-2)
 - Week 3 - 5 (Milestone III): [Week 3 - 5 Tag](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/tags/Week-3-4)
+- Week 6 & 7 (Milestone IV): [Week 6 & 7 Tag](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/tags/Week-6-7)
 
 

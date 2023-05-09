@@ -41,7 +41,7 @@ import "reactjs-popup/dist/index.css";
 import ModalPopup from "./components/ModalPopup";
 import "./components/ModalPopup.css";
 import Graph from "./components/Graph";
-
+import ComputeScores from "./components/Scores";
 
 function App() {
   const [mutagData, setMutagData] = useState<DataArray>();
@@ -50,7 +50,7 @@ function App() {
       setMutagData(mutagData);
     });
   }, []);
-  
+
   const [sizeValue, setSizeValue] = useState(50);
   const [entropyValue, setEntropyValue] = useState(50);
   const [maxValue, setMaxValue] = useState(50);
@@ -407,9 +407,12 @@ function App() {
               </Card.Header>
               <Card.Body>
                 <p>Molecule id: {selectedId}</p>
-                <p>!</p>
-                <p>!</p>
-                <p>!</p>
+                <ComputeScores
+                  explanations={explanations!}
+                  mutagData={mutagData}
+                  selectedId={selectedId}
+                  checkboxState={checkboxState}
+                />
               </Card.Body>
             </Card>
           </Col>

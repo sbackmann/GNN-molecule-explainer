@@ -27,11 +27,14 @@ const ComputeScores: React.FC<ScoresProps> = ({
       focus: checkboxState.focus,
       mask_nature: checkboxState.mask_nature,
     }; // replace with your const object
-    const response = await fetch("/evaluate", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(res),
-    });
+    const response = await fetch(
+      "/Users/kenzaamara/GithubProjects/b2-gnn-explainer/backend-project/src/dummy_server/resources/evaluate",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(res),
+      }
+    );
     const scores = await response.json();
     setScores(scores);
   };

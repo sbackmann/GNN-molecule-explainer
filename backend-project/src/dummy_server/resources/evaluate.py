@@ -12,7 +12,7 @@ import os
 
 app = Flask(__name__)
 
-@app.route('/evaluate', methods=['POST'])
+@app.route('/Users/kenzaamara/GithubProjects/b2-gnn-explainer/backend-project/src/dummy_server/resources/evaluate', methods=['POST'])
 def evaluate():
     edge_mask = request.json['edge_mask'] 
     data = request.json['data']
@@ -142,4 +142,4 @@ if __name__ == '__main__':
     edge_mask = np.array([0.2, 0.8])
     scores, mask_properties = compute_scores(graph, edge_mask, "phenomenon", "hard")
     print('scores', scores)
-    app.run()
+    #app.run()

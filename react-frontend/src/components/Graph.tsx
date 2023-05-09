@@ -13,14 +13,17 @@ interface GraphProps {
   selectedId: String;
 }
 
-const Graph: React.FC<GraphProps> = ({ explanations, mutagData, selectedId }) => {
-  const [explanations_updated, setUpdatedExplantations] = useState<number[]>();
+const Graph: React.FC<GraphProps> = ({
+  explanations,
+  mutagData,
+  selectedId,
+}) => {
+  const [explanationsUpdated, setUpdatedExplanations] = useState<number[]>();
   const containerRef = useRef<HTMLDivElement>(null);
   const networkRef = useRef<Network>();
   useEffect(() => {
-    if (explanations)
-      setUpdatedExplantations(explanations.slice());
-    }, [explanations]);
+    if (explanations) setUpdatedExplanations(explanations.slice());
+  }, [explanations]);
 
   const nodes: Node[] = [];
   const edges: Edge[] = [];
@@ -29,11 +32,7 @@ const Graph: React.FC<GraphProps> = ({ explanations, mutagData, selectedId }) =>
 
   if (mutagData) {
     const idx = Number(selectedId);
-    const calc_idx = mutagData![idx].idx;
-    edge_index_from = mutagData![idx].edge_index[0];
-    edge_index_to = mutagData![idx].edge_index[1];
-    const nodes_list = mutagData![idx].x;
-
+    const nodes_list = mutagData[idx].x;
     const node_label_idx = nodes_list.map((row) =>
       row.indexOf(Math.max(...row))
     );
@@ -57,19 +56,23 @@ const Graph: React.FC<GraphProps> = ({ explanations, mutagData, selectedId }) =>
       };
       nodes.push(node);
     }
-    for (let i = 0; i < explanations_updated!.length; i++) {
+
+    const edge_index_from = mutagData[idx].edge_index[0];
+    const edge_index_to = mutagData[idx].edge_index[1];
+
+    for (let i = 0; i < edge_index_from.length; i++) {
       if (edge_index_from[i] <= edge_index_to[i]) {
         const edge: Edge = {
           id: i,
           from: edge_index_from[i],
           to: edge_index_to[i],
-          label: explanations_updated![i].toFixed(2).toString(), // Add label based on edge weight
+          label: explanationsUpdated![i].toFixed(2).toString(), // Add label based on edge weight
           color: {
             color: "black",
             highlight: "red",
             //opacity: Number(explanations![i]) * 10,
           }, // Add color based on edge weight
-          width: Number(explanations_updated![i]) * 10,
+          width: Number(explanationsUpdated![i]) * 10,
         };
         edges.push(edge);
       }
@@ -90,12 +93,43 @@ const Graph: React.FC<GraphProps> = ({ explanations, mutagData, selectedId }) =>
     const edgeWeights = [0.7, 0.4, 0.2, 0.9];
   }
 
+  function getEdges(
+    mutagData: DataArray,
+    selectedId: String,
+    explanationsUpdated: number[]
+  ) {
+    const idx = Number(selectedId);
+    const edges: Edge[] = [];
+    const edge_index_from = mutagData
+      ? mutagData[idx].edge_index[0]
+      : [1, 1, 2, 3];
+    const edge_index_to = mutagData
+      ? mutagData[idx].edge_index[1]
+      : [2, 3, 4, 4];
+
+    for (let i = 0; i < edge_index_from.length; i++) {
+      if (edge_index_from[i] <= edge_index_to[i]) {
+        const edge: Edge = {
+          id: i,
+          from: edge_index_from[i],
+          to: edge_index_to[i],
+          label: explanationsUpdated![i].toFixed(2).toString(), // Add label based on edge weight
+          color: {
+            color: "black",
+            highlight: "red",
+            //opacity: Number(explanations![i]) * 10,
+          }, // Add color based on edge weight
+          width: Number(explanationsUpdated![i]) * 10,
+        };
+        edges.push(edge);
+      }
+    }
+    return edges;
+  }
+
   useEffect(() => {
     if (containerRef.current) {
-      // create nodes dataset
       const nodesDataSet = new DataSet<Node>(nodes);
-
-      // create edges dataset
       const edgesDataSet = new DataSet<Edge>(edges);
 
       // create options object
@@ -142,42 +176,44 @@ const Graph: React.FC<GraphProps> = ({ explanations, mutagData, selectedId }) =>
         },
       };
 
-      // create network object
       const network = new Network(
         containerRef.current,
         { nodes: nodesDataSet, edges: edgesDataSet },
         options
       );
-
-      // save network object to ref
       networkRef.current = network;
 
-      network.on('click', (params) => {
+      network.on("click", (params) => {
         if (params.edges.length > 0) {
           const selectedEdgeId: Id = params.edges[0];
-          const newLabel = prompt('Enter new label for edge: ');
-          const edge_id = edgesDataSet.get(selectedEdgeId)?.id;
-          const edge_from = edgesDataSet.get(selectedEdgeId)?.from;
-          const edge_to = edgesDataSet.get(selectedEdgeId)?.to;
-          let back_edge = -1;
-          for (let i = 0; i < explanations_updated!.length; i++) {
-            if (edge_index_from[i] == edge_to && edge_index_to[i] == edge_from)
-              back_edge = i;
+          const newLabel = prompt("Enter new label for edge: ");
+          const edgeId = edgesDataSet.get(selectedEdgeId)?.id;
+          const edgeFrom = edgesDataSet.get(selectedEdgeId)?.from;
+          const edgeTo = edgesDataSet.get(selectedEdgeId)?.to;
+
+          let backEdge = -1;
+          for (let i = 0; i < explanationsUpdated!.length; i++) {
+            if (edge_index_from[i] == edgeTo && edge_index_to[i] == edgeFrom) {
+              backEdge = i;
+              //break;
+            }
           }
-          const explanations_temp = explanations_updated?.slice()
-          explanations_temp![Number(edge_id)] = Number(newLabel);
-          explanations_temp![back_edge] = Number(newLabel)
-          setUpdatedExplantations(explanations_temp);
+
+          const updatedExplanations = explanationsUpdated?.slice();
+          updatedExplanations![Number(edgeId)] = Number(newLabel);
+          updatedExplanations![backEdge] = Number(newLabel);
+          setUpdatedExplanations(updatedExplanations);
           if (newLabel !== null) {
             edgesDataSet.update({
               id: selectedEdgeId,
               label: newLabel,
+              width: updatedExplanations![Number(edgeId)] * 10,
             });
           }
         }
       });
     }
-  }, [explanations, mutagData, explanations_updated]);
+  }, [explanations, mutagData, explanationsUpdated]);
 
   return <div ref={containerRef} style={{ width: "100%", height: "400px" }} />;
 };

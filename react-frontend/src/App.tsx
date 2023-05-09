@@ -371,6 +371,52 @@ function App() {
                         }
                       />
                     </li>
+                    <li>
+                      <Form.Check
+                        type="checkbox"
+                        value="basic_gnnexplainer"
+                        label="Basic GNNExplainer"
+                        checked={
+                          checkboxState.explainer === "basic_gnnexplainer"
+                        }
+                        onChange={(event) =>
+                          handleCheckboxChange(event, "explainer")
+                        }
+                      />
+                    </li>
+                    <li>
+                      <Form.Check
+                        type="checkbox"
+                        value="gradcam"
+                        label="Grad-CAM"
+                        checked={checkboxState.explainer === "gradcam"}
+                        onChange={(event) =>
+                          handleCheckboxChange(event, "explainer")
+                        }
+                      />
+                    </li>
+                    <li>
+                      <Form.Check
+                        type="checkbox"
+                        value="occlusion"
+                        label="Occlusion"
+                        checked={checkboxState.explainer === "occlusion"}
+                        onChange={(event) =>
+                          handleCheckboxChange(event, "explainer")
+                        }
+                      />
+                    </li>
+                    <li>
+                      <Form.Check
+                        type="checkbox"
+                        value="pgmexplainer"
+                        label="PGMExplainer"
+                        checked={checkboxState.explainer === "pgmexplainer"}
+                        onChange={(event) =>
+                          handleCheckboxChange(event, "explainer")
+                        }
+                      />
+                    </li>
                   </ol>
                 </div>
               </Card.Body>

@@ -71,7 +71,7 @@ function renderScatterPlot(
     .scaleLinear()
     .domain([d3.min(yValues) || 0, d3.max(yValues) || 1])
     .range([height, 0]);
-  const colors = d3.scaleOrdinal(["1", "2"], ["red", "green"]);
+  const colors = d3.scaleOrdinal(["1", "2"], ["red", "blue"]);
 
   // Add a tooltip div to the HTML body for displaying information
   const tooltip = d3
@@ -145,12 +145,62 @@ function renderScatterPlot(
   }
 
   getChildOrAppend<SVGGElement, SVGGElement>(base, "g", "y-axis-base").call(
-    d3.axisLeft(y).ticks(4).tickFormat(() => "")
+    d3
+      .axisLeft(y)
+      .ticks(4)
+      .tickFormat(() => "")
   );
 
   getChildOrAppend<SVGGElement, SVGGElement>(base, "g", "x-axis-base")
     .attr("transform", `translate(0, ${height})`)
-    .call(d3.axisBottom(x).ticks(5).tickFormat(() => ""));
+    .call(
+      d3
+        .axisBottom(x)
+        .ticks(5)
+        .tickFormat(() => "")
+    );
+
+  const legendData = [
+    { label: "Toxic", color: "red" },
+    { label: "Non-toxic", color: "blue" },
+  ];
+
+  const legend = getChildOrAppend<SVGGElement, SVGElement>(
+    visRoot,
+    "g",
+    "legend"
+  ).attr(
+    "transform",
+    `translate(${width - margin.right - 100}, ${margin.top + 10})`
+  );
+
+  legend
+    .selectAll("rect")
+    .data(legendData)
+    .join<SVGRectElement>(
+      (enter) => enter.append("rect"),
+      (update) => update,
+      (exit) => exit.remove()
+    )
+    .attr("x", 0)
+    .attr("y", (d, i) => i * 25)
+    .attr("width", 20)
+    .attr("height", 20)
+    .style("fill", (d) => d.color);
+
+  legend
+    .selectAll("text")
+    .data(legendData)
+    .join<SVGTextElement>(
+      (enter) => enter.append("text"),
+      (update) => update,
+      (exit) => exit.remove()
+    )
+    .attr("x", 25)
+    .attr("y", (d, i) => i * 25 + 15)
+    .text((d) => d.label)
+    .style("font-size", "14px")
+    .attr("alignment-baseline", "middle");
 }
 
 export default ScatterPlot;

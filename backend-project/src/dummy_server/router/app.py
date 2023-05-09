@@ -5,6 +5,7 @@ from flask import Flask
 from flask_cors import CORS
 
 from dummy_server.router.routes import add_routes
+from dummy_server.resources.evaluate import compute_scores
 
 def create_app():
     app = Flask(__name__)  # static_url_path, static_folder, template_folder...

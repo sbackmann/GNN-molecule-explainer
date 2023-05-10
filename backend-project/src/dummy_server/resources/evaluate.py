@@ -12,7 +12,7 @@ import os
 
 app = Flask(__name__)
 
-@app.route('/Users/kenzaamara/GithubProjects/b2-gnn-explainer/backend-project/src/dummy_server/resources/evaluate', methods=['POST'])
+@app.route('/evaluate', methods=['POST'])
 def evaluate():
     edge_mask = request.json['edge_mask'] 
     data = request.json['data']

@@ -9,7 +9,7 @@ import torch
 import random
 import os
 
-
+'''
 app = Flask(__name__)
 
 @app.route('/evaluate', methods=['POST'])
@@ -20,7 +20,7 @@ def evaluate():
     mask_nature = request.json['mask_nature']
     scores, mask_properties = compute_scores(data, edge_mask, focus, mask_nature)
     return jsonify(scores)
-
+'''
 
 def arg_parse():
     parser = argparse.ArgumentParser()

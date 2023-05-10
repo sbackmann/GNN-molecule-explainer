@@ -59,7 +59,7 @@ const Graph: React.FC<GraphProps> = ({
       nodes.push(node);
     }
 
-    for (let i = 0; i < edge_index_from.length; i++) {
+    for (let i = 0; i < explanationsUpdated!.length; i++) {
       if (edge_index_from[i] <= edge_index_to[i]) {
         const edge: Edge = {
           id: i,

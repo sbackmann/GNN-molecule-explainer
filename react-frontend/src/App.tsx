@@ -154,7 +154,7 @@ function App() {
             </Card>
           </Col>
           <Col lg="6" sm="6">
-            <Card className="card-stats" h-100>
+            <Card className="card-stats" h-100="true">
               <Card.Body>
                 <Card.Title>Customize your need</Card.Title>
                 <Card.Text>
@@ -274,7 +274,7 @@ function App() {
             </Card>
           </Col>
           <Col lg="3" sm="6">
-            <Card className="card-stats" h-100>
+            <Card className="card-stats" h-100="true">
               <Card.Body>
                 <Card.Title>Mask Property</Card.Title>
 
@@ -329,7 +329,7 @@ function App() {
         </Row>
         <p></p>
         <Row>
-          <Col md="3" mh-100>
+          <Col md="3" mh-100="true">
             <Card>
               <Card.Header>
                 <Card.Title as="h4">Rank of Explainer</Card.Title>

@@ -1,7 +1,7 @@
 import argparse
 import os
 
-from flask import Flask
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 
 from dummy_server.router.routes import add_routes
@@ -19,6 +19,15 @@ def create_app():
     @app.route('/overview')
     def overview():
         return f"This is the main application page showing the overview."
+    
+    @app.route('/api/v1/evaluate', methods=['POST'])
+    def evaluate():
+        edge_mask = request.json['edge_mask'] 
+        data = request.json['data']
+        focus = request.json['focus']
+        mask_nature = request.json['mask_nature']
+        scores, mask_properties = compute_scores(data, edge_mask, focus, mask_nature)
+        return jsonify(scores)
 
     return app
 

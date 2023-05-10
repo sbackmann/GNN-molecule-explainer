@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { DataArray, DataPoint } from "../types/data";
+import { AxiosResponse } from 'axios';
+import axiosClient from "../router/apiClient";
 
 interface ScoresProps {
   explanations: number[];
@@ -27,13 +29,25 @@ const ComputeScores: React.FC<ScoresProps> = ({
       focus: checkboxState.focus,
       mask_nature: checkboxState.mask_nature,
     }; // replace with your const object
-    const response = await fetch("'http://127.0.0.1:8000/evaluate", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(res),
+    //const response = await fetch("http://127.0.0.1:8000/evaluate", {
+    //  method: "POST",
+    //  headers: { "Content-Type": "application/json" },
+    //  body: JSON.stringify(res),
+    //});
+    //const scores = await response.json();
+    let myScore : any = [];
+    axiosClient.post('/evaluate', res)
+    .then((response: AxiosResponse) => {
+      // Handle the response from the server
+      myScore = response.data
+      console.log(response.data.result);
+      // ...
+    })
+    .catch((error: Error) => {
+      // Handle any errors that occurred during the request
+      console.error(error);
     });
-    const scores = await response.json();
-    setScores(scores);
+    setScores(myScore);
   };
 
   return (

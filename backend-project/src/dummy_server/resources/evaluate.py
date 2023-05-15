@@ -77,7 +77,7 @@ class Evaluate(object):
 
         # assert true_label == pred_label, "The label predicted by the GCN does not match the true label."\
         self.related_pred = dict({
-                "idx": int(data.idx),
+                "idx": int(data.idx.item()),
                 "masked": masked_prob_idx,
                 "maskout": maskout_prob_idx,
                 "origin": ori_prob_idx,

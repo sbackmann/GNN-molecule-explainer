@@ -104,12 +104,9 @@ class Evaluate(object):
         return fidelity_scores
 
     def get_mask_properties(self, mask):
-        print('mask: ', mask)
-        print((mask != 0))
-        cond = (mask != 0).astype(int) 
         mask_info = {
-            "mask_size": cond.sum(),
-            "mask_sparsity": 1.0 - cond.sum() / len(mask),
+            "mask_size": mask.sum(),
+            "mask_sparsity": 1.0 - mask.sum() / len(mask),
             "mask_entropy": entropy(mask[mask>0])
         }
         return mask_info

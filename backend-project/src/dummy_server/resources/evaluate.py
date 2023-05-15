@@ -42,7 +42,7 @@ def data_to_pytorchData(data):
     pytorchData = Data(x=torch.FloatTensor(data['x']), 
         edge_index=torch.LongTensor(data['edge_index']), 
         edge_attr=torch.FloatTensor(data['edge_attr']), 
-        idx=data['idx'], 
+        idx=torch.LongTensor(data['idx']), 
         y=torch.FloatTensor(data['y']),
         batch=torch.zeros(len(data['x']), dtype=torch.int64))
     return pytorchData
@@ -77,7 +77,7 @@ class Evaluate(object):
 
         # assert true_label == pred_label, "The label predicted by the GCN does not match the true label."\
         self.related_pred = dict({
-                "idx": int(data.idx.item()),
+                "idx": int(data.idx.cpu().item()),
                 "masked": masked_prob_idx,
                 "maskout": maskout_prob_idx,
                 "origin": ori_prob_idx,

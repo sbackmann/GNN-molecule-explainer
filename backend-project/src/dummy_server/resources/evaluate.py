@@ -104,6 +104,7 @@ class Evaluate(object):
         return fidelity_scores
 
     def get_mask_properties(self, mask):
+        mask = np.array(mask)
         mask_info = {
             "mask_size": np.sum(mask),
             "mask_sparsity": 1.0 - np.sum(mask) / len(mask),

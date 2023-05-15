@@ -27,6 +27,7 @@ def create_app():
         focus = request.json['focus']
         mask_nature = request.json['mask_nature']
         scores, mask_properties = compute_scores(data, edge_mask, focus, mask_nature)
+        print(jsonify(scores))
         return jsonify(scores)
 
     return app

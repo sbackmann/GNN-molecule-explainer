@@ -105,8 +105,8 @@ class Evaluate(object):
 
     def get_mask_properties(self, mask):
         mask_info = {
-            "mask_size": mask.sum(),
-            "mask_sparsity": 1.0 - mask.sum() / len(mask),
+            "mask_size": np.sum(mask),
+            "mask_sparsity": 1.0 - np.sum(mask) / len(mask),
             "mask_entropy": entropy(mask[mask>0])
         }
         return mask_info

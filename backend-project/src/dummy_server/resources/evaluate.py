@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+#from flask import Flask, request, jsonify
 from torch_geometric.data import Data
 from .utils.eval_utils import *
 from .model import GAT
@@ -104,9 +104,12 @@ class Evaluate(object):
         return fidelity_scores
 
     def get_mask_properties(self, mask):
+        print('mask: ', mask)
+        print((mask != 0))
+        cond = (mask != 0).astype(int) 
         mask_info = {
-            "mask_size": (mask != 0).sum(),
-            "mask_sparsity": 1.0 - (mask != 0).sum() / len(mask),
+            "mask_size": cond.sum(),
+            "mask_sparsity": 1.0 - cond.sum() / len(mask),
             "mask_entropy": entropy(mask[mask>0])
         }
         return mask_info
@@ -132,8 +135,9 @@ def compute_scores(graph, edge_mask, focus, mask_nature):
 
 
 if __name__ == '__main__':
-    graph = {'x':np.array([[0,0,1,0,0,0,0], [1,0,0,0,0,0,0]]), 'edge_index':np.array([[0,1],[1,0]]), 'edge_attr':np.array([[1.], [1.]]), 'y':1, 'idx':0}
+    graph = {'x':np.array([[0,0,1,0,0,0,0], [1,0,0,0,0,0,0]]), 'edge_index':np.array([[0,1],[1,0]]), 'edge_attr':np.array([[1.], [1.]]), 'y':[1], 'idx':[0]}
     edge_mask = np.array([0.2, 0.8])
     scores, mask_properties = compute_scores(graph, edge_mask, "phenomenon", "hard")
     print('scores', scores)
+    print('mask_properties', mask_properties)
     #app.run()

@@ -9,18 +9,6 @@ import torch
 import random
 import os
 
-'''
-app = Flask(__name__)
-
-@app.route('/evaluate', methods=['POST'])
-def evaluate():
-    edge_mask = request.json['edge_mask'] 
-    data = request.json['data']
-    focus = request.json['focus']
-    mask_nature = request.json['mask_nature']
-    scores, mask_properties = compute_scores(data, edge_mask, focus, mask_nature)
-    return jsonify(scores)
-'''
 
 def arg_parse():
     parser = argparse.ArgumentParser()
@@ -29,7 +17,7 @@ def arg_parse():
     parser.add_argument('--output_dim', type=int, default=2)
     parser.add_argument('--edge_dim', type=int, default=1)
     parser.add_argument('--num_layers', type=int, default=3)
-    parser.add_argument('--hidden_dim', type=int, default=16)
+    parser.add_argument('--hidden_dim', type=int, default=32)
     parser.add_argument('--dropout', type=float, default=0.0)
     parser.add_argument('--readout', type=str, default='max')
     args, unknown = parser.parse_known_args()
@@ -51,7 +39,13 @@ def load_model(path_to_model, model, device):
     return model
 
 def data_to_pytorchData(data):
-    return Data(x=torch.FloatTensor(data['x']), edge_index=torch.LongTensor(data['edge_index']), edge_attr=torch.FloatTensor(data['edge_attr']), idx=data['idx'], y=torch.FloatTensor(data['y']))
+    pytorchData = Data(x=torch.FloatTensor(data['x']), 
+        edge_index=torch.LongTensor(data['edge_index']), 
+        edge_attr=torch.FloatTensor(data['edge_attr']), 
+        idx=data['idx'], 
+        y=torch.FloatTensor(data['y']),
+        batch=torch.zeros(len(data['x']), dtype=torch.int64))
+    return pytorchData
 
 
 class Evaluate(object):

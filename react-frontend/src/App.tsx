@@ -138,7 +138,6 @@ function App() {
                   toxic.
                 </Card.Text>
                 <ModalPopup
-                  triggerButton={<Button variant="primary">Select</Button>}
                   modalTitle="Embedded Molecules"
                   onSelectedIdChange={handleSelectedIdChange}
                   data={mutagData}
@@ -406,6 +405,7 @@ function App() {
               </Card.Header>
               <Card.Body>
                 <Graph
+                  explanations={explanations!}
                   explanationsUpdated={explanationsUpdated!}
                   mutagData={mutagData}
                   selectedId={selectedId}

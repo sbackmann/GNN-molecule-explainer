@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { DataSet } from "vis-data";
 import { Network, Node, Edge } from "vis-network";
-import { postPoints } from "../router/resources/data";
 import Button from "react-bootstrap/Button";
-import { DataArray, DataPoint } from "../types/data";
+import { DataArray } from "../types/data";
 import { Id } from "vis-network/declarations/network/gephiParser";
 
 interface GraphProps {
@@ -78,53 +77,6 @@ const Graph: React.FC<GraphProps> = ({
         edges.push(edge);
       }
     }
-  } else {
-    const nodes = [
-      { id: 1, label: "Node 1" },
-      { id: 2, label: "Node 2" },
-      { id: 3, label: "Node 3" },
-    ];
-
-    const edges = [
-      { from: 1, to: 2 },
-      { from: 1, to: 3 },
-      { from: 2, to: 4 },
-      { from: 3, to: 4 },
-    ];
-    const edgeWeights = [0.7, 0.4, 0.2, 0.9];
-  }
-
-  function getEdges(
-    mutagData: DataArray,
-    selectedId: String,
-    explanationsUpdated: number[]
-  ) {
-    const idx = Number(selectedId);
-    const edges: Edge[] = [];
-    const edge_index_from = mutagData
-      ? mutagData[idx].edge_index[0]
-      : [1, 1, 2, 3];
-    const edge_index_to = mutagData
-      ? mutagData[idx].edge_index[1]
-      : [2, 3, 4, 4];
-
-    for (let i = 0; i < edge_index_from.length; i++) {
-      if (edge_index_from[i] <= edge_index_to[i]) {
-        const edge: Edge = {
-          id: i,
-          from: edge_index_from[i],
-          to: edge_index_to[i],
-          label: explanationsUpdated![i].toFixed(2).toString(), // Add label based on edge weight
-          color: {
-            color: "black",
-            highlight: "red",
-          }, // Add color based on edge weight
-          width: Number(explanationsUpdated![i]) * 10,
-        };
-        edges.push(edge);
-      }
-    }
-    return edges;
   }
 
   useEffect(() => {
@@ -196,7 +148,7 @@ const Graph: React.FC<GraphProps> = ({
 
           let backEdge = -1;
           for (let i = 0; i < explanationsUpdated!.length; i++) {
-            if (edge_index_from[i] == edgeTo && edge_index_to[i] == edgeFrom) {
+            if (edge_index_from[i] === edgeTo && edge_index_to[i] === edgeFrom) {
               backEdge = i;
               //break;
             }

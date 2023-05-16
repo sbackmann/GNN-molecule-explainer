@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { DataArray, DataPoint } from "../types/data";
 import { AxiosResponse } from "axios";
 import axiosClient from "../router/apiClient";
 import ListGroupItem from "react-bootstrap/ListGroupItem";
 import Card from "react-bootstrap/Card";
-import { Form, ListGroup } from "react-bootstrap";
-import Slider from "./Slider";
+import { ListGroup } from "react-bootstrap";
 
 interface PropertiesProps {
   explanations: number[];

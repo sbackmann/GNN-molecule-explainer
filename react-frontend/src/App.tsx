@@ -42,6 +42,7 @@ import ModalPopup from "./components/ModalPopup";
 import "./components/ModalPopup.css";
 import Graph from "./components/Graph";
 import ComputeScores from "./components/Scores";
+import ComputeProperties from "./components/MaskProperties";
 
 function App() {
   const [mutagData, setMutagData] = useState<DataArray>();
@@ -51,10 +52,8 @@ function App() {
     });
   }, []);
 
-  const [sizeValue, setSizeValue] = useState(50);
-  const [entropyValue, setEntropyValue] = useState(50);
-  const [maxValue, setMaxValue] = useState(50);
   const [explanations, setExplanations] = useState<number[]>();
+  const [explanationsUpdated, setUpdatedExplanations] = useState<number[]>();
   const [level, setLevel] = useState("10");
 
   const [selectedId, setSelectedId] = useState("0");
@@ -120,17 +119,9 @@ function App() {
     });
   }, [checkboxState, level, selectedId]);
 
-  const handleSizeChange = (newValue: number) => {
-    setSizeValue(newValue);
-  };
-
-  const handleEntropyChange = (newValue: number) => {
-    setSizeValue(newValue);
-  };
-
-  const handleMaxChange = (newValue: number) => {
-    setSizeValue(newValue);
-  };
+  useEffect(() => {
+    if (explanations) setUpdatedExplanations(explanations.slice());
+  }, [explanations]);
 
   return (
     <>
@@ -276,52 +267,13 @@ function App() {
           <Col lg="3" sm="6">
             <Card className="card-stats" h-100="true">
               <Card.Body>
-                <Card.Title>Mask Property</Card.Title>
-
-                <ListGroup>
-                  <ListGroupItem>
-                    <div style={{ display: "flex", alignItems: "center" }}>
-                      <span style={{ marginRight: "10px", minWidth: "80px" }}>
-                        Size:
-                      </span>
-                      <Slider
-                        min={0}
-                        max={100}
-                        step={1}
-                        value={sizeValue}
-                        onChange={handleSizeChange}
-                      />
-                    </div>
-                  </ListGroupItem>
-                  <ListGroupItem>
-                    <div style={{ display: "flex", alignItems: "center" }}>
-                      <span style={{ marginRight: "10px", minWidth: "80px" }}>
-                        Entropy:
-                      </span>
-                      <Slider
-                        min={0}
-                        max={100}
-                        step={1}
-                        value={entropyValue}
-                        onChange={handleEntropyChange}
-                      />
-                    </div>
-                  </ListGroupItem>
-                  <ListGroupItem>
-                    <div style={{ display: "flex", alignItems: "center" }}>
-                      <span style={{ marginRight: "10px", minWidth: "80px" }}>
-                        Max Value:
-                      </span>
-                      <Slider
-                        min={0}
-                        max={100}
-                        step={1}
-                        value={maxValue}
-                        onChange={handleMaxChange}
-                      />
-                    </div>
-                  </ListGroupItem>
-                </ListGroup>
+                <p>Molecule id: {selectedId}</p>
+                <ComputeProperties
+                  explanations={explanationsUpdated!}
+                  mutagData={mutagData}
+                  selectedId={selectedId}
+                  checkboxState={checkboxState}
+                />
               </Card.Body>
               <Card.Footer></Card.Footer>
             </Card>
@@ -438,9 +390,10 @@ function App() {
               </Card.Header>
               <Card.Body>
                 <Graph
-                  explanations={explanations!}
+                  explanationsUpdated={explanationsUpdated!}
                   mutagData={mutagData}
                   selectedId={selectedId}
+                  setUpdatedExplanations={setUpdatedExplanations}
                 />
               </Card.Body>
             </Card>
@@ -454,7 +407,7 @@ function App() {
               <Card.Body>
                 <p>Molecule id: {selectedId}</p>
                 <ComputeScores
-                  explanations={explanations!}
+                  explanations={explanationsUpdated!}
                   mutagData={mutagData}
                   selectedId={selectedId}
                   checkboxState={checkboxState}

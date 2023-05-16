@@ -8,22 +8,20 @@ import { Id } from "vis-network/declarations/network/gephiParser";
 interface GraphProps {
   //nodes: Node[];
   //edges: Edge[];
-  explanations: number[];
+  explanationsUpdated: number[];
   mutagData?: DataArray;
   selectedId: String;
+  setUpdatedExplanations: (d: any) => void;
 }
 
 const Graph: React.FC<GraphProps> = ({
-  explanations,
+  explanationsUpdated,
   mutagData,
   selectedId,
+  setUpdatedExplanations,
 }) => {
-  const [explanationsUpdated, setUpdatedExplanations] = useState<number[]>();
   const containerRef = useRef<HTMLDivElement>(null);
   const networkRef = useRef<Network>();
-  useEffect(() => {
-    if (explanations) setUpdatedExplanations(explanations.slice());
-  }, [explanations]);
 
   const nodes: Node[] = [];
   const edges: Edge[] = [];
@@ -116,7 +114,6 @@ const Graph: React.FC<GraphProps> = ({
           color: {
             color: "black",
             highlight: "red",
-            //opacity: Number(explanations![i]) * 10,
           }, // Add color based on edge weight
           width: Number(explanationsUpdated![i]) * 10,
         };
@@ -212,7 +209,7 @@ const Graph: React.FC<GraphProps> = ({
         }
       });
     }
-  }, [explanations, mutagData, explanationsUpdated]);
+  }, [mutagData, explanationsUpdated]);
 
   return <div ref={containerRef} style={{ width: "100%", height: "400px" }} />;
 };

@@ -1,4 +1,3 @@
-#from flask import Flask, request, jsonify
 from torch_geometric.data import Data
 from .utils.eval_utils import *
 from .model import GAT
@@ -82,7 +81,7 @@ class Evaluate(object):
                 "maskout": maskout_prob_idx,
                 "origin": ori_prob_idx,
                 "true_label": int(true_label),
-                "gnn_label": int(pred_label),
+                "pred_label": int(pred_label),
             })
         return 
 
@@ -106,9 +105,9 @@ class Evaluate(object):
     def get_mask_properties(self, mask):
         mask = np.array(mask)
         mask_info = {
-            "mask_size": np.sum(mask),
-            "mask_sparsity": 1.0 - np.sum(mask) / len(mask),
-            "mask_entropy": entropy(mask[mask>0])
+            "mask_size": float(np.sum(mask)),
+            "mask_sparsity": 1.0 - float(np.sum(mask)) / len(mask),
+            "mask_entropy": float(entropy(mask[mask>0]))
         }
         return mask_info
 
@@ -128,6 +127,7 @@ def compute_scores(graph, edge_mask, focus, mask_nature):
     scores = eval_module.eval_fid()
     
     mask_properties = eval_module.get_mask_properties(edge_mask)
+    print('mask_properties: ', mask_properties)
     
     return scores, mask_properties
 

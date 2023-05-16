@@ -31,12 +31,11 @@ def create_app():
 
     @app.route('/api/v1/properties', methods=['POST'])
     def properties():
-        edge_mask = request.json['edge_mask'] 
+        edge_mask = request.json['edge_mask']
         data = request.json['data']
         focus = request.json['focus']
         mask_nature = request.json['mask_nature']
         scores, mask_properties = compute_scores(data, edge_mask, focus, mask_nature)
-        print(mask_properties)
         return jsonify(mask_properties)
 
     return app

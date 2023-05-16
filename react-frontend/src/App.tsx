@@ -73,7 +73,7 @@ function App() {
     | "ig"
     | "gnnexplainer"
     | "sa"
-    | "basic_gnnexplainer"
+    | "basicgnnexplainer"
     | "gradcam"
     | "occlusion"
     | "pgmexplainer"
@@ -341,9 +341,11 @@ function App() {
                     {/* <li>
                       <Form.Check
                         type="checkbox"
-                        value="basic_gnnexplainer"
+                        value="basicgnnexplainer"
                         label="Basic GNNExplainer"
-                        checked={checkboxState.explainer === "basic_gnnexplainer"}
+                        checked={
+                          checkboxState.explainer === "basicgnnexplainer"
+                        }
                         onChange={(event) =>
                           handleCheckboxChange(event, "explainer")
                         }
@@ -515,7 +517,7 @@ function App() {
                   mutagData={mutagData}
                   selectedId={selectedId}
                   checkboxState={checkboxState}
-                />
+      />
       </Tab>
     </Tabs>
               </Card.Body>

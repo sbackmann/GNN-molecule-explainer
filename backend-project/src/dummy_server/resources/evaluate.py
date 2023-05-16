@@ -127,7 +127,6 @@ def compute_scores(graph, edge_mask, focus, mask_nature):
     scores = eval_module.eval_fid()
     
     mask_properties = eval_module.get_mask_properties(edge_mask)
-    print('mask_properties: ', mask_properties)
     
     return scores, mask_properties
 

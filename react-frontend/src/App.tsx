@@ -21,23 +21,19 @@ import ListGroupItem from "react-bootstrap/ListGroupItem";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
-import Button from "react-bootstrap/Button";
+// import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { DataArray, DataPoint } from "./types/data";
+import { DataArray } from "./types/data";
 
-import DataChoiceComponent from "./components/DataChoice";
-// import ScatterPlot from "./components/ScatterPlot";
 import {
   postPoints,
-  postEmbeddings,
   postExplanations,
 } from "./router/resources/data";
-import { Form, ListGroup } from "react-bootstrap";
-import Slider from "./components/Slider";
+import { Form } from "react-bootstrap";
 
 import React from "react";
 import "reactjs-popup/dist/index.css";

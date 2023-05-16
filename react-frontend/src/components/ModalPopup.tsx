@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { postPoints, postEmbeddings } from "../router/resources/data";
+import { postEmbeddings } from "../router/resources/data";
 import Modal from "react-modal";
 import { DataArray, EmbeddingArray } from "../types/data";
 import Button from "react-bootstrap/Button";

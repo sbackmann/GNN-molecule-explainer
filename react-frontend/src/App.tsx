@@ -439,7 +439,6 @@ function App() {
                 />
       </Tab>
     </Tabs>
->>>>>>> react-frontend/src/App.tsx
               </Card.Body>
             </Card>
           </Col>

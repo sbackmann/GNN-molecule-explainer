@@ -6,8 +6,6 @@ import { DataArray, DataPoint } from "../types/data";
 import { Id } from "vis-network/declarations/network/gephiParser";
 
 interface GraphProps {
-  //nodes: Node[];
-  //edges: Edge[];
   explanationsUpdated: number[];
   mutagData?: DataArray;
   selectedId: String;
@@ -130,6 +128,9 @@ const Graph: React.FC<GraphProps> = ({
 
       // create options object
       const options = {
+        layout: {
+          randomSeed: 42,
+        },
         edges: {
           arrows: {
             to: {

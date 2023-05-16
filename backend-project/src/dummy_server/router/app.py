@@ -1,11 +1,11 @@
 import argparse
 import os
 
-from flask import Flask
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 
 from dummy_server.router.routes import add_routes
-
+from dummy_server.resources.evaluate import compute_scores
 
 def create_app():
     app = Flask(__name__)  # static_url_path, static_folder, template_folder...
@@ -19,6 +19,25 @@ def create_app():
     @app.route('/overview')
     def overview():
         return f"This is the main application page showing the overview."
+    
+    @app.route('/api/v1/evaluate', methods=['POST'])
+    def evaluate():
+        edge_mask = request.json['edge_mask'] 
+        data = request.json['data']
+        focus = request.json['focus']
+        mask_nature = request.json['mask_nature']
+        scores, mask_properties = compute_scores(data, edge_mask, focus, mask_nature)
+        return jsonify(scores)
+
+    @app.route('/api/v1/properties', methods=['POST'])
+    def properties():
+        edge_mask = request.json['edge_mask'] 
+        data = request.json['data']
+        focus = request.json['focus']
+        mask_nature = request.json['mask_nature']
+        scores, mask_properties = compute_scores(data, edge_mask, focus, mask_nature)
+        print(mask_properties)
+        return jsonify(mask_properties)
 
     return app
 
@@ -48,6 +67,8 @@ def start_server():
     server_app = create_app()
 
     server_app.run(debug=args.debug, host=args.host, port=args.port)
+
+
 
 
 if __name__ == "__main__":

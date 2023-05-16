@@ -43,7 +43,8 @@ import "reactjs-popup/dist/index.css";
 import ModalPopup from "./components/ModalPopup";
 import "./components/ModalPopup.css";
 import Graph from "./components/Graph";
-
+import ComputeScores from "./components/Scores";
+import ComputeProperties from "./components/MaskProperties";
 
 function App() {
   const [mutagData, setMutagData] = useState<DataArray>();
@@ -52,11 +53,9 @@ function App() {
       setMutagData(mutagData);
     });
   }, []);
-  
-  const [sizeValue, setSizeValue] = useState(50);
-  const [entropyValue, setEntropyValue] = useState(50);
-  const [maxValue, setMaxValue] = useState(50);
+
   const [explanations, setExplanations] = useState<number[]>();
+  const [explanationsUpdated, setUpdatedExplanations] = useState<number[]>();
   const [level, setLevel] = useState("10");
 
   const [selectedId, setSelectedId] = useState("0");
@@ -122,17 +121,9 @@ function App() {
     });
   }, [checkboxState, level, selectedId]);
 
-  const handleSizeChange = (newValue: number) => {
-    setSizeValue(newValue);
-  };
-
-  const handleEntropyChange = (newValue: number) => {
-    setSizeValue(newValue);
-  };
-
-  const handleMaxChange = (newValue: number) => {
-    setSizeValue(newValue);
-  };
+  useEffect(() => {
+    if (explanations) setUpdatedExplanations(explanations.slice());
+  }, [explanations]);
 
   return (
     <>
@@ -156,7 +147,7 @@ function App() {
             </Card>
           </Col>
           <Col lg="6" sm="6">
-            <Card className="card-stats" h-100>
+            <Card className="card-stats" h-100="true">
               <Card.Body>
                 <Card.Title>Customize your need</Card.Title>
                 <Card.Text>
@@ -276,54 +267,15 @@ function App() {
             </Card>
           </Col>
           <Col lg="3" sm="6">
-            <Card className="card-stats" h-100>
+            <Card className="card-stats" h-100="true">
               <Card.Body>
-                <Card.Title>Mask Property</Card.Title>
-
-                <ListGroup>
-                  <ListGroupItem>
-                    <div style={{ display: "flex", alignItems: "center" }}>
-                      <span style={{ marginRight: "10px", minWidth: "80px" }}>
-                        Size:
-                      </span>
-                      <Slider
-                        min={0}
-                        max={100}
-                        step={1}
-                        value={sizeValue}
-                        onChange={handleSizeChange}
-                      />
-                    </div>
-                  </ListGroupItem>
-                  <ListGroupItem>
-                    <div style={{ display: "flex", alignItems: "center" }}>
-                      <span style={{ marginRight: "10px", minWidth: "80px" }}>
-                        Entropy:
-                      </span>
-                      <Slider
-                        min={0}
-                        max={100}
-                        step={1}
-                        value={entropyValue}
-                        onChange={handleEntropyChange}
-                      />
-                    </div>
-                  </ListGroupItem>
-                  <ListGroupItem>
-                    <div style={{ display: "flex", alignItems: "center" }}>
-                      <span style={{ marginRight: "10px", minWidth: "80px" }}>
-                        Max Value:
-                      </span>
-                      <Slider
-                        min={0}
-                        max={100}
-                        step={1}
-                        value={maxValue}
-                        onChange={handleMaxChange}
-                      />
-                    </div>
-                  </ListGroupItem>
-                </ListGroup>
+                <p>Molecule id: {selectedId}</p>
+                <ComputeProperties
+                  explanations={explanationsUpdated!}
+                  mutagData={mutagData}
+                  selectedId={selectedId}
+                  checkboxState={checkboxState}
+                />
               </Card.Body>
               <Card.Footer></Card.Footer>
             </Card>
@@ -331,7 +283,7 @@ function App() {
         </Row>
         <p></p>
         <Row>
-          <Col md="3" mh-100>
+          <Col md="3" mh-100="true">
             <Card>
               <Card.Header>
                 <Card.Title as="h4">Rank of Explainer</Card.Title>
@@ -373,6 +325,52 @@ function App() {
                         }
                       />
                     </li>
+                    <li>
+                      <Form.Check
+                        type="checkbox"
+                        value="basic_gnnexplainer"
+                        label="Basic GNNExplainer"
+                        checked={
+                          checkboxState.explainer === "basic_gnnexplainer"
+                        }
+                        onChange={(event) =>
+                          handleCheckboxChange(event, "explainer")
+                        }
+                      />
+                    </li>
+                    <li>
+                      <Form.Check
+                        type="checkbox"
+                        value="gradcam"
+                        label="Grad-CAM"
+                        checked={checkboxState.explainer === "gradcam"}
+                        onChange={(event) =>
+                          handleCheckboxChange(event, "explainer")
+                        }
+                      />
+                    </li>
+                    <li>
+                      <Form.Check
+                        type="checkbox"
+                        value="occlusion"
+                        label="Occlusion"
+                        checked={checkboxState.explainer === "occlusion"}
+                        onChange={(event) =>
+                          handleCheckboxChange(event, "explainer")
+                        }
+                      />
+                    </li>
+                    <li>
+                      <Form.Check
+                        type="checkbox"
+                        value="pgmexplainer"
+                        label="PGMExplainer"
+                        checked={checkboxState.explainer === "pgmexplainer"}
+                        onChange={(event) =>
+                          handleCheckboxChange(event, "explainer")
+                        }
+                      />
+                    </li>
                   </ol>
                 </div>
               </Card.Body>
@@ -408,9 +406,10 @@ function App() {
               </Card.Header>
               <Card.Body>
                 <Graph
-                  explanations={explanations!}
+                  explanationsUpdated={explanationsUpdated!}
                   mutagData={mutagData}
                   selectedId={selectedId}
+                  setUpdatedExplanations={setUpdatedExplanations}
                 />
               </Card.Body>
             </Card>
@@ -432,7 +431,12 @@ function App() {
       <p>Current selected molecule performance</p>
       </Tab>
       <Tab eventKey="overall" title="Overall ">
-      <p>Overall dataset performance</p>
+      <ComputeScores
+                  explanations={explanationsUpdated!}
+                  mutagData={mutagData}
+                  selectedId={selectedId}
+                  checkboxState={checkboxState}
+                />
       </Tab>
     </Tabs>
               </Card.Body>

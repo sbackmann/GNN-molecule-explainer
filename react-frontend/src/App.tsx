@@ -22,6 +22,8 @@ import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { DataArray, DataPoint } from "./types/data";
@@ -376,10 +378,24 @@ function App() {
             <p></p>
             <Card>
               <Card.Header>
-                <Card.Title as="h4">Explainer performance</Card.Title>
-                <p className="card-category">Figure</p>
+                <Card.Title as="h4">Explainer Description</Card.Title>
+                {/* <p className="card-category">Figure</p> */}
               </Card.Header>
-              <Card.Body></Card.Body>
+              {checkboxState.explainer === "ig" && (
+    <Card.Body>
+      This is the ig description
+    </Card.Body>
+  )}
+              {checkboxState.explainer === "gnnexplainer" && (
+    <Card.Body>
+      This is the GNNExplainer description
+    </Card.Body>
+  )}
+  {checkboxState.explainer === "sa" && (
+    <Card.Body>
+      This is the sa description
+    </Card.Body>
+  )}
             </Card>
           </Col>
           <Col md="6">
@@ -406,12 +422,24 @@ function App() {
               </Card.Header>
               <Card.Body>
                 <p>Molecule id: {selectedId}</p>
-                <ComputeScores
+                <Tabs
+      defaultActiveKey="current"
+      id="uncontrolled-tab-example"
+      className="mb-3"
+    >
+      <Tab eventKey="current" title="Current">
+      <p>Current selected molecule performance</p>
+      </Tab>
+      <Tab eventKey="overall" title="Overall ">
+      <ComputeScores
                   explanations={explanationsUpdated!}
                   mutagData={mutagData}
                   selectedId={selectedId}
                   checkboxState={checkboxState}
                 />
+      </Tab>
+    </Tabs>
+>>>>>>> react-frontend/src/App.tsx
               </Card.Body>
             </Card>
           </Col>

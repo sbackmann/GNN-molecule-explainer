@@ -13,6 +13,7 @@ import { useState, useEffect } from "react";
 //   OverlayTrigger,
 //   Tooltip,
 // } from "react-bootstrap";
+import { Dropdown, DropdownButton } from "react-bootstrap";
 import PlaceholderButton from "react-bootstrap/esm/PlaceholderButton";
 import FormCheckInput from "react-bootstrap/esm/FormCheckInput";
 import FormCheckLabel from "react-bootstrap/esm/FormCheckLabel";
@@ -373,8 +374,20 @@ function App() {
                         }
                       />
                     </li>
+                    <li>
+                      <Form.Check
+                        type="checkbox"
+                        value="gradcam"
+                        label="Grad-CAM"
+                        checked={checkboxState.explainer === "gradcam"}
+                        onChange={(event) =>
+                          handleCheckboxChange(event, "explainer")
+                        }
+                      />
+                    </li>
                   </ol>
                 </div>
+                
               </Card.Body>
             </Card>
             <p></p>
@@ -385,17 +398,20 @@ function App() {
               </Card.Header>
               {checkboxState.explainer === "ig" && (
     <Card.Body>
-      This is the ig description
+       Integrated Gradient (IG) avoids the saturation problem of the gradient-based method Saliency by accumulating gradients over the path from a baseline input (zero-vector) and the input at hand.
+       (Sundararajan, Mukund, Ankur Taly, and Qiqi Yan. "Axiomatic attribution for deep networks." International conference on machine learning. PMLR, 2017.)
     </Card.Body>
   )}
               {checkboxState.explainer === "gnnexplainer" && (
     <Card.Body>
-      This is the GNNExplainer description
+      GNNExplainer computes the importance of graph entities (node/edge/node feature) using the mutual information.
+      (Ying, Zhitao, et al. "Gnnexplainer: Generating explanations for graph neural networks." Advances in neural information processing systems 32 (2019).)
     </Card.Body>
   )}
   {checkboxState.explainer === "sa" && (
     <Card.Body>
-      This is the sa description
+      Saliency (SA) measures node importance as the weight on every node after computing the gradient of the output with respect to node features.
+      (Baldassarre, Federico, and Hossein Azizpour. "Explainability techniques for graph convolutional networks." arXiv preprint arXiv:1905.13686 (2019).)
     </Card.Body>
   )}
             </Card>

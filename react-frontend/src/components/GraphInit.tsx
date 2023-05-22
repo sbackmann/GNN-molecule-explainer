@@ -5,28 +5,17 @@ import { postPoints } from "../router/resources/data";
 import { DataArray, DataPoint } from "../types/data";
 import { Id } from "vis-network/declarations/network/gephiParser";
 
-interface GraphProps {
-  //nodes: Node[];
-  //edges: Edge[];
-  explanationsUpdated: number[];
+interface GraphInitProps {
   mutagData?: DataArray;
   selectedId: String;
-  setUpdatedExplanations: (d: any) => void;
 }
 
-const Graph: React.FC<GraphProps> = ({
-  explanationsUpdated,
-  mutagData,
-  selectedId,
-  setUpdatedExplanations,
-}) => {
+const GraphInit: React.FC<GraphInitProps> = ({ mutagData, selectedId }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const networkRef = useRef<Network>();
 
   const nodes: Node[] = [];
   const edges: Edge[] = [];
-  let edge_index_from: number[] = [];
-  let edge_index_to: number[] = [];
 
   if (mutagData) {
     const idx = Number(selectedId);
@@ -57,19 +46,17 @@ const Graph: React.FC<GraphProps> = ({
       nodes.push(node);
     }
 
-    for (let i = 0; i < explanationsUpdated!.length; i++) {
+    for (let i = 0; i < edge_index_from.length; i++) {
       if (edge_index_from[i] <= edge_index_to[i]) {
         const edge: Edge = {
           id: i,
           from: edge_index_from[i],
           to: edge_index_to[i],
-          label: explanationsUpdated![i].toFixed(2).toString(), // Add label based on edge weight
           color: {
             color: "black",
             highlight: "red",
             //opacity: Number(explanations![i]) * 10,
           }, // Add color based on edge weight
-          width: Number(explanationsUpdated![i]) * 10,
         };
         edges.push(edge);
       }
@@ -88,39 +75,6 @@ const Graph: React.FC<GraphProps> = ({
       { from: 3, to: 4 },
     ];
     const edgeWeights = [0.7, 0.4, 0.2, 0.9];
-  }
-
-  function getEdges(
-    mutagData: DataArray,
-    selectedId: String,
-    explanationsUpdated: number[]
-  ) {
-    const idx = Number(selectedId);
-    const edges: Edge[] = [];
-    const edge_index_from = mutagData
-      ? mutagData[idx].edge_index[0]
-      : [1, 1, 2, 3];
-    const edge_index_to = mutagData
-      ? mutagData[idx].edge_index[1]
-      : [2, 3, 4, 4];
-
-    for (let i = 0; i < edge_index_from.length; i++) {
-      if (edge_index_from[i] <= edge_index_to[i]) {
-        const edge: Edge = {
-          id: i,
-          from: edge_index_from[i],
-          to: edge_index_to[i],
-          label: explanationsUpdated![i].toFixed(2).toString(), // Add label based on edge weight
-          color: {
-            color: "black",
-            highlight: "red",
-          }, // Add color based on edge weight
-          width: Number(explanationsUpdated![i]) * 10,
-        };
-        edges.push(edge);
-      }
-    }
-    return edges;
   }
 
   useEffect(() => {
@@ -178,40 +132,10 @@ const Graph: React.FC<GraphProps> = ({
         options
       );
       networkRef.current = network;
-
-      network.on("click", (params) => {
-        if (params.edges.length > 0) {
-          const selectedEdgeId: Id = params.edges[0];
-          const newLabel = prompt("Enter new label for edge: ");
-          const edgeId = edgesDataSet.get(selectedEdgeId)?.id;
-          const edgeFrom = edgesDataSet.get(selectedEdgeId)?.from;
-          const edgeTo = edgesDataSet.get(selectedEdgeId)?.to;
-
-          let backEdge = -1;
-          for (let i = 0; i < explanationsUpdated!.length; i++) {
-            if (edge_index_from[i] == edgeTo && edge_index_to[i] == edgeFrom) {
-              backEdge = i;
-              //break;
-            }
-          }
-
-          const updatedExplanations = explanationsUpdated?.slice();
-          updatedExplanations![Number(edgeId)] = Number(newLabel);
-          updatedExplanations![backEdge] = Number(newLabel);
-          setUpdatedExplanations(updatedExplanations);
-          if (newLabel !== null) {
-            edgesDataSet.update({
-              id: selectedEdgeId,
-              label: newLabel,
-              width: updatedExplanations![Number(edgeId)] * 10,
-            });
-          }
-        }
-      });
     }
-  }, [mutagData, explanationsUpdated]);
+  }, [mutagData]);
 
   return <div ref={containerRef} style={{ width: "100%", height: "400px" }} />;
 };
 
-export default Graph;
+export default GraphInit;

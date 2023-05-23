@@ -26,3 +26,9 @@
     font-size: 35px;
   }
 }
+
+.word-link {
+  cursor: pointer;
+  color: blue;
+  text-decoration: underline;
+}

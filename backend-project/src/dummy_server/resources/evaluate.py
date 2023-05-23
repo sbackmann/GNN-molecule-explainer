@@ -106,8 +106,8 @@ class Evaluate(object):
         mask = np.array(mask)
         mask_info = {
             "mask_size": float(np.sum(mask)),
-            "mask_sparsity": 1.0 - float(np.sum(mask)) / len(mask),
-            "mask_entropy": float(entropy(mask[mask>0]))
+            "mask_sparsity": round(1.0 - float(np.sum(mask)) / len(mask),2),
+            "mask_entropy": round(float(entropy(mask[mask>0])),2)
         }
         return mask_info
 

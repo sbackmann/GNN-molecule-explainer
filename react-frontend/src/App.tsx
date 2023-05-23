@@ -1,4 +1,12 @@
 import { useState, useEffect } from "react";
+import {
+  Nav,
+  NavDropdown,
+  NavItem,
+  NavLink,
+  Navbar,
+  NavbarBrand,
+} from "react-bootstrap";
 // import {
 //   Badge,
 //   Button,
@@ -22,8 +30,8 @@ import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import Tab from 'react-bootstrap/Tab';
-import Tabs from 'react-bootstrap/Tabs';
+import Tab from "react-bootstrap/Tab";
+import Tabs from "react-bootstrap/Tabs";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { DataArray, DataPoint } from "./types/data";
@@ -128,6 +136,19 @@ function App() {
   return (
     <>
       <Container fluid>
+        <Card className="card-stats" h-100="true">
+          <Card.Body>
+            <Card.Title>How to use this interface</Card.Title>
+            <Card.Text>
+              This interface is meant to help you naviguate through the current
+              explainability methods for graph neural networs. Select a molecule
+              from the MUTAG dataset and try out different explanations. Found
+              out the atoms and bonds that explain that the molecule is toxic or
+              non-toxic. Compare existing explainability methods. Understand why
+              the GNN model makes wrong predictions.
+            </Card.Text>
+          </Card.Body>
+        </Card>
         <Row lg="3">
           <Col lg="3" sm="6">
             <Card className="card-stats">
@@ -149,15 +170,18 @@ function App() {
           <Col lg="6" sm="6">
             <Card className="card-stats" h-100="true">
               <Card.Body>
-                <Card.Title>Customize your need</Card.Title>
+                <Card.Title>Customize explanations</Card.Title>
                 <Card.Text>
-                  Here will be several option for user to select their need.
+                  Select your requirements for the generated explanations:
                 </Card.Text>
               </Card.Body>
               <Card.Footer className="d-flex">
                 <Form.Group className="mr-3">
                   <Form.Label
                     style={{ marginRight: "10px", minWidth: "150px" }}
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    title="Focus of explanation"
                   >
                     Focus
                   </Form.Label>
@@ -168,13 +192,20 @@ function App() {
                       label="Phenomenon"
                       checked={checkboxState.focus === "phenomenon"}
                       onChange={(event) => handleCheckboxChange(event, "focus")}
+                      data-bs-toggle="tooltip"
+                      data-bs-placement="top"
+                      title="Explain the real-world problem, reveal findings in the data, i.e. explain the true labeling of the nodes."
                     />
+
                     <Form.Check
                       type="checkbox"
                       value="model"
                       label="Model"
                       checked={checkboxState.focus === "model"}
                       onChange={(event) => handleCheckboxChange(event, "focus")}
+                      data-bs-toggle="tooltip"
+                      data-bs-placement="bottom"
+                      title="Explain how the model works -  explain the logic behind the model, i.e. the predicted labels."
                     />
                   </div>
                 </Form.Group>
@@ -194,6 +225,9 @@ function App() {
                       onChange={(event) =>
                         handleCheckboxChange(event, "mask_nature")
                       }
+                      data-bs-toggle="tooltip"
+                      data-bs-placement="bottom"
+                      title="Positive values in the explanatory mask are set to 1; we do not distinguish edges that have a positive contribution."
                     />
                     <Form.Check
                       type="checkbox"
@@ -203,12 +237,18 @@ function App() {
                       onChange={(event) =>
                         handleCheckboxChange(event, "mask_nature")
                       }
+                      data-bs-toggle="tooltip"
+                      data-bs-placement="bottom"
+                      title="The explanation is a weighted subgraph; edges have a contribution defined as a weight between 0 and 1."
                     />
                   </div>
                 </Form.Group>
                 <Form.Group className="mr-8">
                   <Form.Label
                     style={{ marginRight: "10px", minWidth: "150px" }}
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    title="Select edges that contribute the most to the final molecule label, i.e. with the highest weights in the edge mask."
                   >
                     Mask Transformation
                   </Form.Label>
@@ -222,6 +262,9 @@ function App() {
                         onChange={(event) =>
                           handleCheckboxChange(event, "mask_transformation")
                         }
+                        data-bs-toggle="tooltip"
+                        data-bs-placement="bottom"
+                        title="Select the top k edges in the mask."
                       />
                     </div>
                     <div>
@@ -246,6 +289,9 @@ function App() {
                         onChange={(event) =>
                           handleCheckboxChange(event, "mask_transformation")
                         }
+                        data-bs-toggle="tooltip"
+                        data-bs-placement="bottom"
+                        title="Select the edges which weight is above the threshold."
                       />
                     </div>
                     <div className="d-flex align-items-center ml-3">
@@ -259,6 +305,9 @@ function App() {
                         onChange={(event) =>
                           handleCheckboxChange(event, "mask_transformation")
                         }
+                        data-bs-toggle="tooltip"
+                        data-bs-placement="bottom"
+                        title="Select the (100-X)% edges with highest weights."
                       />
                     </div>
                   </div>
@@ -286,8 +335,7 @@ function App() {
           <Col md="3" mh-100="true">
             <Card>
               <Card.Header>
-                <Card.Title as="h4">Rank of Explainer</Card.Title>
-                <p className="card-category">Rank</p>
+                <Card.Title as="h4">List of explainers</Card.Title>
               </Card.Header>
               <Card.Body>
                 <div>
@@ -382,20 +430,14 @@ function App() {
                 {/* <p className="card-category">Figure</p> */}
               </Card.Header>
               {checkboxState.explainer === "ig" && (
-    <Card.Body>
-      This is the ig description
-    </Card.Body>
-  )}
+                <Card.Body>This is the ig description</Card.Body>
+              )}
               {checkboxState.explainer === "gnnexplainer" && (
-    <Card.Body>
-      This is the GNNExplainer description
-    </Card.Body>
-  )}
-  {checkboxState.explainer === "sa" && (
-    <Card.Body>
-      This is the sa description
-    </Card.Body>
-  )}
+                <Card.Body>This is the GNNExplainer description</Card.Body>
+              )}
+              {checkboxState.explainer === "sa" && (
+                <Card.Body>This is the sa description</Card.Body>
+              )}
             </Card>
           </Col>
           <Col md="6">
@@ -423,22 +465,22 @@ function App() {
               <Card.Body>
                 <p>Molecule id: {selectedId}</p>
                 <Tabs
-      defaultActiveKey="current"
-      id="uncontrolled-tab-example"
-      className="mb-3"
-    >
-      <Tab eventKey="current" title="Current">
-      <p>Current selected molecule performance</p>
-      </Tab>
-      <Tab eventKey="overall" title="Overall ">
-      <ComputeScores
-                  explanations={explanationsUpdated!}
-                  mutagData={mutagData}
-                  selectedId={selectedId}
-                  checkboxState={checkboxState}
-      />
-      </Tab>
-    </Tabs>
+                  defaultActiveKey="current"
+                  id="uncontrolled-tab-example"
+                  className="mb-3"
+                >
+                  <Tab eventKey="current" title="Current">
+                    <p>Current selected molecule performance</p>
+                  </Tab>
+                  <Tab eventKey="overall" title="Overall ">
+                    <ComputeScores
+                      explanations={explanationsUpdated!}
+                      mutagData={mutagData}
+                      selectedId={selectedId}
+                      checkboxState={checkboxState}
+                    />
+                  </Tab>
+                </Tabs>
               </Card.Body>
             </Card>
           </Col>

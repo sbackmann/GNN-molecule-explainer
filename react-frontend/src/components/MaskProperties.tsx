@@ -22,22 +22,22 @@ const ComputeProperties: React.FC<PropertiesProps> = ({
 }) => {
   const [properties, setProperties] = useState<{ [key: string]: number }>({});
   //let Properties = {};
-  let mol : DataPoint = {
+  let mol: DataPoint = {
     x: [],
     edge_index: [],
     y: [],
     idx: [],
     edge_attr: [],
     adj_padded: [],
-    x_padded: []
+    x_padded: [],
   };
   if (mutagData) {
     mol = mutagData[Number(selectedId)];
   }
 
   useEffect(() => {
-    if(Object.values(mol.edge_index).length > 0) {
-      if(mol.edge_index[0].length === explanations.length) {
+    if (Object.values(mol.edge_index).length > 0) {
+      if (mol.edge_index[0].length === explanations.length) {
         const res = {
           edge_mask: explanations,
           data: mol,
@@ -56,13 +56,15 @@ const ComputeProperties: React.FC<PropertiesProps> = ({
             // Handle any errors that occurred during the request
             console.error(error);
           });
-        }
+      }
     }
   }, [explanations, mol]);
 
   return (
     <div>
-      <Card.Title>Mask Property</Card.Title>
+      The explanation corresponds to a mask on the edges (bonds). This mask has
+      some properties like the number of positive values (size), the entropy of
+      the value distribution, and the sparsity of the mask.
       <ListGroup>
         <ListGroupItem>
           <div style={{ display: "flex", alignItems: "center" }}>

@@ -167,7 +167,7 @@ function App() {
               </Card.Body>
             </Card>
           </Col>
-          <Col lg="6" sm="6">
+          <Col lg="9" sm="6">
             <Card className="card-stats" h-100="true">
               <Card.Body>
                 <Card.Title>Customize explanations</Card.Title>
@@ -315,20 +315,6 @@ function App() {
               </Card.Footer>
             </Card>
           </Col>
-          <Col lg="3" sm="6">
-            <Card className="card-stats" h-100="true">
-              <Card.Body>
-                <p>Molecule id: {selectedId}</p>
-                <ComputeProperties
-                  explanations={explanationsUpdated!}
-                  mutagData={mutagData}
-                  selectedId={selectedId}
-                  checkboxState={checkboxState}
-                />
-              </Card.Body>
-              <Card.Footer></Card.Footer>
-            </Card>
-          </Col>
         </Row>
         <p></p>
         <Row>
@@ -444,7 +430,13 @@ function App() {
             <Card>
               <Card.Header>
                 <Card.Title as="h4">Graph Explanation</Card.Title>
-                <p className="card-category">Graph</p>
+                <p className="card-category">
+                  The explanation is a mask on the bonds of the molecules. The
+                  importance of each edge is indicated as a scalar between 0 and
+                  1. Click on an edge to change its weight and modify the
+                  explanations. The scores and mask properties are automatically
+                  updated.{" "}
+                </p>
               </Card.Header>
               <Card.Body>
                 <Graph
@@ -460,20 +452,26 @@ function App() {
             <Card>
               <Card.Header>
                 <Card.Title as="h4">Explainer performance</Card.Title>
-                <p className="card-category">Figure</p>
+                <p className="card-category">
+                  Selected molecule ID: {selectedId}
+                </p>
               </Card.Header>
               <Card.Body>
-                <p>Molecule id: {selectedId}</p>
                 <Tabs
                   defaultActiveKey="current"
                   id="uncontrolled-tab-example"
                   className="mb-3"
                 >
-                  <Tab eventKey="current" title="Current">
-                    <p>Current selected molecule performance</p>
-                  </Tab>
-                  <Tab eventKey="overall" title="Overall ">
+                  <Tab eventKey="current" title="Scores">
                     <ComputeScores
+                      explanations={explanationsUpdated!}
+                      mutagData={mutagData}
+                      selectedId={selectedId}
+                      checkboxState={checkboxState}
+                    />
+                  </Tab>
+                  <Tab eventKey="overall" title="Properties">
+                    <ComputeProperties
                       explanations={explanationsUpdated!}
                       mutagData={mutagData}
                       selectedId={selectedId}

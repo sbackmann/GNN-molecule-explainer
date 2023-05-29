@@ -398,7 +398,7 @@ function App() {
       }
     >
       <option>Choose other option</option>
-      <option value="basic_gnnexplainer">Basic GNNExplainer</option>
+      <option value="basicgnnexplainer">Basic GNNExplainer</option>
       <option value="gradcam">Grad-CAM</option>
       <option value="occlusion">Occlusion</option>
       <option value="pgmexplainer">PGM-Explainer</option>

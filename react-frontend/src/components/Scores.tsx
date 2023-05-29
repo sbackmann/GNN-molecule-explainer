@@ -75,7 +75,7 @@ const ComputeScores: React.FC<ScoresProps> = ({
             <span style={{ marginRight: "10px", minWidth: "80px" }}>
               Necessary explanation:
             </span>
-            <p>{scores["fid+_acc"]}</p>
+            <p>{scores["fidelity_prob+"]}</p>
           </div>
         </ListGroupItem>
         <ListGroupItem>
@@ -83,7 +83,7 @@ const ComputeScores: React.FC<ScoresProps> = ({
             <span style={{ marginRight: "10px", minWidth: "80px" }}>
               Sufficient explanation:
             </span>
-            <p>{1 - scores["fid-_acc"]}</p>
+            <p>{1 - scores["fidelity_prob-"]}</p>
           </div>
         </ListGroupItem>
       </ListGroup>

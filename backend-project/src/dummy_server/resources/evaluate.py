@@ -95,11 +95,19 @@ class Evaluate(object):
             }
         else:
             fidelity_scores = {
-                "fidelity_gnn_acc+": fidelity_gnn_acc(self.related_pred),
-                "fidelity_gnn_acc-": fidelity_gnn_acc_inv(self.related_pred),
-                "fidelity_gnn_prob+": fidelity_gnn_prob(self.related_pred),
-                "fidelity_gnn_prob-": fidelity_gnn_prob_inv(self.related_pred),
+                "fidelity_acc+": fidelity_gnn_acc(self.related_pred),
+                "fidelity_acc-": fidelity_gnn_acc_inv(self.related_pred),
+                "fidelity_prob+": fidelity_gnn_prob(self.related_pred),
+                "fidelity_prob-": fidelity_gnn_prob_inv(self.related_pred),
             }
+        den_prob = (fidelity_scores['fidelity_prob+']  + 1-fidelity_scores['fidelity_prob-'])
+        den_acc = (fidelity_scores['fidelity_acc+']  + 1-fidelity_scores['fidelity_acc-'])
+        if den_prob!=0:
+            fidelity_scores['charact_prob'] = 2 * fidelity_scores['fidelity_prob+'] * (1-fidelity_scores['fidelity_prob-'])/ den_prob
+        if den_acc!=0:
+            fidelity_scores['charact_acc'] = 2 * fidelity_scores['fidelity_acc+'] * (1-fidelity_scores['fidelity_acc-'])/ den_acc
+        for key, val in fidelity_scores.items():
+            fidelity_scores[key] = round(val, 2)
         return fidelity_scores
 
     def get_mask_properties(self, mask):

@@ -13,14 +13,14 @@ import { useState, useEffect } from "react";
 //   OverlayTrigger,
 //   Tooltip,
 // } from "react-bootstrap";
-import { Dropdown, DropdownButton } from "react-bootstrap";
-import PlaceholderButton from "react-bootstrap/esm/PlaceholderButton";
-import FormCheckInput from "react-bootstrap/esm/FormCheckInput";
-import FormCheckLabel from "react-bootstrap/esm/FormCheckLabel";
-import ListGroupItem from "react-bootstrap/ListGroupItem";
+// import PlaceholderButton from "react-bootstrap/esm/PlaceholderButton";
+// import FormCheckInput from "react-bootstrap/esm/FormCheckInput";
+// import FormCheckLabel from "react-bootstrap/esm/FormCheckLabel";
+// import ListGroupItem from "react-bootstrap/ListGroupItem";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
+// import Button from "react-bootstrap/Button";
 // import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Tab from 'react-bootstrap/Tab';
@@ -437,7 +437,7 @@ function App() {
       <p style={{ fontSize: '0.8rem', color: 'grey' }}>Baldassarre, Federico, and Hossein Azizpour. "Explainability techniques for graph convolutional networks." arXiv preprint arXiv:1905.13686 (2019).
 </p>    </Card.Body>
   )}
-  {checkboxState.explainer === "basic_gnnexplainer" && (
+  {checkboxState.explainer === "basicgnnexplainer" && (
     <Card.Body>
       <p>Basic GNNExplainer is a simple version of GNNExplainer that only considers edge importance.</p> 
       <p style={{ fontSize: '0.8rem', color: 'grey' }}>Ying, Zhitao, et al. "Gnnexplainer: Generating explanations for graph neural networks." Advances in neural information processing systems 32 (2019).

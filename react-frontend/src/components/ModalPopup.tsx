@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { postPoints, postEmbeddings } from "../router/resources/data";
+import { postEmbeddings } from "../router/resources/data";
 import Modal from "react-modal";
 import { DataArray, EmbeddingArray } from "../types/data";
 import Button from "react-bootstrap/Button";
 import ScatterPlot from "./ScatterPlot";
 
 type ModalPopupProps = {
-  triggerButton: JSX.Element;
   modalTitle: string;
   onSelectedIdChange: (d: any) => void;
   data?: DataArray;
 };
 
 const ModalPopup: React.FC<ModalPopupProps> = ({
-  triggerButton,
   modalTitle,
   onSelectedIdChange,
   data,
@@ -39,7 +37,7 @@ const ModalPopup: React.FC<ModalPopupProps> = ({
   return (
     <>
       <Button variant="primary" onClick={openModal}>
-        {triggerButton}
+        Select
       </Button>
       <Modal
         isOpen={modalIsOpen}

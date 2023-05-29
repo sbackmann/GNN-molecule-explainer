@@ -13,31 +13,27 @@ import { useState, useEffect } from "react";
 //   OverlayTrigger,
 //   Tooltip,
 // } from "react-bootstrap";
-import { Dropdown, DropdownButton } from "react-bootstrap";
-import PlaceholderButton from "react-bootstrap/esm/PlaceholderButton";
-import FormCheckInput from "react-bootstrap/esm/FormCheckInput";
-import FormCheckLabel from "react-bootstrap/esm/FormCheckLabel";
-import ListGroupItem from "react-bootstrap/ListGroupItem";
+// import PlaceholderButton from "react-bootstrap/esm/PlaceholderButton";
+// import FormCheckInput from "react-bootstrap/esm/FormCheckInput";
+// import FormCheckLabel from "react-bootstrap/esm/FormCheckLabel";
+// import ListGroupItem from "react-bootstrap/ListGroupItem";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
-import Button from "react-bootstrap/Button";
+// import Button from "react-bootstrap/Button";
+// import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { DataArray, DataPoint } from "./types/data";
+import { DataArray } from "./types/data";
 
-import DataChoiceComponent from "./components/DataChoice";
-// import ScatterPlot from "./components/ScatterPlot";
 import {
   postPoints,
-  postEmbeddings,
   postExplanations,
 } from "./router/resources/data";
-import { Form, ListGroup } from "react-bootstrap";
-import Slider from "./components/Slider";
+import { Form } from "react-bootstrap";
 
 import React from "react";
 import "reactjs-popup/dist/index.css";
@@ -73,7 +69,7 @@ function App() {
     | "ig"
     | "gnnexplainer"
     | "sa"
-    | "basic_gnnexplainer"
+    | "basicgnnexplainer"
     | "gradcam"
     | "occlusion"
     | "pgmexplainer"
@@ -151,7 +147,6 @@ function App() {
                   toxic.
                 </Card.Text>
                 <ModalPopup
-                  triggerButton={<Button variant="primary">Select</Button>}
                   modalTitle="Embedded Molecules"
                   onSelectedIdChange={handleSelectedIdChange}
                   data={mutagData}
@@ -341,9 +336,11 @@ function App() {
                     {/* <li>
                       <Form.Check
                         type="checkbox"
-                        value="basic_gnnexplainer"
+                        value="basicgnnexplainer"
                         label="Basic GNNExplainer"
-                        checked={checkboxState.explainer === "basic_gnnexplainer"}
+                        checked={
+                          checkboxState.explainer === "basicgnnexplainer"
+                        }
                         onChange={(event) =>
                           handleCheckboxChange(event, "explainer")
                         }
@@ -440,7 +437,7 @@ function App() {
       <p style={{ fontSize: '0.8rem', color: 'grey' }}>Baldassarre, Federico, and Hossein Azizpour. "Explainability techniques for graph convolutional networks." arXiv preprint arXiv:1905.13686 (2019).
 </p>    </Card.Body>
   )}
-  {checkboxState.explainer === "basic_gnnexplainer" && (
+  {checkboxState.explainer === "basicgnnexplainer" && (
     <Card.Body>
       <p>Basic GNNExplainer is a simple version of GNNExplainer that only considers edge importance.</p> 
       <p style={{ fontSize: '0.8rem', color: 'grey' }}>Ying, Zhitao, et al. "Gnnexplainer: Generating explanations for graph neural networks." Advances in neural information processing systems 32 (2019).
@@ -485,6 +482,7 @@ function App() {
               </Card.Header>
               <Card.Body>
                 <Graph
+                  explanations={explanations!}
                   explanationsUpdated={explanationsUpdated!}
                   mutagData={mutagData}
                   selectedId={selectedId}
@@ -515,7 +513,7 @@ function App() {
                   mutagData={mutagData}
                   selectedId={selectedId}
                   checkboxState={checkboxState}
-                />
+      />
       </Tab>
     </Tabs>
               </Card.Body>

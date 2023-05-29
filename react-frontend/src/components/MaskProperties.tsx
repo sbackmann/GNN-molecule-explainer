@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { DataArray, DataPoint } from "../types/data";
 import { AxiosResponse } from "axios";
 import axiosClient from "../router/apiClient";
 import ListGroupItem from "react-bootstrap/ListGroupItem";
 import Card from "react-bootstrap/Card";
-import { Form, ListGroup } from "react-bootstrap";
-import Slider from "./Slider";
+import { ListGroup } from "react-bootstrap";
 
 interface PropertiesProps {
   explanations: number[];
@@ -22,32 +21,43 @@ const ComputeProperties: React.FC<PropertiesProps> = ({
 }) => {
   const [properties, setProperties] = useState<{ [key: string]: number }>({});
   //let Properties = {};
-  let mol: any[] | object = {};
+  let mol : DataPoint = {
+    x: [],
+    edge_index: [],
+    y: [],
+    idx: [],
+    edge_attr: [],
+    adj_padded: [],
+    x_padded: []
+  };
   if (mutagData) {
     mol = mutagData[Number(selectedId)];
   }
 
   useEffect(() => {
-    const res = {
-      edge_mask: explanations,
-      data: mol,
-      focus: checkboxState.focus,
-      mask_nature: checkboxState.mask_nature,
-    };
-    axiosClient
-      .post("/properties", res)
-      .then((response: AxiosResponse) => {
-        // Handle the response from the server
-        //console.log(response.data);
-        setProperties(response.data);
-        // ...
-      })
-      .catch((error: Error) => {
-        // Handle any errors that occurred during the request
-        console.error(error);
-      });
-    console.log(properties);
-  }, [explanations]);
+    if(Object.values(mol.edge_index).length > 0) {
+      if(mol.edge_index[0].length === explanations.length) {
+        const res = {
+          edge_mask: explanations,
+          data: mol,
+          focus: checkboxState.focus,
+          mask_nature: checkboxState.mask_nature,
+        };
+        axiosClient
+          .post("/properties", res)
+          .then((response: AxiosResponse) => {
+            // Handle the response from the server
+            //console.log(response.data);
+            setProperties(response.data);
+            // ...
+          })
+          .catch((error: Error) => {
+            // Handle any errors that occurred during the request
+            console.error(error);
+          });
+        }
+    }
+  }, [explanations, mol]);
 
   return (
     <div>

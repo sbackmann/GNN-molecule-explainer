@@ -23,6 +23,13 @@ def from_edge_index_to_adj(edge_index, edge_weight, max_n):
     return torch.FloatTensor(adj)
 
 
+def from_adj_to_edge_index_torch(adj):
+    adj_sparse = adj.to_sparse()
+    edge_index = adj_sparse.indices().to(dtype=torch.long)
+    edge_attr = adj_sparse.values()
+    return edge_index, edge_attr
+
+
 def padded_datalist(data_list, adj_list, max_num_nodes):
     for i, data in enumerate(data_list):
         data.adj_padded = padding_graphs(adj_list[i], max_num_nodes)

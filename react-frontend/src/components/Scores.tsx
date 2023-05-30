@@ -65,25 +65,22 @@ const ComputeScores: React.FC<ScoresProps> = ({
         <ListGroupItem>
           <div style={{ display: "flex", alignItems: "center" }}>
             <span style={{ marginRight: "10px", minWidth: "80px" }}>
-              Characterization:
+              Characterization: {scores["charact_prob"]}
             </span>
-            <p>{scores["charact_prob"]}</p>
           </div>
         </ListGroupItem>
         <ListGroupItem>
           <div style={{ display: "flex", alignItems: "center" }}>
             <span style={{ marginRight: "10px", minWidth: "80px" }}>
-              Necessary explanation:
+              Necessary explanation: {scores["fidelity_prob+"]}
             </span>
-            <p>{scores["fidelity_prob+"]}</p>
           </div>
         </ListGroupItem>
         <ListGroupItem>
           <div style={{ display: "flex", alignItems: "center" }}>
             <span style={{ marginRight: "10px", minWidth: "80px" }}>
-              Sufficient explanation:
+              Sufficient explanation: {1 - scores["fidelity_prob-"]}
             </span>
-            <p>{1 - scores["fidelity_prob-"]}</p>
           </div>
         </ListGroupItem>
       </ListGroup>

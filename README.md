@@ -189,8 +189,8 @@ Document here the major milestones of your code and future planned steps.\
 	- [x] Add Graph visualization for molecule, make visualization dependent on user choices, add edge editability options, add recomputation of the graph: [#85d8eec8](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/commit/85d8eec8997744afbc3e752bac6653c49b4f7b33)
 
 - [x] Week 8 - 10 (09th May - 29th May) - Milestone V
-  - [x] Add history states for the graph depending on the users editing steps that allows them to undo, redo and reset their modifications to better interact with the graph: [#HASH](LINK)
-  - [x] 
+  - [x] Add history states for the graph depending on the users editing steps that allows them to undo, redo and reset their modifications to better interact with the graph: [#5e692dd6](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/commit/5e692dd6d88193ba6ce7c42903c6ebe3bc89c29b)
+  - [x] Add descriptions and guidance elements to the dashboard as well as enhance it in general: [#d38b8fb2](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/commit/d38b8fb246bb9131616a28d933684e264ecdf00f)
 
 Create a list subtask.\
 Open an issue for each subtask. Once you create a subtask, link the corresponding issue.\
@@ -226,5 +226,6 @@ Tags:
 - Week 2 (Milestone II): [Week 2 Tag](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/tags/Week-2)
 - Week 3 - 5 (Milestone III): [Week 3 - 5 Tag](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/tags/Week-3-4)
 - Week 6 & 7 (Milestone IV): [Week 6 & 7 Tag](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/tags/Week-6-7)
+- Week 8 - 10 (Milestone V): [Week 8 - 10 Tag](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/tags/Week-8-10)
 
 

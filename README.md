@@ -59,9 +59,9 @@ Specify here the structure of you code and comment what the most important files
 │   │   └── __init__.py 
 │   ├── data
 │   │   ├── masks
-│   │   │     ├── basic_gnnexplainer
-│   │   │     │    ├── mask_mutag_gat_basic_gnnexplainer_model.json
-│   │   │     │    └── mask_mutag_gat_basic_gnnexplainer_phenomenon.json
+│   │   │     ├── basicgnnexplainer
+│   │   │     │    ├── mask_mutag_gat_basicgnnexplainer_model.json
+│   │   │     │    └── mask_mutag_gat_basicgnnexplainer_phenomenon.json
 │   │   │     ├── gnnexplainer
 │   │   │     │    ├── mask_mutag_gat_gnnexplainer_model.json
 │   │   │     │    └── mask_mutag_gat_gnnexplainer_phenomenon.json
@@ -188,6 +188,10 @@ Document here the major milestones of your code and future planned steps.\
 	- [x] Add ML-Model results for the different explainer methods to the project: [#f5469cf2](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/commit/f5469cf22103d27a7640bd6809c9b8109ccfe339)
 	- [x] Add Graph visualization for molecule, make visualization dependent on user choices, add edge editability options, add recomputation of the graph: [#85d8eec8](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/commit/85d8eec8997744afbc3e752bac6653c49b4f7b33)
 
+- [x] Week 8 - 10 (09th May - 29th May) - Milestone V
+  - [x] Add history states for the graph depending on the users editing steps that allows them to undo, redo and reset their modifications to better interact with the graph: [#HASH](LINK)
+  - [x] 
+
 Create a list subtask.\
 Open an issue for each subtask. Once you create a subtask, link the corresponding issue.\
 Create a merge request (with corresponding branch) from each issue.\
@@ -207,6 +211,8 @@ It was communicated that the main focus of the backend deliverable is to add the
 The work was focused on implementing the steps for the third milestone. This meant first and foremost to convert the application sketches into an (until here) static frontend. Next to building the general structure and inserting the basic components, the greatest challenge here was to implement the possibility to display the molecules in the embedded space and make them choosable. First we needed to find a 2-D representation of the molecules. For this we used PCA and added this as the embeddings.csv file. While the scatter plot functionality could largely be reused from the 'dummy-fullstack' project, we needed to find a way to implement a modal pop-up window in React and to display the necesary molecule information when hovering over them.
 ### Week 6 & 7 (25th April - 08th May) - Milestone IV
 These two weeks were dedicated for the most part to including the ML-Model eplainer results and connecting them to the frontend in that way that the results are retrieved with dynamic filters (i.e. the explainer method, the focus, the mask nature, the mask transformation and the selected molecule). Also, the work was about visualizing the molecules as a graph structure and connect it respectively so that the selected molecule is displayed in the application. This includes correctly displaying the different atoms, displaying the compounds between them as edges and make the edges that are relevant for the explanation stand out. Furthermore, we added interactivity elements, that is users (domain experts) can click on a graph edge and modify its weight if they think, and edge should be included in the network (or not). This change is then propagated and the graph is recomputed.
+### Week 8 - 10 (09th May - 29th May) - Milestone V
+The two main tasks for these three weeks were: 1. Add a Graph history, that is keep state of the modifications introduced by the user and allow an undo, redo and reset option in order to let the user go back and forth with their edits. 2. While most functionalities are implemented for the application, it does not look and feel super intuitive yet. So it should be extended with descriptions and guide the user through the steps that make up a typical interaction. This will have to be further completed in the last weeks until the project submission on 15th June.
 
 ## Versioning
 Create stable versions of your code each week by using gitlab tags.\

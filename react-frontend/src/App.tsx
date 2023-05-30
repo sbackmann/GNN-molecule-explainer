@@ -21,30 +21,27 @@ import {
 //   OverlayTrigger,
 //   Tooltip,
 // } from "react-bootstrap";
-import PlaceholderButton from "react-bootstrap/esm/PlaceholderButton";
-import FormCheckInput from "react-bootstrap/esm/FormCheckInput";
-import FormCheckLabel from "react-bootstrap/esm/FormCheckLabel";
-import ListGroupItem from "react-bootstrap/ListGroupItem";
+// import PlaceholderButton from "react-bootstrap/esm/PlaceholderButton";
+// import FormCheckInput from "react-bootstrap/esm/FormCheckInput";
+// import FormCheckLabel from "react-bootstrap/esm/FormCheckLabel";
+// import ListGroupItem from "react-bootstrap/ListGroupItem";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
-import Button from "react-bootstrap/Button";
+// import Button from "react-bootstrap/Button";
+// import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { DataArray, DataPoint } from "./types/data";
+import { DataArray } from "./types/data";
 
-import DataChoiceComponent from "./components/DataChoice";
-// import ScatterPlot from "./components/ScatterPlot";
 import {
   postPoints,
-  postEmbeddings,
   postExplanations,
 } from "./router/resources/data";
-import { Form, ListGroup } from "react-bootstrap";
-import Slider from "./components/Slider";
+import { Form } from "react-bootstrap";
 
 import React from "react";
 import "reactjs-popup/dist/index.css";
@@ -83,7 +80,8 @@ function App() {
     | "basicgnnexplainer"
     | "gradcam"
     | "occlusion"
-    | "pgmexplainer";
+    | "pgmexplainer"
+    | "subgraphx";
   type Focus = "phenomenon" | "model";
   type MaskNature = "hard" | "soft";
   type MaskTransformation = "topk" | "threshold" | "sparsity";
@@ -113,6 +111,17 @@ function App() {
     setCheckboxState({
       ...checkboxState,
       [checkboxName]: value,
+    });
+  };
+
+  const handleSelectChange = (
+    event: React.ChangeEvent<HTMLSelectElement>,
+    selectName: keyof CheckboxState
+  ) => {
+    const value = event.target.value;
+    setCheckboxState({
+      ...checkboxState,
+      [selectName]: value,
     });
   };
 
@@ -159,7 +168,6 @@ function App() {
                   toxic.
                 </Card.Text>
                 <ModalPopup
-                  triggerButton={<Button variant="primary">Select</Button>}
                   modalTitle="Embedded Molecules"
                   onSelectedIdChange={handleSelectedIdChange}
                   data={mutagData}
@@ -359,7 +367,7 @@ function App() {
                         }
                       />
                     </li>
-                    <li>
+                    {/* <li>
                       <Form.Check
                         type="checkbox"
                         value="basicgnnexplainer"
@@ -398,15 +406,39 @@ function App() {
                       <Form.Check
                         type="checkbox"
                         value="pgmexplainer"
-                        label="PGMExplainer"
+                        label="PGM-Explainer"
                         checked={checkboxState.explainer === "pgmexplainer"}
                         onChange={(event) =>
                           handleCheckboxChange(event, "explainer")
                         }
                       />
                     </li>
+                    <li>
+                      <Form.Check
+                        type="checkbox"
+                        value="subgraphx"
+                        label="SubgraphX"
+                        checked={checkboxState.explainer === "subgraphx"}
+                        onChange={(event) =>
+                          handleCheckboxChange(event, "explainer")
+                        }
+                      />
+                    </li> */}
                   </ol>
-                </div>
+                  <Form.Select
+      aria-label="Default select example"
+      onChange={(event) =>
+        handleSelectChange(event, "explainer")
+      }
+    >
+      <option>Choose other option</option>
+      <option value="basicgnnexplainer">Basic GNNExplainer</option>
+      <option value="gradcam">Grad-CAM</option>
+      <option value="occlusion">Occlusion</option>
+      <option value="pgmexplainer">PGM-Explainer</option>
+      <option value="subgraphx">SubgraphX</option>
+    </Form.Select>
+                </div>                
               </Card.Body>
             </Card>
             <p></p>
@@ -416,14 +448,64 @@ function App() {
                 {/* <p className="card-category">Figure</p> */}
               </Card.Header>
               {checkboxState.explainer === "ig" && (
-                <Card.Body>This is the ig description</Card.Body>
-              )}
+    <Card.Body>
+       <p>
+       Integrated Gradient (IG) avoids the saturation problem of the gradient-based method Saliency by accumulating gradients over the path from a baseline input (zero-vector) and the input at hand.
+    </p>
+    <p style={{ fontSize: '0.8rem', color: 'grey' }}>
+       Sundararajan, Mukund, Ankur Taly, and Qiqi Yan. "Axiomatic attribution for deep networks." International conference on machine learning. PMLR, 2017.
+    </p></Card.Body>
+  )}
               {checkboxState.explainer === "gnnexplainer" && (
-                <Card.Body>This is the GNNExplainer description</Card.Body>
-              )}
-              {checkboxState.explainer === "sa" && (
-                <Card.Body>This is the sa description</Card.Body>
-              )}
+    <Card.Body>
+      <p>GNNExplainer computes the importance of graph entities (node/edge/node feature) using the mutual information.
+      </p>
+      <p style={{ fontSize: '0.8rem', color: 'grey' }}>Ying, Zhitao, et al. "Gnnexplainer: Generating explanations for graph neural networks." Advances in neural information processing systems 32 (2019).
+    </p>
+      </Card.Body>
+  )}
+  {checkboxState.explainer === "sa" && (
+    <Card.Body>
+      <p>Saliency (SA) measures node importance as the weight on every node after computing the gradient of the output with respect to node features.
+      </p>
+      <p style={{ fontSize: '0.8rem', color: 'grey' }}>Baldassarre, Federico, and Hossein Azizpour. "Explainability techniques for graph convolutional networks." arXiv preprint arXiv:1905.13686 (2019).
+</p>    </Card.Body>
+  )}
+  {checkboxState.explainer === "basicgnnexplainer" && (
+    <Card.Body>
+      <p>Basic GNNExplainer is a simple version of GNNExplainer that only considers edge importance.</p> 
+      <p style={{ fontSize: '0.8rem', color: 'grey' }}>Ying, Zhitao, et al. "Gnnexplainer: Generating explanations for graph neural networks." Advances in neural information processing systems 32 (2019).
+    </p>
+      </Card.Body>
+  )}
+  {checkboxState.explainer === "gradcam" && (
+    <Card.Body>
+      <p>Grad-CAM is a generalization of class activation maps (CAM).</p>
+      <p style={{ fontSize: '0.8rem', color: 'grey' }}>Selvaraju, Ramprasaath R., et al. "Grad-cam: Visual explanations from deep networks via gradient-based localization." Proceedings of the IEEE international conference on computer vision. 2017.
+</p>
+    </Card.Body>
+  )}
+  {checkboxState.explainer === "occlusion" && (
+    <Card.Body>
+      <p>Occlusion attributes the importance of an edge as the difference of the model initial prediction on the graph after removing this edge.
+</p>
+<p style={{ fontSize: '0.8rem', color: 'grey' }}>Faber, Lukas, Amin K. Moghaddam, and Roger Wattenhofer. "When comparing to ground truth is wrong: On evaluating gnn explanation methods." Proceedings of the 27th ACM SIGKDD Conference on Knowledge Discovery & Data Mining. 2021. 
+</p>    </Card.Body>
+  )}
+  {checkboxState.explainer === "pgmexplainer" && (
+    <Card.Body>
+      <p>PGM-Explainer perturbs the input and uses probabilistic graphical models to find the dependencies between the nodes and the output.
+</p>
+<p style={{ fontSize: '0.8rem', color: 'grey' }}>Vu, Minh, and My T. Thai. "Pgm-explainer: Probabilistic graphical model explanations for graph neural networks." Advances in neural information processing systems 33 (2020): 12225-12235. 
+</p>    </Card.Body>
+  )}
+  {checkboxState.explainer === "subgraphx" && (
+    <Card.Body>
+      <p>SubgraphX explores possible explanatory sub-graphs with Monte Carlo Tree Search and assigns them a score using the Shapley value.
+</p>
+<p style={{ fontSize: '0.8rem', color: 'grey' }}>Yuan, Hao, et al. "On explainability of graph neural networks via subgraph explorations." International Conference on Machine Learning. PMLR, 2021. 
+</p>    </Card.Body>
+  )}
             </Card>
           </Col>
           <Col md="6">
@@ -440,6 +522,7 @@ function App() {
               </Card.Header>
               <Card.Body>
                 <Graph
+                  explanations={explanations!}
                   explanationsUpdated={explanationsUpdated!}
                   mutagData={mutagData}
                   selectedId={selectedId}

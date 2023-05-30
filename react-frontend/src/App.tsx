@@ -33,12 +33,13 @@ import Container from "react-bootstrap/Container";
 import Card from "react-bootstrap/Card";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
+import ListGroupItem from "react-bootstrap/ListGroupItem";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { DataArray } from "./types/data";
 
 import { postPoints, postExplanations } from "./router/resources/data";
-import { Form } from "react-bootstrap";
+import { Form, ListGroup } from "react-bootstrap";
 
 import React from "react";
 import "reactjs-popup/dist/index.css";
@@ -47,6 +48,7 @@ import "./components/ModalPopup.css";
 import Graph from "./components/Graph";
 import ComputeScores from "./components/Scores";
 import ComputeProperties from "./components/MaskProperties";
+import MoleculeInfo from "./components/MoleculeInfo";
 
 function App() {
   const [mutagData, setMutagData] = useState<DataArray>();
@@ -168,7 +170,7 @@ function App() {
               </Card.Body>
             </Card>
           </Col>
-          <Col lg="9" sm="6">
+          <Col lg="6" sm="6">
             <Card className="card-stats" h-100="true">
               <Card.Body>
                 <Card.Title>Customize explanations</Card.Title>
@@ -320,6 +322,21 @@ function App() {
               </Card.Footer>
             </Card>
           </Col>
+          <Col lg="3" sm="6">
+            <Card className="card-stats">
+              <Card.Header>
+                <Card.Title as="h4">Molecule description</Card.Title>
+                <p className="card-category">
+                  Selected molecule ID: {selectedId}
+                </p>
+              </Card.Header>
+              <Card.Body>
+                <Card.Text>
+                  <MoleculeInfo mutagData={mutagData} selectedId={selectedId} />
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
         </Row>
         <p></p>
         <Row>
@@ -364,76 +381,21 @@ function App() {
                         }
                       />
                     </li>
-                    {/* <li>
-                      <Form.Check
-                        type="checkbox"
-                        value="basicgnnexplainer"
-                        label="Basic GNNExplainer"
-                        checked={
-                          checkboxState.explainer === "basicgnnexplainer"
-                        }
-                        onChange={(event) =>
-                          handleCheckboxChange(event, "explainer")
-                        }
-                      />
-                    </li>
-                    <li>
-                      <Form.Check
-                        type="checkbox"
-                        value="gradcam"
-                        label="Grad-CAM"
-                        checked={checkboxState.explainer === "gradcam"}
-                        onChange={(event) =>
-                          handleCheckboxChange(event, "explainer")
-                        }
-                      />
-                    </li>
-                    <li>
-                      <Form.Check
-                        type="checkbox"
-                        value="occlusion"
-                        label="Occlusion"
-                        checked={checkboxState.explainer === "occlusion"}
-                        onChange={(event) =>
-                          handleCheckboxChange(event, "explainer")
-                        }
-                      />
-                    </li>
-                    <li>
-                      <Form.Check
-                        type="checkbox"
-                        value="pgmexplainer"
-                        label="PGM-Explainer"
-                        checked={checkboxState.explainer === "pgmexplainer"}
-                        onChange={(event) =>
-                          handleCheckboxChange(event, "explainer")
-                        }
-                      />
-                    </li>
-                    <li>
-                      <Form.Check
-                        type="checkbox"
-                        value="subgraphx"
-                        label="SubgraphX"
-                        checked={checkboxState.explainer === "subgraphx"}
-                        onChange={(event) =>
-                          handleCheckboxChange(event, "explainer")
-                        }
-                      />
-                    </li> */}
                   </ol>
                   <Form.Select
                     aria-label="Default select example"
                     onChange={(event) => handleSelectChange(event, "explainer")}
                   >
                     <option>Choose other option</option>
+                    <option value="ig">Integrated Gradient</option>
+                    <option value="gnnexplainer">Grad-CAM</option>
+                    <option value="sa">Saliency</option>
                     <option value="basicgnnexplainer">
                       Basic GNNExplainer
                     </option>
                     <option value="gradcam">Grad-CAM</option>
                     <option value="occlusion">Occlusion</option>
                     <option value="pgmexplainer">PGM-Explainer</option>
-                    <option value="subgraphx">SubgraphX</option>
                   </Form.Select>
                 </div>
               </Card.Body>
@@ -565,7 +527,10 @@ function App() {
                 <p className="card-category">
                   The explanation is a mask on the bonds of the molecules. The
                   importance of each edge is indicated as a scalar between 0 and
-                  1. Click on an edge to change its weight and modify the
+                  1.
+                </p>
+                <p style={{ fontSize: "0.8rem", color: "grey" }}>
+                  Click on an edge to change its weight and modify the
                   explanations. The scores and mask properties are automatically
                   updated.{" "}
                 </p>

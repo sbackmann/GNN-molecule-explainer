@@ -32,3 +32,16 @@
   color: blue;
   text-decoration: underline;
 }
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+.card {
+  background: grey;
+  padding: 15px;
+  width: 100%;
+  height: 100%;
+}

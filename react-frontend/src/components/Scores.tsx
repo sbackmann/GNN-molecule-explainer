@@ -61,11 +61,27 @@ const ComputeScores: React.FC<ScoresProps> = ({
 
   return (
     <div>
+      <p className="card-category">
+        The faithfulness is captured by the fidelity scores. These metrics tell
+        if the explanation is necesssary, sufficient or both a characterization
+        of the true label/model prediction.
+      </p>
+      <p style={{ fontSize: "0.8rem", color: "grey" }}>
+        Move the mouse on an explanation aspect and learn more about the score
+        definitions.{" "}
+      </p>
       <ListGroup>
         <ListGroupItem>
           <div style={{ display: "flex", alignItems: "center" }}>
             <span style={{ marginRight: "10px", minWidth: "80px" }}>
-              Characterization: {scores["charact_acc"]}
+              <Form.Label
+                style={{ marginRight: "10px", minWidth: "150px" }}
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                title="An explanation is necessary if the model prediction changes when you remove it from the initial graph. A necessary explanation has a Fidelity+ score close to 1."
+              >
+                Necessary explanation: {scores["fidelity_acc+"]}
+              </Form.Label>
             </span>
           </div>
         </ListGroupItem>
@@ -76,9 +92,9 @@ const ComputeScores: React.FC<ScoresProps> = ({
                 style={{ marginRight: "10px", minWidth: "150px" }}
                 data-bs-toggle="tooltip"
                 data-bs-placement="top"
-                title="An explanation is necessary if the model prediction changes when you remove it from the initial graph. Necessary explanations are similar to counterfactual explanations. A necessary explanation has a Fidelity+ score close to 1."
+                title="An explanation is sufficient if the explanatory subgraph preserves the input label/the model prediction. A sufficent explanation has a (1-Fidelity-) score close to 1."
               >
-                Necessary explanation: {scores["fidelity_acc+"]}
+                Sufficient explanation: {1 - scores["fidelity_acc-"]}
               </Form.Label>
             </span>
           </div>
@@ -86,7 +102,14 @@ const ComputeScores: React.FC<ScoresProps> = ({
         <ListGroupItem>
           <div style={{ display: "flex", alignItems: "center" }}>
             <span style={{ marginRight: "10px", minWidth: "80px" }}>
-              Sufficient explanation: {1 - scores["fidelity_acc-"]}
+              <Form.Label
+                style={{ marginRight: "10px", minWidth: "150px" }}
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                title="The characterization score captures both the necessary and sufficient aspects of the explanation. It summarizes Fidelity+ and Fidelity- measures."
+              >
+                Characterization: {scores["charact_acc"]}
+              </Form.Label>
             </span>
           </div>
         </ListGroupItem>

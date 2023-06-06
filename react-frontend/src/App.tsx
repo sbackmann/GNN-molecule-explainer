@@ -49,12 +49,21 @@ import Graph from "./components/Graph";
 import ComputeScores from "./components/Scores";
 import ComputeProperties from "./components/MaskProperties";
 import MoleculeInfo from "./components/MoleculeInfo";
+import { EmbeddingArray } from "./types/data";
+import { postEmbeddings } from "./router/resources/data";
 
 function App() {
   const [mutagData, setMutagData] = useState<DataArray>();
   useEffect(() => {
     postPoints().then((mutagData) => {
       setMutagData(mutagData);
+    });
+  }, []);
+
+  const [embeddingData, setEmbeddingData] = useState<EmbeddingArray>();
+  useEffect(() => {
+    postEmbeddings().then((embeddingData) => {
+      setEmbeddingData(embeddingData);
     });
   }, []);
 
@@ -332,7 +341,11 @@ function App() {
               </Card.Header>
               <Card.Body>
                 <Card.Text>
-                  <MoleculeInfo mutagData={mutagData} selectedId={selectedId} />
+                  <MoleculeInfo
+                    mutagData={mutagData}
+                    embeddingData={embeddingData}
+                    selectedId={selectedId}
+                  />
                 </Card.Text>
               </Card.Body>
             </Card>

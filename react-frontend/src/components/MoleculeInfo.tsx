@@ -10,17 +10,15 @@ import { Form, ListGroup } from "react-bootstrap";
 
 interface MoleculeProps {
   mutagData?: DataArray;
+  embeddingData?: EmbeddingArray;
   selectedId: String;
 }
 
-const MoleculeInfo: React.FC<MoleculeProps> = ({ mutagData, selectedId }) => {
-  const [embeddingData, setEmbeddingData] = useState<EmbeddingArray>();
-
-  useEffect(() => {
-    postEmbeddings().then((embeddingData) => {
-      setEmbeddingData(embeddingData);
-    });
-  }, []);
+const MoleculeInfo: React.FC<MoleculeProps> = ({
+  mutagData,
+  embeddingData,
+  selectedId,
+}) => {
   // State to store the true and predicted labels
   const [trueLabel, setTrueLabel] = useState("");
   const [predictedLabel, setPredictedLabel] = useState("");
@@ -40,13 +38,13 @@ const MoleculeInfo: React.FC<MoleculeProps> = ({ mutagData, selectedId }) => {
       setNumEdges(selectedDataPoint.edge_index[0]?.length || 0);
     } else {
       // Data point not found, reset labels
-      const selectedDataPoint = mutagData![Number("0")];
-      const selectedEmbeddingPoint = embeddingData![Number("0")];
+      // const selectedDataPoint = mutagData![Number("0")];
+      // const selectedEmbeddingPoint = embeddingData![Number("0")];
       // Set the true and predicted labels
-      setTrueLabel(selectedEmbeddingPoint.true_label);
-      setPredictedLabel(selectedEmbeddingPoint.gnn_label);
-      setNumNodes(selectedDataPoint.x.length);
-      setNumEdges(selectedDataPoint.edge_index[0]?.length || 0);
+      setTrueLabel("0");
+      setPredictedLabel("0");
+      setNumNodes(0);
+      setNumEdges(0);
     }
   };
 

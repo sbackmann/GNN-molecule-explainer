@@ -108,7 +108,7 @@ const ComputeScores: React.FC<ScoresProps> = ({
                 data-bs-placement="top"
                 title="The characterization score captures both the necessary and sufficient aspects of the explanation. It summarizes Fidelity+ and Fidelity- measures."
               >
-                Characterization: {scores["charact_acc"]}
+                Characterization: {scores["charact_prob"]}
               </Form.Label>
             </span>
           </div>

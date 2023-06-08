@@ -401,7 +401,7 @@ function App() {
                   >
                     <option>Choose other option</option>
                     <option value="ig">Integrated Gradient</option>
-                    <option value="gnnexplainer">Grad-CAM</option>
+                    <option value="gnnexplainer">GNNExplainer</option>
                     <option value="sa">Saliency</option>
                     <option value="basicgnnexplainer">
                       Basic GNNExplainer

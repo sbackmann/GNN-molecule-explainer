@@ -66,10 +66,6 @@ const ComputeScores: React.FC<ScoresProps> = ({
         if the explanation is necesssary, sufficient or both a characterization
         of the true label/model prediction.
       </p>
-      <p style={{ fontSize: "0.8rem", color: "grey" }}>
-        Move the mouse on an explanation aspect and learn more about the score
-        definitions.{" "}
-      </p>
       <ListGroup>
         <ListGroupItem>
           <div style={{ display: "flex", alignItems: "center" }}>

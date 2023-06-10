@@ -132,8 +132,8 @@ function renderScatterPlot(
         `Molecule ID: ${d.idx}
         <br/>Toxicity: ${d.true_label}
         <br/>Predicted toxicity: ${d.gnn_label}
-        <br/>Number of nodes: ${d_mol.x.length}
-        <br/>Number of edges: ${d_mol.edge_index[0]?.length || 0}`
+        <br/>Number of atoms: ${d_mol.x.length}
+        <br/>Number of bonds: ${d_mol.edge_index[0]?.length || 0}`
       );
     } else {
       tooltip.html(

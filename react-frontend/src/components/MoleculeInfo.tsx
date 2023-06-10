@@ -51,7 +51,7 @@ const MoleculeInfo: React.FC<MoleculeProps> = ({
   // Call the displayLabels function when the component mounts or the selected ID changes
   useEffect(() => {
     displayLabels();
-  }, [selectedId]);
+  }, [selectedId, embeddingData]);
 
   return (
     <ListGroup>

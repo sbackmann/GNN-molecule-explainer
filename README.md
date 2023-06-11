@@ -159,8 +159,9 @@ To run the backend
 - open the backend folder called "backend-project";
 - create a virtual environment using the command ```conda create -n nameOfTheEnvironment```;
 - activate the virtual environment run the command ```conda activate nameOfTheEnvironment```;
-- install the requirements from the txt file using the command ```pip3 install -r requirements.txt```;
-- start the backend with the command ```python3 setup.py run```;
+- install the requirements from the txt file using the command ```conda env update -n nameOfTheEnvironment --file env_backend.yml```;
+- install the backend with the command ```pip install .```;
+- start the backend with the command ```start-server```;
 To run the frontend
 - open a new terminal instance and once again go to the folder called "dummy-fullstack-main"
 - open the frontend folder called "react-frontend";

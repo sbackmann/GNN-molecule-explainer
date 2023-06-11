@@ -36,6 +36,7 @@ Specify here the structure of you code and comment what the most important files
 ``` bash
 ├── README.md  
 ├── backend-project
+│   ├── env_backend.yml
 │   ├── README.md
 │   ├── setup.py   # main app
 │   ├── pyproject.toml
@@ -47,9 +48,12 @@ Specify here the structure of you code and comment what the most important files
 │   │   │     │    └── __init__.py
 │   │   │     └── resources
 │   │   │         ├── utils
+│   │   │         │     ├── eval_utils.py
 │   │   │         │     ├── gen_utils.py
 │   │   │         │     └── __init__.py
 │   │   │         ├── embedding_data.py
+│   │   │         ├── evaluate.py
+│   │   │         ├── model.py
 │   │   │         ├── mol_data.py
 │   │   │         ├── mol_dataset.py
 │   │   │         ├── process_mask.py
@@ -98,6 +102,11 @@ Specify here the structure of you code and comment what the most important files
 │   │   ├── embeddings.csv
 │   │   ├── generate_data.py    # script to create data
 │   │   └── process.py
+│   ├── model
+│   │     ├── mutag
+│   │     │    ├── gat_3l_cpu_best.pth
+│   │     │    ├── gat_3l_cpu_latest.pth
+│   │     │    ├── gat_3l_cpu_scores.json
 │   └── MANIFEST.in
 ├── react-frontend
 │   ├── README.md
@@ -114,10 +123,13 @@ Specify here the structure of you code and comment what the most important files
 │   │   ├── components
 │   │   │   ├── DataChoice.tsx
 │   │   │   ├── Graph.tsx
+│   │   │   ├── GraphInit.tsx
+│   │   │   ├── MaskProperties.tsx
 │   │   │   ├── ModalPopup.tsx
 │   │   │   ├── ModalPopup.css
 │   │   │   ├── ScatterPlot.css
 │   │   │   ├── ScatterPlot.tsx
+│   │   │   ├── Scores.tsx
 │   │   │   ├── Slider.css
 │   │   │   ├── Slider.tsx
 │   │   │   └── utils.ts

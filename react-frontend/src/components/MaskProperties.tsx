@@ -64,27 +64,27 @@ const ComputeProperties: React.FC<PropertiesProps> = ({
       The explanation corresponds to a mask on the edges (bonds). This mask has
       some properties like the number of positive values (size), the entropy of
       the value distribution, and the sparsity of the mask.
+      <p></p>
       <ListGroup>
         <ListGroupItem>
           <div style={{ display: "flex", alignItems: "center" }}>
-            <span style={{ marginRight: "10px", minWidth: "80px" }}>Size:</span>
-            <p>{properties["mask_size"]}</p>
+            <span style={{ marginRight: "10px", minWidth: "80px" }}>
+              Size: {properties["mask_size"]}
+            </span>
           </div>
         </ListGroupItem>
         <ListGroupItem>
           <div style={{ display: "flex", alignItems: "center" }}>
             <span style={{ marginRight: "10px", minWidth: "80px" }}>
-              Entropy:
+              Entropy: {properties["mask_entropy"]}
             </span>
-            <p>{properties["mask_entropy"]}</p>
           </div>
         </ListGroupItem>
         <ListGroupItem>
           <div style={{ display: "flex", alignItems: "center" }}>
             <span style={{ marginRight: "10px", minWidth: "80px" }}>
-              Sparsity:
+              Sparsity: {properties["mask_sparsity"]}
             </span>
-            <p>{properties["mask_sparsity"]}</p>
           </div>
         </ListGroupItem>
       </ListGroup>

@@ -4,6 +4,7 @@ import { Network, Node, Edge } from "vis-network";
 import Button from "react-bootstrap/Button";
 import { DataArray } from "../types/data";
 import { Id } from "vis-network/declarations/network/gephiParser";
+import "./Graph.css";
 
 interface GraphProps {
   explanations: number[];
@@ -88,6 +89,8 @@ const Graph: React.FC<GraphProps> = ({
       const options = {
         layout: {
           randomSeed: 42,
+          width: "100%", // Set the desired width of the graph
+          height: "600px", // Set the desired height of the graph
         },
         edges: {
           arrows: {
@@ -97,7 +100,7 @@ const Graph: React.FC<GraphProps> = ({
             },
           },
           font: {
-            size: 16,
+            size: 26,
           },
           width: 2,
           color: {
@@ -237,7 +240,7 @@ const Graph: React.FC<GraphProps> = ({
       <Button variant="primary" onClick={handleUndo}>&#8630;</Button>&nbsp;
       <Button variant="primary" onClick={handleRedo}>&#8631;</Button>&nbsp;
       <Button variant="primary" onClick={handleReset}>Reset</Button>
-      <div ref={containerRef} style={{ width: "100%", height: "400px" }} />
+      <div className="graph-container" ref={containerRef} />
     </div>
   );
 };

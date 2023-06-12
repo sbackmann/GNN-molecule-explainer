@@ -1,0 +1,17 @@
+.info-icon {
+    color: grey;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .description-popup {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    border: 1px solid grey;
+    padding: 5px;
+    width: 330px;
+    z-index: 9999; /* Set a high z-index value */
+  }
+  

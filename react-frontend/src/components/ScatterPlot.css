@@ -3,3 +3,6 @@
   z-index: 9999; /* Set a higher value than the modal popup window */
   /* Other styles for the text element */
 }
+.axis line {
+  display: none;
+}

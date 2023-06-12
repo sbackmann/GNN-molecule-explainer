@@ -166,7 +166,7 @@ To run the dummy project you have to:
 - clone the repository;
 - open a new terminal instance;
 - move to the folder where the project has been downloaded using the command ```cd```;
-- open the folder called "dummy-fullstack-main";
+- open the folder called "b2-gnn-explainer";
 To run the backend
 - open the backend folder called "backend-project";
 - create a virtual environment using the command ```conda create -n nameOfTheEnvironment```;
@@ -175,7 +175,7 @@ To run the backend
 - install the backend with the command ```pip install .```;
 - start the backend with the command ```start-server```;
 To run the frontend
-- open a new terminal instance and once again go to the folder called "dummy-fullstack-main"
+- open a new terminal instance and once again go to the folder called "b2-gnn-explainer"
 - open the frontend folder called "react-frontend";
 - start the front end by using the following two commands ```npm install```, ```npm start```;
 If all the steps have been successfully executed a new browser window will open automatically.

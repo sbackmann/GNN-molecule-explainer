@@ -144,21 +144,17 @@ function renderScatterPlot(
     }
   }
 
-  getChildOrAppend<SVGGElement, SVGGElement>(base, "g", "y-axis-base").call(
-    d3
-      .axisLeft(y)
-      .ticks(4)
-      .tickFormat(() => "")
-  );
+  // Add inline styles to hide axis lines
+  getChildOrAppend<SVGGElement, SVGGElement>(base, "g", "y-axis-base")
+    .call(d3.axisLeft(y).ticks(4).tickFormat(() => ""))
+    .selectAll("path")
+    .style("display", "none");
 
   getChildOrAppend<SVGGElement, SVGGElement>(base, "g", "x-axis-base")
     .attr("transform", `translate(0, ${height})`)
-    .call(
-      d3
-        .axisBottom(x)
-        .ticks(5)
-        .tickFormat(() => "")
-    );
+    .call(d3.axisBottom(x).ticks(5).tickFormat(() => ""))
+    .selectAll("path")
+    .style("display", "none");
 
   const legendData = [
     { label: "Toxic", color: "red" },

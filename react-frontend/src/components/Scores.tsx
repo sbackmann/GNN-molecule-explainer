@@ -3,8 +3,7 @@ import { DataArray, DataPoint } from "../types/data";
 import { AxiosResponse } from "axios";
 import axiosClient from "../router/apiClient";
 import ListGroupItem from "react-bootstrap/ListGroupItem";
-import Card from "react-bootstrap/Card";
-import { Form, ListGroup } from "react-bootstrap";
+import { ListGroup } from "react-bootstrap";
 import DescriptionPopup from "./DescriptionPopup";
 
 interface ScoresProps {
@@ -51,7 +50,6 @@ const ComputeScores: React.FC<ScoresProps> = ({
           .post("/evaluate", res)
           .then((response: AxiosResponse) => {
             // Handle the response from the server
-            //console.log(response.data);
             setScores(response.data);
             // ...
           })

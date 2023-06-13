@@ -5,8 +5,7 @@
 ## Team Members
 1. Kenza Amara
 2. Steffen Backmann
-3. Petros Polydorou
-4. Rushan Wang
+3. Rushan Wang
 
 ## Project Description 
 Construct an interactive tool where users can get familiar and play with explainability methods on GNN models for graph or node classification. Moreover, multiple explanations could be provided for a single instance to observe how the scores vary. 
@@ -31,10 +30,10 @@ MUTAG (https://nrvis.com/download/data/labeled/Mutag.zip)
 
 - - -
 ## Folder Structure
-Specify here the structure of you code and comment what the most important files contain
 
 ``` bash
-├── README.md  
+├── README.md
+├── report.pdf
 ├── backend-project
 │   ├── env_backend.yml
 │   ├── README.md
@@ -153,16 +152,8 @@ Specify here the structure of you code and comment what the most important files
 └── Dockerfile
 ```
 
-## Requirements
-Write here all instructions to build the environment and run your code.\
-**NOTE:** If we cannot run your code following these requirements we will not be able to evaluate it.
+## Requirements/How to Run
 
-## How to Run
-Write here **DETAILED** intructions on how to run your code.\
-**NOTE:** If we cannot run your code following these instructions we will not be able to evaluate it.
-
-As an example here are the instructions to run the Dummy Project:
-To run the dummy project you have to:
 - clone the repository;
 - open a new terminal instance;
 - move to the folder where the project has been downloaded using the command ```cd```;
@@ -171,7 +162,7 @@ To run the backend
 - open the backend folder called "backend-project";
 - create a virtual environment using the command ```conda create -n nameOfTheEnvironment```;
 - activate the virtual environment run the command ```conda activate nameOfTheEnvironment```;
-- install the requirements from the txt file using the command ```conda env update -n nameOfTheEnvironment --file env_backend.yml```;
+- install the requirements from the txt file using the command ```conda env update -n nameOfTheEnvironment --file env_backend.yml``` (This may take a while);
 - install the backend with the command ```pip install .```;
 - start the backend with the command ```start-server```;
 To run the frontend
@@ -205,17 +196,11 @@ Document here the major milestones of your code and future planned steps.\
   - [x] Add history states for the graph depending on the users editing steps that allows them to undo, redo and reset their modifications to better interact with the graph: [#5e692dd6](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/commit/5e692dd6d88193ba6ce7c42903c6ebe3bc89c29b)
   - [x] Add descriptions and guidance elements to the dashboard as well as enhance it in general: [#d38b8fb2](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/commit/d38b8fb246bb9131616a28d933684e264ecdf00f)
 
-Create a list subtask.\
-Open an issue for each subtask. Once you create a subtask, link the corresponding issue.\
-Create a merge request (with corresponding branch) from each issue.\
-Finally accept the merge request once issue is resolved. Once you complete a task, link the corresponding merge commit.\
-Take a look at [Issues and Branches](https://www.youtube.com/watch?v=DSuSBuVYpys) for more details. 
-
-This will help you have a clearer overview of what you are currently doing, track your progress and organise your work among yourselves. Moreover it gives us more insights on your progress.  
+- [x] Week 11 & 12 (30th May - 15th June) - Finalization
+  - [x] Finalize application by reordering the dashboard layout, fixing alignment issues and small initialization bugs: [#4e7809cd](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/commit/4e7809cd4687482d4cf4c186bb504b753fffabcb)
 
 ## Weekly Summary 
-Write here a short summary with weekly progress, including challanges and open questions.\
-We will use this to understand what your struggles and where did the weekly effort go to.
+
 ### Week 1 (21st March - 27th March)
 The week was mainly dedicated to familiarize ourselves with the GitLab repository and the development workflow and creating the initial README. Also an API endpoint was added that will serve as the overview for the application. An open challenge is to determine what exactly should be implemented for Backend milestone, a question that will be discussed in the open office hour in Week 2.
 ### Week 2 (28th March - 03rd April) - Milestone II
@@ -228,11 +213,6 @@ These two weeks were dedicated for the most part to including the ML-Model eplai
 The two main tasks for these three weeks were: 1. Add a Graph history, that is keep state of the modifications introduced by the user and allow an undo, redo and reset option in order to let the user go back and forth with their edits. 2. While most functionalities are implemented for the application, it does not look and feel super intuitive yet. So it should be extended with descriptions and guide the user through the steps that make up a typical interaction. This will have to be further completed in the last weeks until the project submission on 15th June.
 
 ## Versioning
-Create stable versions of your code each week by using gitlab tags.\
-Take a look at [Gitlab Tags](https://docs.gitlab.com/ee/topics/git/tags.html) for more details. 
-
-Then list here the weekly tags. \
-We will evaluate your code every week, based on the corresponding version.
 
 Tags:
 - Week 1: [Week 1 Tag](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/tags/Week-1)
@@ -240,5 +220,4 @@ Tags:
 - Week 3 - 5 (Milestone III): [Week 3 - 5 Tag](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/tags/Week-3-4)
 - Week 6 & 7 (Milestone IV): [Week 6 & 7 Tag](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/tags/Week-6-7)
 - Week 8 - 10 (Milestone V): [Week 8 - 10 Tag](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/tags/Week-8-10)
-
-
+- Final Submission: [Final Submission Tag](https://gitlab.inf.ethz.ch/course-xai-iml23/b2-gnn-explainer/-/tags/final_submission)

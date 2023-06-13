@@ -20,7 +20,6 @@ const ComputeProperties: React.FC<PropertiesProps> = ({
   checkboxState,
 }) => {
   const [properties, setProperties] = useState<{ [key: string]: number }>({});
-  //let Properties = {};
   let mol: DataPoint = {
     x: [],
     edge_index: [],
@@ -47,7 +46,6 @@ const ComputeProperties: React.FC<PropertiesProps> = ({
           .post("/properties", res)
           .then((response: AxiosResponse) => {
             // Handle the response from the server
-            //console.log(response.data);
             setProperties(response.data);
             // ...
           })

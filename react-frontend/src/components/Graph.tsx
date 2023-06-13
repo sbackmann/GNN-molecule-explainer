@@ -71,7 +71,6 @@ const Graph: React.FC<GraphProps> = ({
           color: {
             color: "black",
             highlight: "red",
-            //opacity: Number(explanations![i]) * 10,
           }, // Add color based on edge weight
           width: Number(explanationsUpdated![i]) * 10,
         };

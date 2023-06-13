@@ -37,9 +37,6 @@ const MoleculeInfo: React.FC<MoleculeProps> = ({
       setNumNodes(selectedDataPoint.x.length);
       setNumEdges(selectedDataPoint.edge_index[0]?.length || 0);
     } else {
-      // Data point not found, reset labels
-      // const selectedDataPoint = mutagData![Number("0")];
-      // const selectedEmbeddingPoint = embeddingData![Number("0")];
       // Set the true and predicted labels
       setTrueLabel("0");
       setPredictedLabel("0");

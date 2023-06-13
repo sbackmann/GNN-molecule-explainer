@@ -7,29 +7,9 @@ import {
   Navbar,
   NavbarBrand,
 } from "react-bootstrap";
-// import {
-//   Badge,
-//   Button,
-//   Card,
-//   Navbar,
-//   Nav,
-//   Table,
-//   Container,
-//   Row,
-//   Col,
-//   Form,
-//   OverlayTrigger,
-//   Tooltip,
-// } from "react-bootstrap";
-// import PlaceholderButton from "react-bootstrap/esm/PlaceholderButton";
-// import FormCheckInput from "react-bootstrap/esm/FormCheckInput";
-// import FormCheckLabel from "react-bootstrap/esm/FormCheckLabel";
-// import ListGroupItem from "react-bootstrap/ListGroupItem";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
-// import Button from "react-bootstrap/Button";
-// import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
@@ -109,7 +89,6 @@ function App() {
 
   const [checkboxState, setCheckboxState] =
     useState<CheckboxState>(initialCheckboxState);
-  // const [selectedFocus, setSelectedFocus] = useState<Focus>("phenomenon");
 
   const handleCheckboxChange = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -214,7 +193,7 @@ function App() {
                       </Form.Label>
                       <div>
                         <Form.Check
-                          type="checkbox"
+                          type="radio"
                           value="phenomenon"
                           label="Phenomenon"
                           checked={checkboxState.focus === "phenomenon"}
@@ -225,7 +204,7 @@ function App() {
                         />
 
                         <Form.Check
-                          type="checkbox"
+                          type="radio"
                           value="model"
                           label="Model"
                           checked={checkboxState.focus === "model"}
@@ -247,7 +226,7 @@ function App() {
                       </Form.Label>
                       <div>
                         <Form.Check
-                          type="checkbox"
+                          type="radio"
                           value="hard"
                           label="Hard"
                           checked={checkboxState.mask_nature === "hard"}
@@ -259,7 +238,7 @@ function App() {
                           title="Positive values in the explanatory mask are set to 1; we do not distinguish edges that have a positive contribution."
                         />
                         <Form.Check
-                          type="checkbox"
+                          type="radio"
                           value="soft"
                           label="Soft"
                           checked={checkboxState.mask_nature === "soft"}
@@ -287,7 +266,7 @@ function App() {
                       <div className="d-flex">
                         <div style={{ marginRight: "10px", minWidth: "100px" }}>
                           <Form.Check
-                            type="checkbox"
+                            type="radio"
                             value="topk"
                             label="Top k"
                             checked={checkboxState.mask_transformation === "topk"}
@@ -312,7 +291,7 @@ function App() {
                       <div className="d-flex">
                         <div style={{ marginRight: "10px", minWidth: "100px" }}>
                           <Form.Check
-                            type="checkbox"
+                            type="radio"
                             value="threshold"
                             label="Threshold"
                             checked={
@@ -328,7 +307,7 @@ function App() {
                         </div>
                         <div className="d-flex align-items-center ml-3">
                           <Form.Check
-                            type="checkbox"
+                            type="radio"
                             value="sparsity"
                             label="Sparsity"
                             checked={
@@ -356,7 +335,7 @@ function App() {
                 <div className="row">
                   <div className="col-md-4">
                     <Form.Check
-                      type="checkbox"
+                      type="radio"
                       value="ig"
                       label="Integrated Grad"
                       checked={checkboxState.explainer === "ig"}
@@ -365,7 +344,7 @@ function App() {
                       }
                     />
                     <Form.Check
-                      type="checkbox"
+                      type="radio"
                       value="gnnexplainer"
                       label="GNNExplainer"
                       checked={checkboxState.explainer === "gnnexplainer"}
@@ -374,7 +353,7 @@ function App() {
                       }
                     />
                     <Form.Check
-                      type="checkbox"
+                      type="radio"
                       value="sa"
                       label="Saliency"
                       checked={checkboxState.explainer === "sa"}

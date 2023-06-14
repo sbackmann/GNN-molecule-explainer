@@ -88,8 +88,6 @@ const Graph: React.FC<GraphProps> = ({
       const options = {
         layout: {
           randomSeed: 42,
-          width: "100%", // Set the desired width of the graph
-          height: "600px", // Set the desired height of the graph
         },
         edges: {
           arrows: {
